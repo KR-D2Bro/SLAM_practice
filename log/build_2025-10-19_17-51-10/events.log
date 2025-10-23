@@ -1,0 +1,108 @@
+[0.000000] (-) TimerEvent: {}
+[0.001005] (slam_core) JobQueued: {'identifier': 'slam_core', 'dependencies': OrderedDict()}
+[0.001176] (slam_core) JobStarted: {'identifier': 'slam_core'}
+[0.007648] (slam_core) JobProgress: {'identifier': 'slam_core', 'progress': 'cmake'}
+[0.008689] (slam_core) JobProgress: {'identifier': 'slam_core', 'progress': 'build'}
+[0.008828] (slam_core) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/dongjae/slambook_ws/build/slam_core', '--', '-j16', '-l16'], 'cwd': '/home/dongjae/slambook_ws/build/slam_core', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'dongjae'), ('GIT_ASKPASS', '/home/dongjae/.vscode-server/bin/488a1f239235055e34e673291fb8d8c810886f81/extensions/git/dist/askpass.sh'), ('ROS_APT_SOURCE_VERSION', '1.1.0'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('MOTD_SHOWN', 'update-motd'), ('HOME', '/home/dongjae'), ('OLDPWD', '/home/dongjae'), ('TERM_PROGRAM_VERSION', '1.102.3'), ('VSCODE_IPC_HOOK_CLI', '/run/user/1000/vscode-ipc-531973d9-bda8-44c6-9d96-cd3a4acd7463.sock'), ('ROS_PYTHON_VERSION', '3'), ('VSCODE_GIT_ASKPASS_MAIN', '/home/dongjae/.vscode-server/bin/488a1f239235055e34e673291fb8d8c810886f81/extensions/git/dist/askpass-main.js'), ('VSCODE_GIT_ASKPASS_NODE', '/home/dongjae/.vscode-server/bin/488a1f239235055e34e673291fb8d8c810886f81/node'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('WSL_DISTRO_NAME', 'Ubuntu-22.04'), ('WAYLAND_DISPLAY', 'wayland-0'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'dongjae'), ('NAME', 'DESKTOP-6O5P79B'), ('WSL_INTEROP', '/run/WSL/395_interop'), ('PULSE_SERVER', 'unix:/mnt/wslg/PulseServer'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm-256color'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/home/dongjae/.vscode-server/bin/488a1f239235055e34e673291fb8d8c810886f81/bin/remote-cli:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/d/programs/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/x64:/mnt/d/programs/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Program Files/NVIDIA Corporation/NVIDIA App/NvDLISR:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files/Zero Install:/mnt/d/Microsoft VS Code/bin:/mnt/c/Program Files/Microsoft VS Code/bin:/mnt/c/Program Files/Tailscale/:/mnt/d/programs/Git/cmd:/mnt/d/Windows Kits/10/Windows Performance Toolkit/:/mnt/c/Program Files/NVIDIA Corporation/Nsight Compute 2025.3.1/:/mnt/c/Users/Dongjae/AppData/Local/Microsoft/WindowsApps:/snap/bin:/home/dongjae/.vscode-server/data/User/globalStorage/github.copilot-chat/debugCommand'), ('XDG_RUNTIME_DIR', '/run/user/1000/'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('VSCODE_GIT_IPC_HANDLE', '/run/user/1000/vscode-git-86eaa534c4.sock'), ('TERM_PROGRAM', 'vscode'), ('AMENT_PREFIX_PATH', '/opt/ros/humble'), ('SHELL', '/bin/bash'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('VSCODE_GIT_ASKPASS_EXTRA_ARGS', ''), ('PWD', '/home/dongjae/slambook_ws/build/slam_core'), ('XDG_DATA_DIRS', '/usr/local/share:/usr/share:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('WSL2_GUI_APPS_ENABLED', '1'), ('HOSTTYPE', 'x86_64'), ('WSLENV', 'VSCODE_WSL_EXT_LOCATION/up'), ('CMAKE_PREFIX_PATH', '/opt/ros/humble')]), 'shell': False}
+[0.031184] (slam_core) StdoutLine: {'line': b'-- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)\n'}
+[0.099936] (-) TimerEvent: {}
+[0.148480] (slam_core) StdoutLine: {'line': b'-- Found rclcpp: 16.0.15 (/opt/ros/humble/share/rclcpp/cmake)\n'}
+[0.204379] (-) TimerEvent: {}
+[0.275399] (slam_core) StdoutLine: {'line': b'-- Found rosidl_generator_c: 3.1.7 (/opt/ros/humble/share/rosidl_generator_c/cmake)\n'}
+[0.276896] (slam_core) StdoutLine: {'line': b'-- Found rosidl_adapter: 3.1.7 (/opt/ros/humble/share/rosidl_adapter/cmake)\n'}
+[0.280307] (slam_core) StdoutLine: {'line': b'-- Found rosidl_generator_cpp: 3.1.7 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)\n'}
+[0.286118] (slam_core) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[0.292978] (slam_core) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[0.305501] (-) TimerEvent: {}
+[0.310563] (slam_core) StdoutLine: {'line': b'-- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)\n'}
+[0.311333] (slam_core) StdoutLine: {'line': b'-- Found rmw_fastrtps_cpp: 6.2.8 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)\n'}
+[0.413522] (-) TimerEvent: {}
+[0.522325] (-) TimerEvent: {}
+[0.624845] (-) TimerEvent: {}
+[0.733707] (-) TimerEvent: {}
+[0.838000] (-) TimerEvent: {}
+[0.946825] (-) TimerEvent: {}
+[1.055628] (-) TimerEvent: {}
+[1.164431] (-) TimerEvent: {}
+[1.273250] (-) TimerEvent: {}
+[1.382114] (-) TimerEvent: {}
+[1.490921] (-) TimerEvent: {}
+[1.599729] (-) TimerEvent: {}
+[1.708579] (-) TimerEvent: {}
+[1.817389] (-) TimerEvent: {}
+[1.926105] (-) TimerEvent: {}
+[2.035241] (-) TimerEvent: {}
+[2.144037] (-) TimerEvent: {}
+[2.252584] (-) TimerEvent: {}
+[2.361382] (-) TimerEvent: {}
+[2.470212] (-) TimerEvent: {}
+[2.579216] (-) TimerEvent: {}
+[2.688032] (-) TimerEvent: {}
+[2.796845] (-) TimerEvent: {}
+[2.905662] (-) TimerEvent: {}
+[3.011708] (-) TimerEvent: {}
+[3.120597] (-) TimerEvent: {}
+[3.229395] (-) TimerEvent: {}
+[3.338207] (-) TimerEvent: {}
+[3.447025] (-) TimerEvent: {}
+[3.555866] (-) TimerEvent: {}
+[3.659672] (-) TimerEvent: {}
+[3.760738] (-) TimerEvent: {}
+[3.869530] (-) TimerEvent: {}
+[3.978368] (-) TimerEvent: {}
+[4.087149] (-) TimerEvent: {}
+[4.195969] (-) TimerEvent: {}
+[4.301576] (-) TimerEvent: {}
+[4.336933] (slam_core) StdoutLine: {'line': b"-- Using RMW implementation 'rmw_fastrtps_cpp' as default\n"}
+[4.368460] (slam_core) StdoutLine: {'line': b'-- Found cv_bridge: 3.2.1 (/opt/ros/humble/share/cv_bridge/cmake)\n'}
+[4.388045] (slam_core) StdoutLine: {'line': b'-- Found required Ceres dependency: Eigen version 3.4.0 in /usr/include/eigen3\n'}
+[4.389002] (slam_core) StdoutLine: {'line': b'-- Found required Ceres dependency: glog\n'}
+[4.389219] (slam_core) StdoutLine: {'line': b'-- Found required Ceres dependency: gflags\n'}
+[4.389375] (slam_core) StdoutLine: {'line': b'-- Found Ceres version: 2.0.0 installed in: /usr with components: [EigenSparse, SparseLinearAlgebraLibrary, LAPACK, SuiteSparse, CXSparse, SchurSpecializations, Multithreading]\n'}
+[4.389930] (slam_core) StdoutLine: {'line': b'-- Found nav_msgs: 4.9.0 (/opt/ros/humble/share/nav_msgs/cmake)\n'}
+[4.402686] (-) TimerEvent: {}
+[4.424826] (slam_core) StderrLine: {'line': b'\x1b[33mCMake Warning (dev) at /usr/share/cmake-3.22/Modules/FindOpenGL.cmake:315 (message):\n'}
+[4.425088] (slam_core) StderrLine: {'line': b'  Policy CMP0072 is not set: FindOpenGL prefers GLVND by default when\n'}
+[4.425129] (slam_core) StderrLine: {'line': b'  available.  Run "cmake --help-policy CMP0072" for policy details.  Use the\n'}
+[4.425161] (slam_core) StderrLine: {'line': b'  cmake_policy command to set the policy and suppress this warning.\n'}
+[4.425188] (slam_core) StderrLine: {'line': b'\n'}
+[4.425213] (slam_core) StderrLine: {'line': b'  FindOpenGL found both a legacy GL library:\n'}
+[4.425238] (slam_core) StderrLine: {'line': b'\n'}
+[4.425262] (slam_core) StderrLine: {'line': b'    OPENGL_gl_LIBRARY: /usr/lib/x86_64-linux-gnu/libGL.so\n'}
+[4.425286] (slam_core) StderrLine: {'line': b'\n'}
+[4.425309] (slam_core) StderrLine: {'line': b'  and GLVND libraries for OpenGL and GLX:\n'}
+[4.425333] (slam_core) StderrLine: {'line': b'\n'}
+[4.425356] (slam_core) StderrLine: {'line': b'    OPENGL_opengl_LIBRARY: /usr/lib/x86_64-linux-gnu/libOpenGL.so\n'}
+[4.425379] (slam_core) StderrLine: {'line': b'    OPENGL_glx_LIBRARY: /usr/lib/x86_64-linux-gnu/libGLX.so\n'}
+[4.425401] (slam_core) StderrLine: {'line': b'\n'}
+[4.425423] (slam_core) StderrLine: {'line': b'  OpenGL_GL_PREFERENCE has not been set to "GLVND" or "LEGACY", so for\n'}
+[4.425445] (slam_core) StderrLine: {'line': b'  compatibility with CMake 3.10 and below the legacy GL library will be used.\n'}
+[4.425466] (slam_core) StderrLine: {'line': b'Call Stack (most recent call first):\n'}
+[4.425488] (slam_core) StderrLine: {'line': b'  /usr/share/cmake-3.22/Modules/CMakeFindDependencyMacro.cmake:47 (find_package)\n'}
+[4.425511] (slam_core) StderrLine: {'line': b'  /opt/ros/humble/lib/cmake/g2o/g2oConfig.cmake:4 (find_dependency)\n'}
+[4.425532] (slam_core) StderrLine: {'line': b'  CMakeLists.txt:17 (find_package)\n'}
+[4.425554] (slam_core) StderrLine: {'line': b'This warning is for project developers.  Use -Wno-dev to suppress it.\n'}
+[4.425577] (slam_core) StderrLine: {'line': b'\x1b[0m\n'}
+[4.426623] (slam_core) StdoutLine: {'line': b'-- Found visualization_msgs: 4.9.0 (/opt/ros/humble/share/visualization_msgs/cmake)\n'}
+[4.438142] (slam_core) StdoutLine: {'line': b'-- Found ament_lint_auto: 0.12.14 (/opt/ros/humble/share/ament_lint_auto/cmake)\n'}
+[4.481050] (slam_core) StdoutLine: {'line': b"-- Added test 'cppcheck' to perform static code analysis on C / C++ code\n"}
+[4.481300] (slam_core) StdoutLine: {'line': b'-- Configured cppcheck include dirs: $<BUILD_INTERFACE:/home/dongjae/slambook_ws/src/slam_core/include>\n'}
+[4.481341] (slam_core) StdoutLine: {'line': b'-- Configured cppcheck exclude dirs and/or files: \n'}
+[4.481500] (slam_core) StdoutLine: {'line': b"-- Added test 'lint_cmake' to check CMake code style\n"}
+[4.482118] (slam_core) StdoutLine: {'line': b"-- Added test 'uncrustify' to check C / C++ code style\n"}
+[4.482212] (slam_core) StdoutLine: {'line': b'-- Configured uncrustify additional arguments: \n'}
+[4.482353] (slam_core) StdoutLine: {'line': b"-- Added test 'xmllint' to check XML markup files\n"}
+[4.482798] (slam_core) StdoutLine: {'line': b'-- Configuring done\n'}
+[4.487407] (slam_core) StderrLine: {'line': b'\x1b[31mCMake Error at CMakeLists.txt:23 (add_executable):\n'}
+[4.487650] (slam_core) StderrLine: {'line': b'  Target "slam_system" links to target "g2o::solver_core" but the target was\n'}
+[4.487710] (slam_core) StderrLine: {'line': b'  not found.  Perhaps a find_package() call is missing for an IMPORTED\n'}
+[4.487754] (slam_core) StderrLine: {'line': b'  target, or an ALIAS target is missing?\n'}
+[4.487807] (slam_core) StderrLine: {'line': b'\n'}
+[4.487854] (slam_core) StderrLine: {'line': b'\x1b[0m\n'}
+[4.497212] (slam_core) StdoutLine: {'line': b'-- Generating done\n'}
+[4.498160] (slam_core) StderrLine: {'line': b'\x1b[0mCMake Generate step failed.  Build files cannot be regenerated correctly.\x1b[0m\n'}
+[4.503137] (-) TimerEvent: {}
+[4.504156] (slam_core) StderrLine: {'line': b'gmake: *** [Makefile:348: cmake_check_build_system] Error 1\n'}
+[4.506042] (slam_core) CommandEnded: {'returncode': 2}
+[4.512813] (slam_core) JobEnded: {'identifier': 'slam_core', 'rc': 2}
+[4.523778] (-) EventReactorShutdown: {}

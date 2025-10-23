@@ -1,0 +1,17 @@
+[31mCMake Error at CMakeLists.txt:17 (find_package):
+  By not providing "FindG2O.cmake" in CMAKE_MODULE_PATH this project has
+  asked CMake to find a package configuration file provided by "G2O", but
+  CMake did not find one.
+
+  Could not find a package configuration file provided by "G2O" with any of
+  the following names:
+
+    G2OConfig.cmake
+    g2o-config.cmake
+
+  Add the installation prefix of "G2O" to CMAKE_PREFIX_PATH or set "G2O_DIR"
+  to a directory containing one of the above files.  If "G2O" provides a
+  separate development package or SDK, be sure it has been installed.
+
+[0m
+gmake: *** [Makefile:348: cmake_check_build_system] Error 1

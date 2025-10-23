@@ -1,0 +1,59 @@
+[0.011s] Invoking command in '/home/dongjae/slambook_ws/build/slam_core': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/dongjae/slambook_ws/build/slam_core -- -j16 -l16
+[0.030s] -- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.147s] -- Found rclcpp: 16.0.15 (/opt/ros/humble/share/rclcpp/cmake)
+[0.274s] -- Found rosidl_generator_c: 3.1.7 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.276s] -- Found rosidl_adapter: 3.1.7 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.279s] -- Found rosidl_generator_cpp: 3.1.7 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[0.285s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.292s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.310s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[0.310s] -- Found rmw_fastrtps_cpp: 6.2.8 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[4.336s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[4.368s] -- Found cv_bridge: 3.2.1 (/opt/ros/humble/share/cv_bridge/cmake)
+[4.387s] -- Found required Ceres dependency: Eigen version 3.4.0 in /usr/include/eigen3
+[4.388s] -- Found required Ceres dependency: glog
+[4.388s] -- Found required Ceres dependency: gflags
+[4.388s] -- Found Ceres version: 2.0.0 installed in: /usr with components: [EigenSparse, SparseLinearAlgebraLibrary, LAPACK, SuiteSparse, CXSparse, SchurSpecializations, Multithreading]
+[4.389s] -- Found nav_msgs: 4.9.0 (/opt/ros/humble/share/nav_msgs/cmake)
+[4.424s] [33mCMake Warning (dev) at /usr/share/cmake-3.22/Modules/FindOpenGL.cmake:315 (message):
+[4.424s]   Policy CMP0072 is not set: FindOpenGL prefers GLVND by default when
+[4.424s]   available.  Run "cmake --help-policy CMP0072" for policy details.  Use the
+[4.424s]   cmake_policy command to set the policy and suppress this warning.
+[4.424s] 
+[4.424s]   FindOpenGL found both a legacy GL library:
+[4.424s] 
+[4.424s]     OPENGL_gl_LIBRARY: /usr/lib/x86_64-linux-gnu/libGL.so
+[4.424s] 
+[4.424s]   and GLVND libraries for OpenGL and GLX:
+[4.424s] 
+[4.424s]     OPENGL_opengl_LIBRARY: /usr/lib/x86_64-linux-gnu/libOpenGL.so
+[4.424s]     OPENGL_glx_LIBRARY: /usr/lib/x86_64-linux-gnu/libGLX.so
+[4.424s] 
+[4.424s]   OpenGL_GL_PREFERENCE has not been set to "GLVND" or "LEGACY", so for
+[4.424s]   compatibility with CMake 3.10 and below the legacy GL library will be used.
+[4.424s] Call Stack (most recent call first):
+[4.424s]   /usr/share/cmake-3.22/Modules/CMakeFindDependencyMacro.cmake:47 (find_package)
+[4.424s]   /opt/ros/humble/lib/cmake/g2o/g2oConfig.cmake:4 (find_dependency)
+[4.424s]   CMakeLists.txt:17 (find_package)
+[4.424s] This warning is for project developers.  Use -Wno-dev to suppress it.
+[4.424s] [0m
+[4.425s] -- Found visualization_msgs: 4.9.0 (/opt/ros/humble/share/visualization_msgs/cmake)
+[4.437s] -- Found ament_lint_auto: 0.12.14 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[4.480s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[4.480s] -- Configured cppcheck include dirs: $<BUILD_INTERFACE:/home/dongjae/slambook_ws/src/slam_core/include>
+[4.480s] -- Configured cppcheck exclude dirs and/or files: 
+[4.480s] -- Added test 'lint_cmake' to check CMake code style
+[4.481s] -- Added test 'uncrustify' to check C / C++ code style
+[4.481s] -- Configured uncrustify additional arguments: 
+[4.481s] -- Added test 'xmllint' to check XML markup files
+[4.482s] -- Configuring done
+[4.486s] [31mCMake Error at CMakeLists.txt:23 (add_executable):
+[4.486s]   Target "slam_system" links to target "g2o::solver_core" but the target was
+[4.487s]   not found.  Perhaps a find_package() call is missing for an IMPORTED
+[4.487s]   target, or an ALIAS target is missing?
+[4.487s] 
+[4.487s] [0m
+[4.496s] -- Generating done
+[4.497s] [0mCMake Generate step failed.  Build files cannot be regenerated correctly.[0m
+[4.503s] gmake: *** [Makefile:348: cmake_check_build_system] Error 1
+[4.506s] Invoked command in '/home/dongjae/slambook_ws/build/slam_core' returned '2': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/dongjae/slambook_ws/build/slam_core -- -j16 -l16

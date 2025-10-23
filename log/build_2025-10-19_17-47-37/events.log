@@ -1,0 +1,571 @@
+[0.000000] (-) TimerEvent: {}
+[0.000923] (slam_core) JobQueued: {'identifier': 'slam_core', 'dependencies': OrderedDict()}
+[0.001606] (slam_core) JobStarted: {'identifier': 'slam_core'}
+[0.006993] (slam_core) JobProgress: {'identifier': 'slam_core', 'progress': 'cmake'}
+[0.007565] (slam_core) JobProgress: {'identifier': 'slam_core', 'progress': 'build'}
+[0.008105] (slam_core) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/dongjae/slambook_ws/build/slam_core', '--', '-j16', '-l16'], 'cwd': '/home/dongjae/slambook_ws/build/slam_core', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'dongjae'), ('GIT_ASKPASS', '/home/dongjae/.vscode-server/bin/488a1f239235055e34e673291fb8d8c810886f81/extensions/git/dist/askpass.sh'), ('ROS_APT_SOURCE_VERSION', '1.1.0'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('MOTD_SHOWN', 'update-motd'), ('HOME', '/home/dongjae'), ('OLDPWD', '/home/dongjae'), ('TERM_PROGRAM_VERSION', '1.102.3'), ('VSCODE_IPC_HOOK_CLI', '/run/user/1000/vscode-ipc-531973d9-bda8-44c6-9d96-cd3a4acd7463.sock'), ('ROS_PYTHON_VERSION', '3'), ('VSCODE_GIT_ASKPASS_MAIN', '/home/dongjae/.vscode-server/bin/488a1f239235055e34e673291fb8d8c810886f81/extensions/git/dist/askpass-main.js'), ('VSCODE_GIT_ASKPASS_NODE', '/home/dongjae/.vscode-server/bin/488a1f239235055e34e673291fb8d8c810886f81/node'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('WSL_DISTRO_NAME', 'Ubuntu-22.04'), ('WAYLAND_DISPLAY', 'wayland-0'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'dongjae'), ('NAME', 'DESKTOP-6O5P79B'), ('WSL_INTEROP', '/run/WSL/395_interop'), ('PULSE_SERVER', 'unix:/mnt/wslg/PulseServer'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm-256color'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/home/dongjae/.vscode-server/bin/488a1f239235055e34e673291fb8d8c810886f81/bin/remote-cli:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/d/programs/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/x64:/mnt/d/programs/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Program Files/NVIDIA Corporation/NVIDIA App/NvDLISR:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files/Zero Install:/mnt/d/Microsoft VS Code/bin:/mnt/c/Program Files/Microsoft VS Code/bin:/mnt/c/Program Files/Tailscale/:/mnt/d/programs/Git/cmd:/mnt/d/Windows Kits/10/Windows Performance Toolkit/:/mnt/c/Program Files/NVIDIA Corporation/Nsight Compute 2025.3.1/:/mnt/c/Users/Dongjae/AppData/Local/Microsoft/WindowsApps:/snap/bin:/home/dongjae/.vscode-server/data/User/globalStorage/github.copilot-chat/debugCommand'), ('XDG_RUNTIME_DIR', '/run/user/1000/'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('VSCODE_GIT_IPC_HANDLE', '/run/user/1000/vscode-git-86eaa534c4.sock'), ('TERM_PROGRAM', 'vscode'), ('AMENT_PREFIX_PATH', '/opt/ros/humble'), ('SHELL', '/bin/bash'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('VSCODE_GIT_ASKPASS_EXTRA_ARGS', ''), ('PWD', '/home/dongjae/slambook_ws/build/slam_core'), ('XDG_DATA_DIRS', '/usr/local/share:/usr/share:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('WSL2_GUI_APPS_ENABLED', '1'), ('HOSTTYPE', 'x86_64'), ('WSLENV', 'VSCODE_WSL_EXT_LOCATION/up'), ('CMAKE_PREFIX_PATH', '/opt/ros/humble')]), 'shell': False}
+[0.026767] (slam_core) StdoutLine: {'line': b'-- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)\n'}
+[0.100135] (-) TimerEvent: {}
+[0.121280] (slam_core) StdoutLine: {'line': b'-- Found rclcpp: 16.0.15 (/opt/ros/humble/share/rclcpp/cmake)\n'}
+[0.200426] (-) TimerEvent: {}
+[0.253372] (slam_core) StdoutLine: {'line': b'-- Found rosidl_generator_c: 3.1.7 (/opt/ros/humble/share/rosidl_generator_c/cmake)\n'}
+[0.254810] (slam_core) StdoutLine: {'line': b'-- Found rosidl_adapter: 3.1.7 (/opt/ros/humble/share/rosidl_adapter/cmake)\n'}
+[0.258590] (slam_core) StdoutLine: {'line': b'-- Found rosidl_generator_cpp: 3.1.7 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)\n'}
+[0.264129] (slam_core) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[0.271372] (slam_core) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[0.289508] (slam_core) StdoutLine: {'line': b'-- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)\n'}
+[0.290425] (slam_core) StdoutLine: {'line': b'-- Found rmw_fastrtps_cpp: 6.2.8 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)\n'}
+[0.301357] (-) TimerEvent: {}
+[0.405615] (-) TimerEvent: {}
+[0.507265] (-) TimerEvent: {}
+[0.614230] (-) TimerEvent: {}
+[0.714906] (-) TimerEvent: {}
+[0.819186] (-) TimerEvent: {}
+[0.923280] (-) TimerEvent: {}
+[1.024057] (-) TimerEvent: {}
+[1.124507] (-) TimerEvent: {}
+[1.225663] (-) TimerEvent: {}
+[1.328979] (-) TimerEvent: {}
+[1.431468] (-) TimerEvent: {}
+[1.534127] (-) TimerEvent: {}
+[1.636982] (-) TimerEvent: {}
+[1.739235] (-) TimerEvent: {}
+[1.842027] (-) TimerEvent: {}
+[1.944283] (-) TimerEvent: {}
+[2.047343] (-) TimerEvent: {}
+[2.150574] (-) TimerEvent: {}
+[2.252664] (-) TimerEvent: {}
+[2.354689] (-) TimerEvent: {}
+[2.456797] (-) TimerEvent: {}
+[2.557375] (-) TimerEvent: {}
+[2.659577] (-) TimerEvent: {}
+[2.760115] (-) TimerEvent: {}
+[2.861636] (-) TimerEvent: {}
+[2.962414] (-) TimerEvent: {}
+[3.063045] (-) TimerEvent: {}
+[3.163775] (-) TimerEvent: {}
+[3.272618] (-) TimerEvent: {}
+[3.381141] (-) TimerEvent: {}
+[3.487130] (-) TimerEvent: {}
+[3.595948] (-) TimerEvent: {}
+[3.696475] (-) TimerEvent: {}
+[3.801595] (-) TimerEvent: {}
+[3.902444] (-) TimerEvent: {}
+[4.011231] (-) TimerEvent: {}
+[4.115115] (-) TimerEvent: {}
+[4.223949] (-) TimerEvent: {}
+[4.330821] (-) TimerEvent: {}
+[4.415936] (slam_core) StdoutLine: {'line': b"-- Using RMW implementation 'rmw_fastrtps_cpp' as default\n"}
+[4.432307] (-) TimerEvent: {}
+[4.447796] (slam_core) StdoutLine: {'line': b'-- Found cv_bridge: 3.2.1 (/opt/ros/humble/share/cv_bridge/cmake)\n'}
+[4.466847] (slam_core) StdoutLine: {'line': b'-- Found required Ceres dependency: Eigen version 3.4.0 in /usr/include/eigen3\n'}
+[4.467761] (slam_core) StdoutLine: {'line': b'-- Found required Ceres dependency: glog\n'}
+[4.468142] (slam_core) StdoutLine: {'line': b'-- Found required Ceres dependency: gflags\n'}
+[4.468697] (slam_core) StdoutLine: {'line': b'-- Found Ceres version: 2.0.0 installed in: /usr with components: [EigenSparse, SparseLinearAlgebraLibrary, LAPACK, SuiteSparse, CXSparse, SchurSpecializations, Multithreading]\n'}
+[4.469058] (slam_core) StdoutLine: {'line': b'-- Found nav_msgs: 4.9.0 (/opt/ros/humble/share/nav_msgs/cmake)\n'}
+[4.504225] (slam_core) StderrLine: {'line': b'\x1b[33mCMake Warning (dev) at /usr/share/cmake-3.22/Modules/FindOpenGL.cmake:315 (message):\n'}
+[4.504522] (slam_core) StderrLine: {'line': b'  Policy CMP0072 is not set: FindOpenGL prefers GLVND by default when\n'}
+[4.504569] (slam_core) StderrLine: {'line': b'  available.  Run "cmake --help-policy CMP0072" for policy details.  Use the\n'}
+[4.504601] (slam_core) StderrLine: {'line': b'  cmake_policy command to set the policy and suppress this warning.\n'}
+[4.504627] (slam_core) StderrLine: {'line': b'\n'}
+[4.504651] (slam_core) StderrLine: {'line': b'  FindOpenGL found both a legacy GL library:\n'}
+[4.504678] (slam_core) StderrLine: {'line': b'\n'}
+[4.504704] (slam_core) StderrLine: {'line': b'    OPENGL_gl_LIBRARY: /usr/lib/x86_64-linux-gnu/libGL.so\n'}
+[4.504730] (slam_core) StderrLine: {'line': b'\n'}
+[4.504754] (slam_core) StderrLine: {'line': b'  and GLVND libraries for OpenGL and GLX:\n'}
+[4.504779] (slam_core) StderrLine: {'line': b'\n'}
+[4.504802] (slam_core) StderrLine: {'line': b'    OPENGL_opengl_LIBRARY: /usr/lib/x86_64-linux-gnu/libOpenGL.so\n'}
+[4.504825] (slam_core) StderrLine: {'line': b'    OPENGL_glx_LIBRARY: /usr/lib/x86_64-linux-gnu/libGLX.so\n'}
+[4.504847] (slam_core) StderrLine: {'line': b'\n'}
+[4.504870] (slam_core) StderrLine: {'line': b'  OpenGL_GL_PREFERENCE has not been set to "GLVND" or "LEGACY", so for\n'}
+[4.504895] (slam_core) StderrLine: {'line': b'  compatibility with CMake 3.10 and below the legacy GL library will be used.\n'}
+[4.504920] (slam_core) StderrLine: {'line': b'Call Stack (most recent call first):\n'}
+[4.504943] (slam_core) StderrLine: {'line': b'  /usr/share/cmake-3.22/Modules/CMakeFindDependencyMacro.cmake:47 (find_package)\n'}
+[4.504966] (slam_core) StderrLine: {'line': b'  /opt/ros/humble/lib/cmake/g2o/g2oConfig.cmake:4 (find_dependency)\n'}
+[4.504988] (slam_core) StderrLine: {'line': b'  CMakeLists.txt:17 (find_package)\n'}
+[4.505011] (slam_core) StderrLine: {'line': b'This warning is for project developers.  Use -Wno-dev to suppress it.\n'}
+[4.505033] (slam_core) StderrLine: {'line': b'\x1b[0m\n'}
+[4.507885] (slam_core) StdoutLine: {'line': b'-- Found visualization_msgs: 4.9.0 (/opt/ros/humble/share/visualization_msgs/cmake)\n'}
+[4.527111] (slam_core) StdoutLine: {'line': b'-- Found ament_lint_auto: 0.12.14 (/opt/ros/humble/share/ament_lint_auto/cmake)\n'}
+[4.532808] (-) TimerEvent: {}
+[4.567913] (slam_core) StdoutLine: {'line': b"-- Added test 'cppcheck' to perform static code analysis on C / C++ code\n"}
+[4.568196] (slam_core) StdoutLine: {'line': b'-- Configured cppcheck include dirs: $<BUILD_INTERFACE:/home/dongjae/slambook_ws/src/slam_core/include>\n'}
+[4.568273] (slam_core) StdoutLine: {'line': b'-- Configured cppcheck exclude dirs and/or files: \n'}
+[4.568482] (slam_core) StdoutLine: {'line': b"-- Added test 'lint_cmake' to check CMake code style\n"}
+[4.569179] (slam_core) StdoutLine: {'line': b"-- Added test 'uncrustify' to check C / C++ code style\n"}
+[4.569280] (slam_core) StdoutLine: {'line': b'-- Configured uncrustify additional arguments: \n'}
+[4.569314] (slam_core) StdoutLine: {'line': b"-- Added test 'xmllint' to check XML markup files\n"}
+[4.569645] (slam_core) StdoutLine: {'line': b'-- Configuring done\n'}
+[4.578501] (slam_core) StdoutLine: {'line': b'-- Generating done\n'}
+[4.582029] (slam_core) StdoutLine: {'line': b'-- Build files have been written to: /home/dongjae/slambook_ws/build/slam_core\n'}
+[4.601640] (slam_core) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target slam_system\x1b[0m\n'}
+[4.622340] (slam_core) StdoutLine: {'line': b'[ 20%] \x1b[32mBuilding CXX object CMakeFiles/slam_system.dir/src/slam_system.cpp.o\x1b[0m\n'}
+[4.622958] (slam_core) StdoutLine: {'line': b'[ 40%] \x1b[32mBuilding CXX object CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o\x1b[0m\n'}
+[4.623380] (slam_core) StdoutLine: {'line': b'[ 60%] \x1b[32mBuilding CXX object CMakeFiles/slam_system.dir/src/frontend/frontend.cpp.o\x1b[0m\n'}
+[4.624027] (slam_core) StdoutLine: {'line': b'[ 80%] \x1b[32mBuilding CXX object CMakeFiles/slam_system.dir/src/frontend/feature_tracker.cpp.o\x1b[0m\n'}
+[4.633117] (-) TimerEvent: {}
+[4.734099] (-) TimerEvent: {}
+[4.835159] (-) TimerEvent: {}
+[4.936493] (-) TimerEvent: {}
+[5.037277] (-) TimerEvent: {}
+[5.137854] (-) TimerEvent: {}
+[5.238617] (-) TimerEvent: {}
+[5.341622] (-) TimerEvent: {}
+[5.442793] (-) TimerEvent: {}
+[5.547410] (-) TimerEvent: {}
+[5.652151] (-) TimerEvent: {}
+[5.757088] (-) TimerEvent: {}
+[5.861905] (-) TimerEvent: {}
+[5.966535] (-) TimerEvent: {}
+[6.071119] (-) TimerEvent: {}
+[6.176317] (-) TimerEvent: {}
+[6.278528] (-) TimerEvent: {}
+[6.383003] (-) TimerEvent: {}
+[6.483913] (-) TimerEvent: {}
+[6.588904] (-) TimerEvent: {}
+[6.693527] (-) TimerEvent: {}
+[6.798188] (-) TimerEvent: {}
+[6.903219] (-) TimerEvent: {}
+[7.008298] (-) TimerEvent: {}
+[7.109544] (-) TimerEvent: {}
+[7.210156] (-) TimerEvent: {}
+[7.313256] (-) TimerEvent: {}
+[7.414350] (-) TimerEvent: {}
+[7.518977] (-) TimerEvent: {}
+[7.623477] (-) TimerEvent: {}
+[7.728090] (-) TimerEvent: {}
+[7.832791] (-) TimerEvent: {}
+[7.937656] (-) TimerEvent: {}
+[8.040178] (-) TimerEvent: {}
+[8.142687] (-) TimerEvent: {}
+[8.244153] (-) TimerEvent: {}
+[8.347388] (-) TimerEvent: {}
+[8.450215] (-) TimerEvent: {}
+[8.552723] (-) TimerEvent: {}
+[8.656038] (-) TimerEvent: {}
+[8.757732] (-) TimerEvent: {}
+[8.860776] (-) TimerEvent: {}
+[8.961539] (-) TimerEvent: {}
+[9.062723] (-) TimerEvent: {}
+[9.133881] (slam_core) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/visual_odometry.hpp:6\x1b[m\x1b[K,\n'}
+[9.134410] (slam_core) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/frontend.hpp:6\x1b[m\x1b[K,\n'}
+[9.134483] (slam_core) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/src/frontend/frontend.cpp:1\x1b[m\x1b[K:\n'}
+[9.134519] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:\x1b[m\x1b[K In member function \xe2\x80\x98\x1b[01m\x1b[Kvirtual bool VertexPose::read(std::istream&)\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[9.134549] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:21:51:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kno return statement in function returning non-void [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreturn-type\x07-Wreturn-type\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[9.134590] (slam_core) StderrLine: {'line': b'   21 |   virtual bool read(std::istream &in) override {  \x1b[01;35m\x1b[K}\x1b[m\x1b[K\n'}
+[9.134615] (slam_core) StderrLine: {'line': b'      |                                                   \x1b[01;35m\x1b[K^\x1b[m\x1b[K\n'}
+[9.134639] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:21:35:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused parameter \xe2\x80\x98\x1b[01m\x1b[Kin\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter\x07-Wunused-parameter\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[9.134664] (slam_core) StderrLine: {'line': b'   21 |   virtual bool read(\x1b[01;35m\x1b[Kstd::istream &in\x1b[m\x1b[K) override {  }\n'}
+[9.134689] (slam_core) StderrLine: {'line': b'      |                     \x1b[01;35m\x1b[K~~~~~~~~~~~~~~^~\x1b[m\x1b[K\n'}
+[9.134714] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:\x1b[m\x1b[K In member function \xe2\x80\x98\x1b[01m\x1b[Kvirtual bool VertexPose::write(std::ostream&) const\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[9.134743] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:23:59:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kno return statement in function returning non-void [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreturn-type\x07-Wreturn-type\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[9.134767] (slam_core) StderrLine: {'line': b'   23 |   virtual bool write(std::ostream &out) const override {  \x1b[01;35m\x1b[K}\x1b[m\x1b[K\n'}
+[9.134789] (slam_core) StderrLine: {'line': b'      |                                                           \x1b[01;35m\x1b[K^\x1b[m\x1b[K\n'}
+[9.134812] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:23:36:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused parameter \xe2\x80\x98\x1b[01m\x1b[Kout\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter\x07-Wunused-parameter\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[9.134901] (slam_core) StderrLine: {'line': b'   23 |   virtual bool write(\x1b[01;35m\x1b[Kstd::ostream &out\x1b[m\x1b[K) const override {  }\n'}
+[9.134937] (slam_core) StderrLine: {'line': b'      |                      \x1b[01;35m\x1b[K~~~~~~~~~~~~~~^~~\x1b[m\x1b[K\n'}
+[9.138501] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:\x1b[m\x1b[K At global scope:\n'}
+[9.138742] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:28:34:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kextra \xe2\x80\x98\x1b[01m\x1b[K;\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wpedantic\x07-Wpedantic\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[9.138798] (slam_core) StderrLine: {'line': b'   28 |   EIGEN_MAKE_ALIGNED_OPERATOR_NEW\x1b[01;35m\x1b[K;\x1b[m\x1b[K\n'}
+[9.138837] (slam_core) StderrLine: {'line': b'      |                                  \x1b[01;35m\x1b[K^\x1b[m\x1b[K\n'}
+[9.138869] (slam_core) StderrLine: {'line': b'      |                                  \x1b[31m\x1b[K-\x1b[m\x1b[K\n'}
+[9.165017] (-) TimerEvent: {}
+[9.170124] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:\x1b[m\x1b[K In member function \xe2\x80\x98\x1b[01m\x1b[Kvirtual bool EdgeProjection::read(std::istream&)\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[9.170478] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:55:51:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kno return statement in function returning non-void [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreturn-type\x07-Wreturn-type\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[9.170556] (slam_core) StderrLine: {'line': b'   55 |   virtual bool read(std::istream &in) override {  \x1b[01;35m\x1b[K}\x1b[m\x1b[K\n'}
+[9.170600] (slam_core) StderrLine: {'line': b'      |                                                   \x1b[01;35m\x1b[K^\x1b[m\x1b[K\n'}
+[9.170637] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:55:35:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused parameter \xe2\x80\x98\x1b[01m\x1b[Kin\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter\x07-Wunused-parameter\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[9.170692] (slam_core) StderrLine: {'line': b'   55 |   virtual bool read(\x1b[01;35m\x1b[Kstd::istream &in\x1b[m\x1b[K) override {  }\n'}
+[9.170727] (slam_core) StderrLine: {'line': b'      |                     \x1b[01;35m\x1b[K~~~~~~~~~~~~~~^~\x1b[m\x1b[K\n'}
+[9.170761] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:\x1b[m\x1b[K In member function \xe2\x80\x98\x1b[01m\x1b[Kvirtual bool EdgeProjection::write(std::ostream&) const\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[9.170801] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:57:59:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kno return statement in function returning non-void [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreturn-type\x07-Wreturn-type\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[9.170838] (slam_core) StderrLine: {'line': b'   57 |   virtual bool write(std::ostream &out) const override {  \x1b[01;35m\x1b[K}\x1b[m\x1b[K\n'}
+[9.170872] (slam_core) StderrLine: {'line': b'      |                                                           \x1b[01;35m\x1b[K^\x1b[m\x1b[K\n'}
+[9.170902] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:57:36:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused parameter \xe2\x80\x98\x1b[01m\x1b[Kout\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter\x07-Wunused-parameter\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[9.170939] (slam_core) StderrLine: {'line': b'   57 |   virtual bool write(\x1b[01;35m\x1b[Kstd::ostream &out\x1b[m\x1b[K) const override {  }\n'}
+[9.170970] (slam_core) StderrLine: {'line': b'      |                      \x1b[01;35m\x1b[K~~~~~~~~~~~~~~^~~\x1b[m\x1b[K\n'}
+[9.211594] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/src/frontend/frontend.cpp:\x1b[m\x1b[K In member function \xe2\x80\x98\x1b[01m\x1b[Kint Frontend::add_keyframe(std::shared_ptr<Frame>&, bool, bool)\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[9.211843] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/src/frontend/frontend.cpp:91:64:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused parameter \xe2\x80\x98\x1b[01m\x1b[KisFirst\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter\x07-Wunused-parameter\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[9.211886] (slam_core) StderrLine: {'line': b'   91 | int Frontend::add_keyframe(std::shared_ptr<Frame> &frame, \x1b[01;35m\x1b[Kbool isFirst\x1b[m\x1b[K, bool isInit){\n'}
+[9.211917] (slam_core) StderrLine: {'line': b'      |                                                           \x1b[01;35m\x1b[K~~~~~^~~~~~~\x1b[m\x1b[K\n'}
+[9.211943] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/src/frontend/frontend.cpp:91:78:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused parameter \xe2\x80\x98\x1b[01m\x1b[KisInit\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter\x07-Wunused-parameter\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[9.211974] (slam_core) StderrLine: {'line': b'   91 | int Frontend::add_keyframe(std::shared_ptr<Frame> &frame, bool isFirst, \x1b[01;35m\x1b[Kbool isInit\x1b[m\x1b[K){\n'}
+[9.211997] (slam_core) StderrLine: {'line': b'      |                                                                         \x1b[01;35m\x1b[K~~~~~^~~~~~\x1b[m\x1b[K\n'}
+[9.265294] (-) TimerEvent: {}
+[9.282830] (slam_core) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/visual_odometry.hpp:6\x1b[m\x1b[K,\n'}
+[9.283427] (slam_core) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/src/frontend/visual_odometry.cpp:1\x1b[m\x1b[K:\n'}
+[9.283577] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:\x1b[m\x1b[K In member function \xe2\x80\x98\x1b[01m\x1b[Kvirtual bool VertexPose::read(std::istream&)\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[9.283674] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:21:51:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kno return statement in function returning non-void [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreturn-type\x07-Wreturn-type\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[9.283791] (slam_core) StderrLine: {'line': b'   21 |   virtual bool read(std::istream &in) override {  \x1b[01;35m\x1b[K}\x1b[m\x1b[K\n'}
+[9.283868] (slam_core) StderrLine: {'line': b'      |                                                   \x1b[01;35m\x1b[K^\x1b[m\x1b[K\n'}
+[9.283942] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:21:35:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused parameter \xe2\x80\x98\x1b[01m\x1b[Kin\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter\x07-Wunused-parameter\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[9.283993] (slam_core) StderrLine: {'line': b'   21 |   virtual bool read(\x1b[01;35m\x1b[Kstd::istream &in\x1b[m\x1b[K) override {  }\n'}
+[9.284040] (slam_core) StderrLine: {'line': b'      |                     \x1b[01;35m\x1b[K~~~~~~~~~~~~~~^~\x1b[m\x1b[K\n'}
+[9.284112] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:\x1b[m\x1b[K In member function \xe2\x80\x98\x1b[01m\x1b[Kvirtual bool VertexPose::write(std::ostream&) const\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[9.284151] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:23:59:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kno return statement in function returning non-void [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreturn-type\x07-Wreturn-type\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[9.284186] (slam_core) StderrLine: {'line': b'   23 |   virtual bool write(std::ostream &out) const override {  \x1b[01;35m\x1b[K}\x1b[m\x1b[K\n'}
+[9.284221] (slam_core) StderrLine: {'line': b'      |                                                           \x1b[01;35m\x1b[K^\x1b[m\x1b[K\n'}
+[9.284253] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:23:36:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused parameter \xe2\x80\x98\x1b[01m\x1b[Kout\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter\x07-Wunused-parameter\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[9.284287] (slam_core) StderrLine: {'line': b'   23 |   virtual bool write(\x1b[01;35m\x1b[Kstd::ostream &out\x1b[m\x1b[K) const override {  }\n'}
+[9.284318] (slam_core) StderrLine: {'line': b'      |                      \x1b[01;35m\x1b[K~~~~~~~~~~~~~~^~~\x1b[m\x1b[K\n'}
+[9.288222] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:\x1b[m\x1b[K At global scope:\n'}
+[9.288428] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:28:34:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kextra \xe2\x80\x98\x1b[01m\x1b[K;\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wpedantic\x07-Wpedantic\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[9.288484] (slam_core) StderrLine: {'line': b'   28 |   EIGEN_MAKE_ALIGNED_OPERATOR_NEW\x1b[01;35m\x1b[K;\x1b[m\x1b[K\n'}
+[9.288514] (slam_core) StderrLine: {'line': b'      |                                  \x1b[01;35m\x1b[K^\x1b[m\x1b[K\n'}
+[9.288538] (slam_core) StderrLine: {'line': b'      |                                  \x1b[31m\x1b[K-\x1b[m\x1b[K\n'}
+[9.316725] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:\x1b[m\x1b[K In member function \xe2\x80\x98\x1b[01m\x1b[Kvirtual bool EdgeProjection::read(std::istream&)\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[9.317469] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:55:51:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kno return statement in function returning non-void [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreturn-type\x07-Wreturn-type\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[9.317576] (slam_core) StderrLine: {'line': b'   55 |   virtual bool read(std::istream &in) override {  \x1b[01;35m\x1b[K}\x1b[m\x1b[K\n'}
+[9.317616] (slam_core) StderrLine: {'line': b'      |                                                   \x1b[01;35m\x1b[K^\x1b[m\x1b[K\n'}
+[9.317645] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:55:35:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused parameter \xe2\x80\x98\x1b[01m\x1b[Kin\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter\x07-Wunused-parameter\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[9.317677] (slam_core) StderrLine: {'line': b'   55 |   virtual bool read(\x1b[01;35m\x1b[Kstd::istream &in\x1b[m\x1b[K) override {  }\n'}
+[9.317703] (slam_core) StderrLine: {'line': b'      |                     \x1b[01;35m\x1b[K~~~~~~~~~~~~~~^~\x1b[m\x1b[K\n'}
+[9.317729] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:\x1b[m\x1b[K In member function \xe2\x80\x98\x1b[01m\x1b[Kvirtual bool EdgeProjection::write(std::ostream&) const\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[9.317757] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:57:59:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kno return statement in function returning non-void [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreturn-type\x07-Wreturn-type\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[9.317782] (slam_core) StderrLine: {'line': b'   57 |   virtual bool write(std::ostream &out) const override {  \x1b[01;35m\x1b[K}\x1b[m\x1b[K\n'}
+[9.317807] (slam_core) StderrLine: {'line': b'      |                                                           \x1b[01;35m\x1b[K^\x1b[m\x1b[K\n'}
+[9.317831] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:57:36:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused parameter \xe2\x80\x98\x1b[01m\x1b[Kout\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter\x07-Wunused-parameter\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[9.317863] (slam_core) StderrLine: {'line': b'   57 |   virtual bool write(\x1b[01;35m\x1b[Kstd::ostream &out\x1b[m\x1b[K) const override {  }\n'}
+[9.317887] (slam_core) StderrLine: {'line': b'      |                      \x1b[01;35m\x1b[K~~~~~~~~~~~~~~^~~\x1b[m\x1b[K\n'}
+[9.336379] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/src/frontend/visual_odometry.cpp:\x1b[m\x1b[K In member function \xe2\x80\x98\x1b[01m\x1b[Kbool VisualOdometry::triangulation(const Frame&, Frame&, const std::vector<cv::DMatch>&, std::vector<std::shared_ptr<MapPoint> >&, bool)\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[9.336835] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/src/frontend/visual_odometry.cpp:170:18:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kcomparison of integer expressions of different signedness: \xe2\x80\x98\x1b[01m\x1b[Kint\x1b[m\x1b[K\xe2\x80\x99 and \xe2\x80\x98\x1b[01m\x1b[Kstd::vector<cv::DMatch>::size_type\x1b[m\x1b[K\xe2\x80\x99 {aka \xe2\x80\x98\x1b[01m\x1b[Klong unsigned int\x1b[m\x1b[K\xe2\x80\x99} [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wsign-compare\x07-Wsign-compare\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[9.336949] (slam_core) StderrLine: {'line': b'  170 |     for(int i=0;\x1b[01;35m\x1b[Ki<matches.size()\x1b[m\x1b[K;i++){\n'}
+[9.337008] (slam_core) StderrLine: {'line': b'      |                 \x1b[01;35m\x1b[K~^~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[9.366936] (-) TimerEvent: {}
+[9.476036] (-) TimerEvent: {}
+[9.490453] (slam_core) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/visual_odometry.hpp:6\x1b[m\x1b[K,\n'}
+[9.490737] (slam_core) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/frontend.hpp:6\x1b[m\x1b[K,\n'}
+[9.490873] (slam_core) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/src/slam_system.cpp:5\x1b[m\x1b[K:\n'}
+[9.490922] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:\x1b[m\x1b[K In member function \xe2\x80\x98\x1b[01m\x1b[Kvirtual bool VertexPose::read(std::istream&)\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[9.490964] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:21:51:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kno return statement in function returning non-void [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreturn-type\x07-Wreturn-type\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[9.491050] (slam_core) StderrLine: {'line': b'   21 |   virtual bool read(std::istream &in) override {  \x1b[01;35m\x1b[K}\x1b[m\x1b[K\n'}
+[9.491107] (slam_core) StderrLine: {'line': b'      |                                                   \x1b[01;35m\x1b[K^\x1b[m\x1b[K\n'}
+[9.491147] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:21:35:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused parameter \xe2\x80\x98\x1b[01m\x1b[Kin\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter\x07-Wunused-parameter\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[9.491194] (slam_core) StderrLine: {'line': b'   21 |   virtual bool read(\x1b[01;35m\x1b[Kstd::istream &in\x1b[m\x1b[K) override {  }\n'}
+[9.491229] (slam_core) StderrLine: {'line': b'      |                     \x1b[01;35m\x1b[K~~~~~~~~~~~~~~^~\x1b[m\x1b[K\n'}
+[9.491264] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:\x1b[m\x1b[K In member function \xe2\x80\x98\x1b[01m\x1b[Kvirtual bool VertexPose::write(std::ostream&) const\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[9.491304] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:23:59:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kno return statement in function returning non-void [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreturn-type\x07-Wreturn-type\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[9.491342] (slam_core) StderrLine: {'line': b'   23 |   virtual bool write(std::ostream &out) const override {  \x1b[01;35m\x1b[K}\x1b[m\x1b[K\n'}
+[9.491379] (slam_core) StderrLine: {'line': b'      |                                                           \x1b[01;35m\x1b[K^\x1b[m\x1b[K\n'}
+[9.491413] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:23:36:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused parameter \xe2\x80\x98\x1b[01m\x1b[Kout\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter\x07-Wunused-parameter\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[9.491451] (slam_core) StderrLine: {'line': b'   23 |   virtual bool write(\x1b[01;35m\x1b[Kstd::ostream &out\x1b[m\x1b[K) const override {  }\n'}
+[9.491487] (slam_core) StderrLine: {'line': b'      |                      \x1b[01;35m\x1b[K~~~~~~~~~~~~~~^~~\x1b[m\x1b[K\n'}
+[9.494108] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:\x1b[m\x1b[K At global scope:\n'}
+[9.494315] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:28:34:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kextra \xe2\x80\x98\x1b[01m\x1b[K;\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wpedantic\x07-Wpedantic\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[9.494373] (slam_core) StderrLine: {'line': b'   28 |   EIGEN_MAKE_ALIGNED_OPERATOR_NEW\x1b[01;35m\x1b[K;\x1b[m\x1b[K\n'}
+[9.494416] (slam_core) StderrLine: {'line': b'      |                                  \x1b[01;35m\x1b[K^\x1b[m\x1b[K\n'}
+[9.494450] (slam_core) StderrLine: {'line': b'      |                                  \x1b[31m\x1b[K-\x1b[m\x1b[K\n'}
+[9.522313] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:\x1b[m\x1b[K In member function \xe2\x80\x98\x1b[01m\x1b[Kvirtual bool EdgeProjection::read(std::istream&)\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[9.522581] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:55:51:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kno return statement in function returning non-void [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreturn-type\x07-Wreturn-type\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[9.522641] (slam_core) StderrLine: {'line': b'   55 |   virtual bool read(std::istream &in) override {  \x1b[01;35m\x1b[K}\x1b[m\x1b[K\n'}
+[9.522673] (slam_core) StderrLine: {'line': b'      |                                                   \x1b[01;35m\x1b[K^\x1b[m\x1b[K\n'}
+[9.522699] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:55:35:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused parameter \xe2\x80\x98\x1b[01m\x1b[Kin\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter\x07-Wunused-parameter\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[9.522725] (slam_core) StderrLine: {'line': b'   55 |   virtual bool read(\x1b[01;35m\x1b[Kstd::istream &in\x1b[m\x1b[K) override {  }\n'}
+[9.522748] (slam_core) StderrLine: {'line': b'      |                     \x1b[01;35m\x1b[K~~~~~~~~~~~~~~^~\x1b[m\x1b[K\n'}
+[9.522772] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:\x1b[m\x1b[K In member function \xe2\x80\x98\x1b[01m\x1b[Kvirtual bool EdgeProjection::write(std::ostream&) const\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[9.522796] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:57:59:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kno return statement in function returning non-void [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreturn-type\x07-Wreturn-type\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[9.522820] (slam_core) StderrLine: {'line': b'   57 |   virtual bool write(std::ostream &out) const override {  \x1b[01;35m\x1b[K}\x1b[m\x1b[K\n'}
+[9.522846] (slam_core) StderrLine: {'line': b'      |                                                           \x1b[01;35m\x1b[K^\x1b[m\x1b[K\n'}
+[9.522870] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:57:36:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused parameter \xe2\x80\x98\x1b[01m\x1b[Kout\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter\x07-Wunused-parameter\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[9.522897] (slam_core) StderrLine: {'line': b'   57 |   virtual bool write(\x1b[01;35m\x1b[Kstd::ostream &out\x1b[m\x1b[K) const override {  }\n'}
+[9.522920] (slam_core) StderrLine: {'line': b'      |                      \x1b[01;35m\x1b[K~~~~~~~~~~~~~~^~~\x1b[m\x1b[K\n'}
+[9.580616] (-) TimerEvent: {}
+[9.689529] (-) TimerEvent: {}
+[9.798566] (-) TimerEvent: {}
+[9.907745] (-) TimerEvent: {}
+[10.010553] (-) TimerEvent: {}
+[10.115445] (-) TimerEvent: {}
+[10.216961] (-) TimerEvent: {}
+[10.320375] (-) TimerEvent: {}
+[10.420930] (-) TimerEvent: {}
+[10.525859] (-) TimerEvent: {}
+[10.632791] (-) TimerEvent: {}
+[10.739574] (-) TimerEvent: {}
+[10.843389] (-) TimerEvent: {}
+[10.950230] (-) TimerEvent: {}
+[11.057167] (-) TimerEvent: {}
+[11.164381] (-) TimerEvent: {}
+[11.265002] (-) TimerEvent: {}
+[11.365565] (-) TimerEvent: {}
+[11.466171] (-) TimerEvent: {}
+[11.571499] (-) TimerEvent: {}
+[11.678190] (-) TimerEvent: {}
+[11.785147] (-) TimerEvent: {}
+[11.885911] (-) TimerEvent: {}
+[11.987258] (-) TimerEvent: {}
+[12.089795] (-) TimerEvent: {}
+[12.192777] (-) TimerEvent: {}
+[12.301069] (-) TimerEvent: {}
+[12.410126] (-) TimerEvent: {}
+[12.519150] (-) TimerEvent: {}
+[12.628197] (-) TimerEvent: {}
+[12.737105] (-) TimerEvent: {}
+[12.846006] (-) TimerEvent: {}
+[12.954997] (-) TimerEvent: {}
+[13.064213] (-) TimerEvent: {}
+[13.167308] (-) TimerEvent: {}
+[13.276406] (-) TimerEvent: {}
+[13.385332] (-) TimerEvent: {}
+[13.487299] (-) TimerEvent: {}
+[13.596204] (-) TimerEvent: {}
+[13.705310] (-) TimerEvent: {}
+[13.814461] (-) TimerEvent: {}
+[13.923502] (-) TimerEvent: {}
+[14.032399] (-) TimerEvent: {}
+[14.133051] (-) TimerEvent: {}
+[14.234624] (-) TimerEvent: {}
+[14.337890] (-) TimerEvent: {}
+[14.440290] (-) TimerEvent: {}
+[14.541417] (-) TimerEvent: {}
+[14.643278] (-) TimerEvent: {}
+[14.745305] (-) TimerEvent: {}
+[14.847591] (-) TimerEvent: {}
+[14.949791] (-) TimerEvent: {}
+[15.052047] (-) TimerEvent: {}
+[15.154298] (-) TimerEvent: {}
+[15.256671] (-) TimerEvent: {}
+[15.358919] (-) TimerEvent: {}
+[15.463131] (-) TimerEvent: {}
+[15.572080] (-) TimerEvent: {}
+[15.681233] (-) TimerEvent: {}
+[15.790279] (-) TimerEvent: {}
+[15.899321] (-) TimerEvent: {}
+[16.008398] (-) TimerEvent: {}
+[16.117285] (-) TimerEvent: {}
+[16.218068] (-) TimerEvent: {}
+[16.325729] (-) TimerEvent: {}
+[16.434560] (-) TimerEvent: {}
+[16.543502] (-) TimerEvent: {}
+[16.652520] (-) TimerEvent: {}
+[16.761441] (-) TimerEvent: {}
+[16.870493] (-) TimerEvent: {}
+[16.979450] (-) TimerEvent: {}
+[17.088568] (-) TimerEvent: {}
+[17.197400] (-) TimerEvent: {}
+[17.301768] (-) TimerEvent: {}
+[17.410959] (-) TimerEvent: {}
+[17.520086] (-) TimerEvent: {}
+[17.624998] (-) TimerEvent: {}
+[17.734134] (-) TimerEvent: {}
+[17.835171] (-) TimerEvent: {}
+[17.943998] (-) TimerEvent: {}
+[18.052924] (-) TimerEvent: {}
+[18.162024] (-) TimerEvent: {}
+[18.264513] (-) TimerEvent: {}
+[18.373452] (-) TimerEvent: {}
+[18.482281] (-) TimerEvent: {}
+[18.591192] (-) TimerEvent: {}
+[18.700219] (-) TimerEvent: {}
+[18.809356] (-) TimerEvent: {}
+[18.918187] (-) TimerEvent: {}
+[19.027015] (-) TimerEvent: {}
+[19.135913] (-) TimerEvent: {}
+[19.236798] (-) TimerEvent: {}
+[19.344970] (-) TimerEvent: {}
+[19.448133] (-) TimerEvent: {}
+[19.548625] (-) TimerEvent: {}
+[19.655873] (-) TimerEvent: {}
+[19.764763] (-) TimerEvent: {}
+[19.873581] (-) TimerEvent: {}
+[19.982487] (-) TimerEvent: {}
+[20.091444] (-) TimerEvent: {}
+[20.200346] (-) TimerEvent: {}
+[20.305664] (-) TimerEvent: {}
+[20.414269] (-) TimerEvent: {}
+[20.523182] (-) TimerEvent: {}
+[20.629910] (-) TimerEvent: {}
+[20.738817] (-) TimerEvent: {}
+[20.847733] (-) TimerEvent: {}
+[20.956595] (-) TimerEvent: {}
+[21.065441] (-) TimerEvent: {}
+[21.174296] (-) TimerEvent: {}
+[21.276627] (-) TimerEvent: {}
+[21.385543] (-) TimerEvent: {}
+[21.494049] (-) TimerEvent: {}
+[21.602891] (-) TimerEvent: {}
+[21.711802] (-) TimerEvent: {}
+[21.821087] (-) TimerEvent: {}
+[21.930104] (-) TimerEvent: {}
+[22.039035] (-) TimerEvent: {}
+[22.148010] (-) TimerEvent: {}
+[22.248766] (-) TimerEvent: {}
+[22.356672] (-) TimerEvent: {}
+[22.465551] (-) TimerEvent: {}
+[22.574241] (-) TimerEvent: {}
+[22.683233] (-) TimerEvent: {}
+[22.792070] (-) TimerEvent: {}
+[22.900863] (-) TimerEvent: {}
+[23.009799] (-) TimerEvent: {}
+[23.118884] (-) TimerEvent: {}
+[23.227897] (-) TimerEvent: {}
+[23.333814] (-) TimerEvent: {}
+[23.435729] (-) TimerEvent: {}
+[23.544835] (-) TimerEvent: {}
+[23.651140] (-) TimerEvent: {}
+[23.760279] (-) TimerEvent: {}
+[23.869102] (-) TimerEvent: {}
+[23.978006] (-) TimerEvent: {}
+[24.087024] (-) TimerEvent: {}
+[24.195823] (-) TimerEvent: {}
+[24.298932] (-) TimerEvent: {}
+[24.407743] (-) TimerEvent: {}
+[24.516590] (-) TimerEvent: {}
+[24.625495] (-) TimerEvent: {}
+[24.733866] (-) TimerEvent: {}
+[24.842887] (-) TimerEvent: {}
+[24.951694] (-) TimerEvent: {}
+[25.060834] (-) TimerEvent: {}
+[25.169780] (-) TimerEvent: {}
+[25.270342] (-) TimerEvent: {}
+[25.379103] (-) TimerEvent: {}
+[25.487899] (-) TimerEvent: {}
+[25.596716] (-) TimerEvent: {}
+[25.705585] (-) TimerEvent: {}
+[25.814107] (-) TimerEvent: {}
+[25.923233] (-) TimerEvent: {}
+[26.032411] (-) TimerEvent: {}
+[26.141422] (-) TimerEvent: {}
+[26.250296] (-) TimerEvent: {}
+[26.357469] (-) TimerEvent: {}
+[26.466274] (-) TimerEvent: {}
+[26.575144] (-) TimerEvent: {}
+[26.684195] (-) TimerEvent: {}
+[26.793015] (-) TimerEvent: {}
+[26.900338] (-) TimerEvent: {}
+[27.002362] (-) TimerEvent: {}
+[27.111146] (-) TimerEvent: {}
+[27.219933] (-) TimerEvent: {}
+[27.324103] (-) TimerEvent: {}
+[27.424916] (-) TimerEvent: {}
+[27.533795] (-) TimerEvent: {}
+[27.642957] (-) TimerEvent: {}
+[27.751322] (-) TimerEvent: {}
+[27.860328] (-) TimerEvent: {}
+[27.968800] (-) TimerEvent: {}
+[28.069418] (-) TimerEvent: {}
+[28.178499] (-) TimerEvent: {}
+[28.282873] (-) TimerEvent: {}
+[28.391969] (-) TimerEvent: {}
+[28.500861] (-) TimerEvent: {}
+[28.572598] (slam_core) StdoutLine: {'line': b'[100%] \x1b[32m\x1b[1mLinking CXX executable slam_system\x1b[0m\n'}
+[28.601105] (-) TimerEvent: {}
+[28.706313] (-) TimerEvent: {}
+[28.809428] (-) TimerEvent: {}
+[28.917767] (-) TimerEvent: {}
+[29.018360] (-) TimerEvent: {}
+[29.121123] (-) TimerEvent: {}
+[29.223423] (-) TimerEvent: {}
+[29.325640] (-) TimerEvent: {}
+[29.427252] (-) TimerEvent: {}
+[29.531671] (-) TimerEvent: {}
+[29.636560] (-) TimerEvent: {}
+[29.740141] (-) TimerEvent: {}
+[29.744105] (slam_core) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o: warning: relocation against `_ZTIN3g2o10HyperGraph4EdgeE' in read-only section `.text'\n"}
+[29.840409] (-) TimerEvent: {}
+[29.883610] (slam_core) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o: in function `VisualOdometry::PnPcompute_g2o(std::vector<Eigen::Matrix<double, 3, 1, 0, 3, 1>, Eigen::aligned_allocator<Eigen::Matrix<double, 3, 1, 0, 3, 1> > > const&, std::vector<Eigen::Matrix<double, 2, 1, 0, 2, 1>, Eigen::aligned_allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > > const&, Frame&)':\n"}
+[29.883977] (slam_core) StderrLine: {'line': b"visual_odometry.cpp:(.text+0x3691): undefined reference to `g2o::OptimizationAlgorithmGaussNewton::OptimizationAlgorithmGaussNewton(std::unique_ptr<g2o::Solver, std::default_delete<g2o::Solver> >)'\n"}
+[29.884214] (slam_core) StderrLine: {'line': b"/usr/bin/ld: visual_odometry.cpp:(.text+0x36d4): undefined reference to `g2o::SparseOptimizer::SparseOptimizer()'\n"}
+[29.884534] (slam_core) StderrLine: {'line': b"/usr/bin/ld: visual_odometry.cpp:(.text+0x36ed): undefined reference to `g2o::SparseOptimizer::setAlgorithm(g2o::OptimizationAlgorithm*)'\n"}
+[29.884770] (slam_core) StderrLine: {'line': b"/usr/bin/ld: visual_odometry.cpp:(.text+0x3701): undefined reference to `g2o::SparseOptimizer::setVerbose(bool)'\n"}
+[29.885092] (slam_core) StderrLine: {'line': b"/usr/bin/ld: visual_odometry.cpp:(.text+0x3879): undefined reference to `g2o::HyperGraph::Edge::setId(int)'\n"}
+[29.885377] (slam_core) StderrLine: {'line': b"/usr/bin/ld: visual_odometry.cpp:(.text+0x396c): undefined reference to `g2o::OptimizableGraph::Edge::setRobustKernel(g2o::RobustKernel*)'\n"}
+[29.885726] (slam_core) StderrLine: {'line': b"/usr/bin/ld: visual_odometry.cpp:(.text+0x3985): undefined reference to `g2o::OptimizableGraph::addEdge(g2o::OptimizableGraph::Edge*)'\n"}
+[29.885964] (slam_core) StderrLine: {'line': b"/usr/bin/ld: visual_odometry.cpp:(.text+0x39c7): undefined reference to `g2o::SparseOptimizer::setVerbose(bool)'\n"}
+[29.886349] (slam_core) StderrLine: {'line': b"/usr/bin/ld: visual_odometry.cpp:(.text+0x39db): undefined reference to `g2o::SparseOptimizer::initializeOptimization(int)'\n"}
+[29.886673] (slam_core) StderrLine: {'line': b"/usr/bin/ld: visual_odometry.cpp:(.text+0x39f4): undefined reference to `g2o::SparseOptimizer::optimize(int, bool)'\n"}
+[29.887021] (slam_core) StderrLine: {'line': b"/usr/bin/ld: visual_odometry.cpp:(.text+0x3b11): undefined reference to `typeinfo for g2o::HyperGraph::Edge'\n"}
+[29.887356] (slam_core) StderrLine: {'line': b"/usr/bin/ld: visual_odometry.cpp:(.text+0x3bd3): undefined reference to `g2o::SparseOptimizer::~SparseOptimizer()'\n"}
+[29.887616] (slam_core) StderrLine: {'line': b"/usr/bin/ld: visual_odometry.cpp:(.text+0x3caf): undefined reference to `g2o::SparseOptimizer::~SparseOptimizer()'\n"}
+[29.888368] (slam_core) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o: in function `g2o::OptimizableGraph::addVertex(g2o::OptimizableGraph::Vertex*)':\n"}
+[29.888615] (slam_core) StderrLine: {'line': b"visual_odometry.cpp:(.text._ZN3g2o16OptimizableGraph9addVertexEPNS0_6VertexE[_ZN3g2o16OptimizableGraph9addVertexEPNS0_6VertexE]+0x28): undefined reference to `g2o::OptimizableGraph::addVertex(g2o::OptimizableGraph::Vertex*, g2o::HyperGraph::Data*)'\n"}
+[29.888942] (slam_core) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o: in function `g2o::G2OBatchStatistics::globalStats()':\n"}
+[29.889027] (slam_core) StderrLine: {'line': b"visual_odometry.cpp:(.text._ZN3g2o18G2OBatchStatistics11globalStatsEv[_ZN3g2o18G2OBatchStatistics11globalStatsEv]+0xb): undefined reference to `g2o::G2OBatchStatistics::_globalStats'\n"}
+[29.889540] (slam_core) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o: in function `g2o::BlockSolverBase::~BlockSolverBase()':\n"}
+[29.889726] (slam_core) StderrLine: {'line': b"visual_odometry.cpp:(.text._ZN3g2o15BlockSolverBaseD2Ev[_ZN3g2o15BlockSolverBaseD5Ev]+0x26): undefined reference to `g2o::Solver::~Solver()'\n"}
+[29.890390] (slam_core) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o: in function `g2o::BaseVertex<6, Sophus::SE3<double, 0> >::~BaseVertex()':\n"}
+[29.890599] (slam_core) StderrLine: {'line': b"visual_odometry.cpp:(.text._ZN3g2o10BaseVertexILi6EN6Sophus3SE3IdLi0EEEED2Ev[_ZN3g2o10BaseVertexILi6EN6Sophus3SE3IdLi0EEEED5Ev]+0x47): undefined reference to `g2o::OptimizableGraph::Vertex::~Vertex()'\n"}
+[29.890893] (slam_core) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o: in function `g2o::RobustKernelHuber::RobustKernelHuber()':\n"}
+[29.891154] (slam_core) StderrLine: {'line': b"visual_odometry.cpp:(.text._ZN3g2o17RobustKernelHuberC2Ev[_ZN3g2o17RobustKernelHuberC5Ev]+0x18): undefined reference to `g2o::RobustKernel::RobustKernel()'\n"}
+[29.891415] (slam_core) StderrLine: {'line': b"/usr/bin/ld: visual_odometry.cpp:(.text._ZN3g2o17RobustKernelHuberC2Ev[_ZN3g2o17RobustKernelHuberC5Ev]+0x1f): undefined reference to `vtable for g2o::RobustKernelHuber'\n"}
+[29.892087] (slam_core) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o: in function `g2o::BaseEdge<2, Eigen::Matrix<double, 2, 1, 0, 2, 1> >::~BaseEdge()':\n"}
+[29.892146] (slam_core) StderrLine: {'line': b"visual_odometry.cpp:(.text._ZN3g2o8BaseEdgeILi2EN5Eigen6MatrixIdLi2ELi1ELi0ELi2ELi1EEEED2Ev[_ZN3g2o8BaseEdgeILi2EN5Eigen6MatrixIdLi2ELi1ELi0ELi2ELi1EEEED5Ev]+0x35): undefined reference to `g2o::OptimizableGraph::Edge::~Edge()'\n"}
+[29.892757] (slam_core) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o: in function `g2o::BaseVertex<6, Sophus::SE3<double, 0> >::BaseVertex()':\n"}
+[29.893032] (slam_core) StderrLine: {'line': b"visual_odometry.cpp:(.text._ZN3g2o10BaseVertexILi6EN6Sophus3SE3IdLi0EEEEC2Ev[_ZN3g2o10BaseVertexILi6EN6Sophus3SE3IdLi0EEEEC5Ev]+0x28): undefined reference to `g2o::OptimizableGraph::Vertex::Vertex()'\n"}
+[29.893216] (slam_core) StderrLine: {'line': b"/usr/bin/ld: visual_odometry.cpp:(.text._ZN3g2o10BaseVertexILi6EN6Sophus3SE3IdLi0EEEEC2Ev[_ZN3g2o10BaseVertexILi6EN6Sophus3SE3IdLi0EEEEC5Ev]+0xe0): undefined reference to `g2o::OptimizableGraph::Vertex::~Vertex()'\n"}
+[29.894322] (slam_core) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o: in function `g2o::BlockSolverBase::BlockSolverBase()':\n"}
+[29.894459] (slam_core) StderrLine: {'line': b"visual_odometry.cpp:(.text._ZN3g2o15BlockSolverBaseC2Ev[_ZN3g2o15BlockSolverBaseC5Ev]+0x18): undefined reference to `g2o::Solver::Solver()'\n"}
+[29.895123] (slam_core) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o: in function `g2o::BaseEdge<2, Eigen::Matrix<double, 2, 1, 0, 2, 1> >::BaseEdge()':\n"}
+[29.895210] (slam_core) StderrLine: {'line': b"visual_odometry.cpp:(.text._ZN3g2o8BaseEdgeILi2EN5Eigen6MatrixIdLi2ELi1ELi0ELi2ELi1EEEEC2Ev[_ZN3g2o8BaseEdgeILi2EN5Eigen6MatrixIdLi2ELi1ELi0ELi2ELi1EEEEC5Ev]+0x19): undefined reference to `g2o::OptimizableGraph::Edge::Edge()'\n"}
+[29.895373] (slam_core) StderrLine: {'line': b"/usr/bin/ld: visual_odometry.cpp:(.text._ZN3g2o8BaseEdgeILi2EN5Eigen6MatrixIdLi2ELi1ELi0ELi2ELi1EEEEC2Ev[_ZN3g2o8BaseEdgeILi2EN5Eigen6MatrixIdLi2ELi1ELi0ELi2ELi1EEEEC5Ev]+0x8c): undefined reference to `g2o::OptimizableGraph::Edge::~Edge()'\n"}
+[29.899687] (slam_core) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o:(.data.rel.ro._ZTV14EdgeProjection[_ZTV14EdgeProjection]+0x40): undefined reference to `g2o::OptimizableGraph::Edge::setMeasurementData(double const*)'\n"}
+[29.900199] (slam_core) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o:(.data.rel.ro._ZTV14EdgeProjection[_ZTV14EdgeProjection]+0x48): undefined reference to `g2o::OptimizableGraph::Edge::getMeasurementData(double*) const'\n"}
+[29.900660] (slam_core) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o:(.data.rel.ro._ZTV14EdgeProjection[_ZTV14EdgeProjection]+0x50): undefined reference to `g2o::OptimizableGraph::Edge::measurementDimension() const'\n"}
+[29.901119] (slam_core) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o:(.data.rel.ro._ZTV14EdgeProjection[_ZTV14EdgeProjection]+0x58): undefined reference to `g2o::OptimizableGraph::Edge::setMeasurementFromState()'\n"}
+[29.901692] (slam_core) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o:(.data.rel.ro._ZTV14EdgeProjection[_ZTV14EdgeProjection]+0xd8): undefined reference to `g2o::OptimizableGraph::Edge::resolveCaches()'\n"}
+[29.902262] (slam_core) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o:(.data.rel.ro._ZTVN3g2o13BaseUnaryEdgeILi2EN5Eigen6MatrixIdLi2ELi1ELi0ELi2ELi1EEE10VertexPoseEE[_ZTVN3g2o13BaseUnaryEdgeILi2EN5Eigen6MatrixIdLi2ELi1ELi0ELi2ELi1EEE10VertexPoseEE]+0x40): undefined reference to `g2o::OptimizableGraph::Edge::setMeasurementData(double const*)'\n"}
+[29.902776] (slam_core) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o:(.data.rel.ro._ZTVN3g2o13BaseUnaryEdgeILi2EN5Eigen6MatrixIdLi2ELi1ELi0ELi2ELi1EEE10VertexPoseEE[_ZTVN3g2o13BaseUnaryEdgeILi2EN5Eigen6MatrixIdLi2ELi1ELi0ELi2ELi1EEE10VertexPoseEE]+0x48): undefined reference to `g2o::OptimizableGraph::Edge::getMeasurementData(double*) const'\n"}
+[29.903225] (slam_core) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o:(.data.rel.ro._ZTVN3g2o13BaseUnaryEdgeILi2EN5Eigen6MatrixIdLi2ELi1ELi0ELi2ELi1EEE10VertexPoseEE[_ZTVN3g2o13BaseUnaryEdgeILi2EN5Eigen6MatrixIdLi2ELi1ELi0ELi2ELi1EEE10VertexPoseEE]+0x50): undefined reference to `g2o::OptimizableGraph::Edge::measurementDimension() const'\n"}
+[29.903684] (slam_core) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o:(.data.rel.ro._ZTVN3g2o13BaseUnaryEdgeILi2EN5Eigen6MatrixIdLi2ELi1ELi0ELi2ELi1EEE10VertexPoseEE[_ZTVN3g2o13BaseUnaryEdgeILi2EN5Eigen6MatrixIdLi2ELi1ELi0ELi2ELi1EEE10VertexPoseEE]+0x58): undefined reference to `g2o::OptimizableGraph::Edge::setMeasurementFromState()'\n"}
+[29.904143] (slam_core) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o:(.data.rel.ro._ZTVN3g2o13BaseUnaryEdgeILi2EN5Eigen6MatrixIdLi2ELi1ELi0ELi2ELi1EEE10VertexPoseEE[_ZTVN3g2o13BaseUnaryEdgeILi2EN5Eigen6MatrixIdLi2ELi1ELi0ELi2ELi1EEE10VertexPoseEE]+0xd8): undefined reference to `g2o::OptimizableGraph::Edge::resolveCaches()'\n"}
+[29.904706] (slam_core) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o:(.data.rel.ro._ZTVN3g2o18BaseFixedSizedEdgeILi2EN5Eigen6MatrixIdLi2ELi1ELi0ELi2ELi1EEEJ10VertexPoseEEE[_ZTVN3g2o18BaseFixedSizedEdgeILi2EN5Eigen6MatrixIdLi2ELi1ELi0ELi2ELi1EEEJ10VertexPoseEEE]+0x40): undefined reference to `g2o::OptimizableGraph::Edge::setMeasurementData(double const*)'\n"}
+[29.905157] (slam_core) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o:(.data.rel.ro._ZTVN3g2o18BaseFixedSizedEdgeILi2EN5Eigen6MatrixIdLi2ELi1ELi0ELi2ELi1EEEJ10VertexPoseEEE[_ZTVN3g2o18BaseFixedSizedEdgeILi2EN5Eigen6MatrixIdLi2ELi1ELi0ELi2ELi1EEEJ10VertexPoseEEE]+0x48): undefined reference to `g2o::OptimizableGraph::Edge::getMeasurementData(double*) const'\n"}
+[29.905604] (slam_core) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o:(.data.rel.ro._ZTVN3g2o18BaseFixedSizedEdgeILi2EN5Eigen6MatrixIdLi2ELi1ELi0ELi2ELi1EEEJ10VertexPoseEEE[_ZTVN3g2o18BaseFixedSizedEdgeILi2EN5Eigen6MatrixIdLi2ELi1ELi0ELi2ELi1EEEJ10VertexPoseEEE]+0x50): undefined reference to `g2o::OptimizableGraph::Edge::measurementDimension() const'\n"}
+[29.906053] (slam_core) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o:(.data.rel.ro._ZTVN3g2o18BaseFixedSizedEdgeILi2EN5Eigen6MatrixIdLi2ELi1ELi0ELi2ELi1EEEJ10VertexPoseEEE[_ZTVN3g2o18BaseFixedSizedEdgeILi2EN5Eigen6MatrixIdLi2ELi1ELi0ELi2ELi1EEEJ10VertexPoseEEE]+0x58): undefined reference to `g2o::OptimizableGraph::Edge::setMeasurementFromState()'\n"}
+[29.906541] (slam_core) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o:(.data.rel.ro._ZTVN3g2o18BaseFixedSizedEdgeILi2EN5Eigen6MatrixIdLi2ELi1ELi0ELi2ELi1EEEJ10VertexPoseEEE[_ZTVN3g2o18BaseFixedSizedEdgeILi2EN5Eigen6MatrixIdLi2ELi1ELi0ELi2ELi1EEEJ10VertexPoseEEE]+0xd8): undefined reference to `g2o::OptimizableGraph::Edge::resolveCaches()'\n"}
+[29.907038] (slam_core) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o:(.data.rel.ro._ZTV10VertexPose[_ZTV10VertexPose]+0x88): undefined reference to `g2o::OptimizableGraph::Vertex::getEstimateData(double*) const'\n"}
+[29.907569] (slam_core) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o:(.data.rel.ro._ZTV10VertexPose[_ZTV10VertexPose]+0x98): undefined reference to `g2o::OptimizableGraph::Vertex::estimateDimension() const'\n"}
+[29.908094] (slam_core) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o:(.data.rel.ro._ZTV10VertexPose[_ZTV10VertexPose]+0xa0): undefined reference to `g2o::OptimizableGraph::Vertex::getMinimalEstimateData(double*) const'\n"}
+[29.908629] (slam_core) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o:(.data.rel.ro._ZTV10VertexPose[_ZTV10VertexPose]+0xb0): undefined reference to `g2o::OptimizableGraph::Vertex::minimalEstimateDimension() const'\n"}
+[29.909690] (slam_core) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o:(.data.rel.ro._ZTV10VertexPose[_ZTV10VertexPose]+0xe8): undefined reference to `g2o::OptimizableGraph::Vertex::updateCache()'\n"}
+[29.910211] (slam_core) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o:(.data.rel.ro._ZTVN3g2o10BaseVertexILi6EN6Sophus3SE3IdLi0EEEEE[_ZTVN3g2o10BaseVertexILi6EN6Sophus3SE3IdLi0EEEEE]+0x88): undefined reference to `g2o::OptimizableGraph::Vertex::getEstimateData(double*) const'\n"}
+[29.910613] (slam_core) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o:(.data.rel.ro._ZTVN3g2o10BaseVertexILi6EN6Sophus3SE3IdLi0EEEEE[_ZTVN3g2o10BaseVertexILi6EN6Sophus3SE3IdLi0EEEEE]+0x98): undefined reference to `g2o::OptimizableGraph::Vertex::estimateDimension() const'\n"}
+[29.910943] (slam_core) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o:(.data.rel.ro._ZTVN3g2o10BaseVertexILi6EN6Sophus3SE3IdLi0EEEEE[_ZTVN3g2o10BaseVertexILi6EN6Sophus3SE3IdLi0EEEEE]+0xa0): undefined reference to `g2o::OptimizableGraph::Vertex::getMinimalEstimateData(double*) const'\n"}
+[29.911184] (slam_core) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o:(.data.rel.ro._ZTVN3g2o10BaseVertexILi6EN6Sophus3SE3IdLi0EEEEE[_ZTVN3g2o10BaseVertexILi6EN6Sophus3SE3IdLi0EEEEE]+0xb0): undefined reference to `g2o::OptimizableGraph::Vertex::minimalEstimateDimension() const'\n"}
+[29.911546] (slam_core) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o:(.data.rel.ro._ZTVN3g2o10BaseVertexILi6EN6Sophus3SE3IdLi0EEEEE[_ZTVN3g2o10BaseVertexILi6EN6Sophus3SE3IdLi0EEEEE]+0xe8): undefined reference to `g2o::OptimizableGraph::Vertex::updateCache()'\n"}
+[29.911829] (slam_core) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o:(.data.rel.ro._ZTVN3g2o8BaseEdgeILi2EN5Eigen6MatrixIdLi2ELi1ELi0ELi2ELi1EEEEE[_ZTVN3g2o8BaseEdgeILi2EN5Eigen6MatrixIdLi2ELi1ELi0ELi2ELi1EEEEE]+0x28): undefined reference to `g2o::HyperGraph::Edge::resize(unsigned long)'\n"}
+[29.912132] (slam_core) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o:(.data.rel.ro._ZTVN3g2o8BaseEdgeILi2EN5Eigen6MatrixIdLi2ELi1ELi0ELi2ELi1EEEEE[_ZTVN3g2o8BaseEdgeILi2EN5Eigen6MatrixIdLi2ELi1ELi0ELi2ELi1EEEEE]+0x40): undefined reference to `g2o::OptimizableGraph::Edge::setMeasurementData(double const*)'\n"}
+[29.912388] (slam_core) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o:(.data.rel.ro._ZTVN3g2o8BaseEdgeILi2EN5Eigen6MatrixIdLi2ELi1ELi0ELi2ELi1EEEEE[_ZTVN3g2o8BaseEdgeILi2EN5Eigen6MatrixIdLi2ELi1ELi0ELi2ELi1EEEEE]+0x48): undefined reference to `g2o::OptimizableGraph::Edge::getMeasurementData(double*) const'\n"}
+[29.912678] (slam_core) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o:(.data.rel.ro._ZTVN3g2o8BaseEdgeILi2EN5Eigen6MatrixIdLi2ELi1ELi0ELi2ELi1EEEEE[_ZTVN3g2o8BaseEdgeILi2EN5Eigen6MatrixIdLi2ELi1ELi0ELi2ELi1EEEEE]+0x50): undefined reference to `g2o::OptimizableGraph::Edge::measurementDimension() const'\n"}
+[29.912939] (slam_core) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o:(.data.rel.ro._ZTVN3g2o8BaseEdgeILi2EN5Eigen6MatrixIdLi2ELi1ELi0ELi2ELi1EEEEE[_ZTVN3g2o8BaseEdgeILi2EN5Eigen6MatrixIdLi2ELi1ELi0ELi2ELi1EEEEE]+0x58): undefined reference to `g2o::OptimizableGraph::Edge::setMeasurementFromState()'\n"}
+[29.913207] (slam_core) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o:(.data.rel.ro._ZTVN3g2o8BaseEdgeILi2EN5Eigen6MatrixIdLi2ELi1ELi0ELi2ELi1EEEEE[_ZTVN3g2o8BaseEdgeILi2EN5Eigen6MatrixIdLi2ELi1ELi0ELi2ELi1EEEEE]+0xd8): undefined reference to `g2o::OptimizableGraph::Edge::resolveCaches()'\n"}
+[29.913592] (slam_core) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o:(.data.rel.ro._ZTIN3g2o10BaseVertexILi6EN6Sophus3SE3IdLi0EEEEE[_ZTIN3g2o10BaseVertexILi6EN6Sophus3SE3IdLi0EEEEE]+0x10): undefined reference to `typeinfo for g2o::OptimizableGraph::Vertex'\n"}
+[29.913950] (slam_core) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o:(.data.rel.ro._ZTIN3g2o15BlockSolverBaseE[_ZTIN3g2o15BlockSolverBaseE]+0x10): undefined reference to `typeinfo for g2o::Solver'\n"}
+[29.914263] (slam_core) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o:(.data.rel.ro._ZTIN3g2o8BaseEdgeILi2EN5Eigen6MatrixIdLi2ELi1ELi0ELi2ELi1EEEEE[_ZTIN3g2o8BaseEdgeILi2EN5Eigen6MatrixIdLi2ELi1ELi0ELi2ELi1EEEEE]+0x10): undefined reference to `typeinfo for g2o::OptimizableGraph::Edge'\n"}
+[29.914598] (slam_core) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o: in function `g2o::LinearSolverEigen<Eigen::Matrix<double, 6, 6, 0, 6, 6> >::solve(g2o::SparseBlockMatrix<Eigen::Matrix<double, 6, 6, 0, 6, 6> > const&, double*, double*)':\n"}
+[29.914690] (slam_core) StderrLine: {'line': b"visual_odometry.cpp:(.text._ZN3g2o17LinearSolverEigenIN5Eigen6MatrixIdLi6ELi6ELi0ELi6ELi6EEEE5solveERKNS_17SparseBlockMatrixIS3_EEPdS9_[_ZN3g2o17LinearSolverEigenIN5Eigen6MatrixIdLi6ELi6ELi0ELi6ELi6EEEE5solveERKNS_17SparseBlockMatrixIS3_EEPdS9_]+0x11e): undefined reference to `g2o::get_monotonic_time()'\n"}
+[29.914875] (slam_core) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o: in function `g2o::LinearSolverCCS<Eigen::Matrix<double, 6, 6, 0, 6, 6> >::solveBlocks(double**&, g2o::SparseBlockMatrix<Eigen::Matrix<double, 6, 6, 0, 6, 6> > const&)::{lambda(g2o::MarginalCovarianceCholesky&)#1}::operator()(g2o::MarginalCovarianceCholesky&) const':\n"}
+[29.914987] (slam_core) StderrLine: {'line': b"visual_odometry.cpp:(.text._ZZN3g2o15LinearSolverCCSIN5Eigen6MatrixIdLi6ELi6ELi0ELi6ELi6EEEE11solveBlocksERPPdRKNS_17SparseBlockMatrixIS3_EEENKUlRNS_26MarginalCovarianceCholeskyEE_clESD_[_ZZN3g2o15LinearSolverCCSIN5Eigen6MatrixIdLi6ELi6ELi0ELi6ELi6EEEE11solveBlocksERPPdRKNS_17SparseBlockMatrixIS3_EEENKUlRNS_26MarginalCovarianceCholeskyEE_clESD_]+0x65): undefined reference to `g2o::MarginalCovarianceCholesky::computeCovariance(double**, std::vector<int, std::allocator<int> > const&)'\n"}
+[29.915195] (slam_core) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o: in function `g2o::LinearSolverCCS<Eigen::Matrix<double, 6, 6, 0, 6, 6> >::solvePattern(g2o::SparseBlockMatrix<Eigen::Matrix<double, -1, -1, 0, -1, -1> >&, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&, g2o::SparseBlockMatrix<Eigen::Matrix<double, 6, 6, 0, 6, 6> > const&)::{lambda(g2o::MarginalCovarianceCholesky&)#1}::operator()(g2o::MarginalCovarianceCholesky&) const':\n"}
+[29.915268] (slam_core) StderrLine: {'line': b"visual_odometry.cpp:(.text._ZZN3g2o15LinearSolverCCSIN5Eigen6MatrixIdLi6ELi6ELi0ELi6ELi6EEEE12solvePatternERNS_17SparseBlockMatrixINS2_IdLin1ELin1ELi0ELin1ELin1EEEEERKSt6vectorISt4pairIiiESaISB_EERKNS5_IS3_EEENKUlRNS_26MarginalCovarianceCholeskyEE_clESK_[_ZZN3g2o15LinearSolverCCSIN5Eigen6MatrixIdLi6ELi6ELi0ELi6ELi6EEEE12solvePatternERNS_17SparseBlockMatrixINS2_IdLin1ELin1ELi0ELin1ELin1EEEEERKSt6vectorISt4pairIiiESaISB_EERKNS5_IS3_EEENKUlRNS_26MarginalCovarianceCholeskyEE_clESK_]+0x42): undefined reference to `g2o::MarginalCovarianceCholesky::computeCovariance(g2o::SparseBlockMatrix<Eigen::Matrix<double, -1, -1, 0, -1, -1> >&, std::vector<int, std::allocator<int> > const&, std::vector<std::pair<int, int>, std::allocator<std::pair<int, int> > > const&)'\n"}
+[29.915573] (slam_core) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o: in function `g2o::LinearSolverEigen<Eigen::Matrix<double, 6, 6, 0, 6, 6> >::solveBlocks_impl(g2o::SparseBlockMatrix<Eigen::Matrix<double, 6, 6, 0, 6, 6> > const&, std::function<void (g2o::MarginalCovarianceCholesky&)>)':\n"}
+[29.915665] (slam_core) StderrLine: {'line': b"visual_odometry.cpp:(.text._ZN3g2o17LinearSolverEigenIN5Eigen6MatrixIdLi6ELi6ELi0ELi6ELi6EEEE16solveBlocks_implERKNS_17SparseBlockMatrixIS3_EESt8functionIFvRNS_26MarginalCovarianceCholeskyEEE[_ZN3g2o17LinearSolverEigenIN5Eigen6MatrixIdLi6ELi6ELi0ELi6ELi6EEEE16solveBlocks_implERKNS_17SparseBlockMatrixIS3_EESt8functionIFvRNS_26MarginalCovarianceCholeskyEEE]+0x83): undefined reference to `g2o::MarginalCovarianceCholesky::MarginalCovarianceCholesky()'\n"}
+[29.915785] (slam_core) StderrLine: {'line': b"/usr/bin/ld: visual_odometry.cpp:(.text._ZN3g2o17LinearSolverEigenIN5Eigen6MatrixIdLi6ELi6ELi0ELi6ELi6EEEE16solveBlocks_implERKNS_17SparseBlockMatrixIS3_EESt8functionIFvRNS_26MarginalCovarianceCholeskyEEE[_ZN3g2o17LinearSolverEigenIN5Eigen6MatrixIdLi6ELi6ELi0ELi6ELi6EEEE16solveBlocks_implERKNS_17SparseBlockMatrixIS3_EESt8functionIFvRNS_26MarginalCovarianceCholeskyEEE]+0x1b7): undefined reference to `g2o::MarginalCovarianceCholesky::setCholeskyFactor(int, int*, int*, double*, int*)'\n"}
+[29.916001] (slam_core) StderrLine: {'line': b"/usr/bin/ld: visual_odometry.cpp:(.text._ZN3g2o17LinearSolverEigenIN5Eigen6MatrixIdLi6ELi6ELi0ELi6ELi6EEEE16solveBlocks_implERKNS_17SparseBlockMatrixIS3_EESt8functionIFvRNS_26MarginalCovarianceCholeskyEEE[_ZN3g2o17LinearSolverEigenIN5Eigen6MatrixIdLi6ELi6ELi0ELi6ELi6EEEE16solveBlocks_implERKNS_17SparseBlockMatrixIS3_EESt8functionIFvRNS_26MarginalCovarianceCholeskyEEE]+0x247): undefined reference to `g2o::MarginalCovarianceCholesky::~MarginalCovarianceCholesky()'\n"}
+[29.916128] (slam_core) StderrLine: {'line': b"/usr/bin/ld: visual_odometry.cpp:(.text._ZN3g2o17LinearSolverEigenIN5Eigen6MatrixIdLi6ELi6ELi0ELi6ELi6EEEE16solveBlocks_implERKNS_17SparseBlockMatrixIS3_EESt8functionIFvRNS_26MarginalCovarianceCholeskyEEE[_ZN3g2o17LinearSolverEigenIN5Eigen6MatrixIdLi6ELi6ELi0ELi6ELi6EEEE16solveBlocks_implERKNS_17SparseBlockMatrixIS3_EESt8functionIFvRNS_26MarginalCovarianceCholeskyEEE]+0x270): undefined reference to `g2o::MarginalCovarianceCholesky::~MarginalCovarianceCholesky()'\n"}
+[29.916484] (slam_core) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o: in function `g2o::BlockSolver<g2o::BlockSolverTraits<6, -1> >::updateStructure(std::vector<g2o::HyperGraph::Vertex*, std::allocator<g2o::HyperGraph::Vertex*> > const&, std::set<g2o::HyperGraph::Edge*, std::less<g2o::HyperGraph::Edge*>, std::allocator<g2o::HyperGraph::Edge*> > const&)':\n"}
+[29.916545] (slam_core) StderrLine: {'line': b"visual_odometry.cpp:(.text._ZN3g2o11BlockSolverINS_17BlockSolverTraitsILi6ELin1EEEE15updateStructureERKSt6vectorIPNS_10HyperGraph6VertexESaIS7_EERKSt3setIPNS5_4EdgeESt4lessISE_ESaISE_EE[_ZN3g2o11BlockSolverINS_17BlockSolverTraitsILi6ELin1EEEE15updateStructureERKSt6vectorIPNS_10HyperGraph6VertexESaIS7_EERKSt3setIPNS5_4EdgeESt4lessISE_ESaISE_EE]+0x2da): undefined reference to `g2o::Solver::resizeVector(unsigned long)'\n"}
+[29.916882] (slam_core) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o: in function `g2o::BlockSolver<g2o::BlockSolverTraits<6, -1> >::solve()':\n"}
+[29.916971] (slam_core) StderrLine: {'line': b"visual_odometry.cpp:(.text._ZN3g2o11BlockSolverINS_17BlockSolverTraitsILi6ELin1EEEE5solveEv[_ZN3g2o11BlockSolverINS_17BlockSolverTraitsILi6ELin1EEEE5solveEv]+0x46): undefined reference to `g2o::get_monotonic_time()'\n"}
+[29.917083] (slam_core) StderrLine: {'line': b"/usr/bin/ld: visual_odometry.cpp:(.text._ZN3g2o11BlockSolverINS_17BlockSolverTraitsILi6ELin1EEEE5solveEv[_ZN3g2o11BlockSolverINS_17BlockSolverTraitsILi6ELin1EEEE5solveEv]+0xcb): undefined reference to `g2o::get_monotonic_time()'\n"}
+[29.917215] (slam_core) StderrLine: {'line': b"/usr/bin/ld: visual_odometry.cpp:(.text._ZN3g2o11BlockSolverINS_17BlockSolverTraitsILi6ELin1EEEE5solveEv[_ZN3g2o11BlockSolverINS_17BlockSolverTraitsILi6ELin1EEEE5solveEv]+0x141): undefined reference to `g2o::get_monotonic_time()'\n"}
+[29.917892] (slam_core) StderrLine: {'line': b"/usr/bin/ld: visual_odometry.cpp:(.text._ZN3g2o11BlockSolverINS_17BlockSolverTraitsILi6ELin1EEEE5solveEv[_ZN3g2o11BlockSolverINS_17BlockSolverTraitsILi6ELin1EEEE5solveEv]+0xb36): undefined reference to `g2o::get_monotonic_time()'\n"}
+[29.917996] (slam_core) StderrLine: {'line': b"/usr/bin/ld: visual_odometry.cpp:(.text._ZN3g2o11BlockSolverINS_17BlockSolverTraitsILi6ELin1EEEE5solveEv[_ZN3g2o11BlockSolverINS_17BlockSolverTraitsILi6ELin1EEEE5solveEv]+0xb59): undefined reference to `g2o::get_monotonic_time()'\n"}
+[29.918187] (slam_core) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o:visual_odometry.cpp:(.text._ZN3g2o11BlockSolverINS_17BlockSolverTraitsILi6ELin1EEEE5solveEv[_ZN3g2o11BlockSolverINS_17BlockSolverTraitsILi6ELin1EEEE5solveEv]+0xbe3): more undefined references to `g2o::get_monotonic_time()' follow\n"}
+[29.918254] (slam_core) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o: in function `g2o::BaseFixedSizedEdge<2, Eigen::Matrix<double, 2, 1, 0, 2, 1>, VertexPose>::resize(unsigned long)':\n"}
+[29.918306] (slam_core) StderrLine: {'line': b"visual_odometry.cpp:(.text._ZN3g2o18BaseFixedSizedEdgeILi2EN5Eigen6MatrixIdLi2ELi1ELi0ELi2ELi1EEEJ10VertexPoseEE6resizeEm[_ZN3g2o18BaseFixedSizedEdgeILi2EN5Eigen6MatrixIdLi2ELi1ELi0ELi2ELi1EEEJ10VertexPoseEE6resizeEm]+0x52): undefined reference to `g2o::HyperGraph::Edge::resize(unsigned long)'\n"}
+[29.918436] (slam_core) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o: in function `g2o::LinearSolverEigen<Eigen::Matrix<double, 6, 6, 0, 6, 6> >::computeCholesky(g2o::SparseBlockMatrix<Eigen::Matrix<double, 6, 6, 0, 6, 6> > const&, double&)':\n"}
+[29.918532] (slam_core) StderrLine: {'line': b"visual_odometry.cpp:(.text._ZN3g2o17LinearSolverEigenIN5Eigen6MatrixIdLi6ELi6ELi0ELi6ELi6EEEE15computeCholeskyERKNS_17SparseBlockMatrixIS3_EERd[_ZN3g2o17LinearSolverEigenIN5Eigen6MatrixIdLi6ELi6ELi0ELi6ELi6EEEE15computeCholeskyERKNS_17SparseBlockMatrixIS3_EERd]+0xa2): undefined reference to `g2o::get_monotonic_time()'\n"}
+[29.918861] (slam_core) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o: in function `g2o::BlockSolver<g2o::BlockSolverTraits<6, -1> >::resize(int*, int, int*, int, int)':\n"}
+[29.918926] (slam_core) StderrLine: {'line': b"visual_odometry.cpp:(.text._ZN3g2o11BlockSolverINS_17BlockSolverTraitsILi6ELin1EEEE6resizeEPiiS4_ii[_ZN3g2o11BlockSolverINS_17BlockSolverTraitsILi6ELin1EEEE6resizeEPiiS4_ii]+0x4f): undefined reference to `g2o::Solver::resizeVector(unsigned long)'\n"}
+[29.919394] (slam_core) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o: in function `g2o::LinearSolverEigen<Eigen::Matrix<double, 6, 6, 0, 6, 6> >::computeSymbolicDecomposition(g2o::SparseBlockMatrix<Eigen::Matrix<double, 6, 6, 0, 6, 6> > const&)':\n"}
+[29.919486] (slam_core) StderrLine: {'line': b"visual_odometry.cpp:(.text._ZN3g2o17LinearSolverEigenIN5Eigen6MatrixIdLi6ELi6ELi0ELi6ELi6EEEE28computeSymbolicDecompositionERKNS_17SparseBlockMatrixIS3_EE[_ZN3g2o17LinearSolverEigenIN5Eigen6MatrixIdLi6ELi6ELi0ELi6ELi6EEEE28computeSymbolicDecompositionERKNS_17SparseBlockMatrixIS3_EE]+0x2e): undefined reference to `g2o::get_monotonic_time()'\n"}
+[29.919636] (slam_core) StderrLine: {'line': b"/usr/bin/ld: visual_odometry.cpp:(.text._ZN3g2o17LinearSolverEigenIN5Eigen6MatrixIdLi6ELi6ELi0ELi6ELi6EEEE28computeSymbolicDecompositionERKNS_17SparseBlockMatrixIS3_EE[_ZN3g2o17LinearSolverEigenIN5Eigen6MatrixIdLi6ELi6ELi0ELi6ELi6EEEE28computeSymbolicDecompositionERKNS_17SparseBlockMatrixIS3_EE]+0x231): undefined reference to `g2o::get_monotonic_time()'\n"}
+[29.942333] (-) TimerEvent: {}
+[29.995777] (slam_core) StderrLine: {'line': b'/usr/bin/ld: warning: creating DT_TEXTREL in a PIE\n'}
+[30.003707] (slam_core) StderrLine: {'line': b'collect2: error: ld returned 1 exit status\n'}
+[30.005205] (slam_core) StderrLine: {'line': b'gmake[2]: *** [CMakeFiles/slam_system.dir/build.make:299: slam_system] Error 1\n'}
+[30.005783] (slam_core) StderrLine: {'line': b'gmake[1]: *** [CMakeFiles/Makefile2:137: CMakeFiles/slam_system.dir/all] Error 2\n'}
+[30.006007] (slam_core) StderrLine: {'line': b'gmake: *** [Makefile:146: all] Error 2\n'}
+[30.009495] (slam_core) CommandEnded: {'returncode': 2}
+[30.017278] (slam_core) JobEnded: {'identifier': 'slam_core', 'rc': 2}
+[30.028621] (-) EventReactorShutdown: {}

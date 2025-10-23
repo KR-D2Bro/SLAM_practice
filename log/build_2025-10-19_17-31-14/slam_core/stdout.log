@@ -1,0 +1,5 @@
+[35m[1mConsolidate compiler generated dependencies of target slam_system[0m
+[ 60%] [32mBuilding CXX object CMakeFiles/slam_system.dir/src/slam_system.cpp.o[0m
+[ 60%] [32mBuilding CXX object CMakeFiles/slam_system.dir/src/frontend/frontend.cpp.o[0m
+[ 60%] [32mBuilding CXX object CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o[0m
+[ 80%] [32m[1mLinking CXX executable slam_system[0m

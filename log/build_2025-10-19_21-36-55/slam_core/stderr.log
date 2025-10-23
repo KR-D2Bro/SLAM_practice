@@ -1,0 +1,4 @@
+gmake[2]: *** [CMakeFiles/slam_system.dir/build.make:76: CMakeFiles/slam_system.dir/src/slam_system.cpp.o] Interrupt
+gmake[2]: *** [CMakeFiles/slam_system.dir/build.make:118: CMakeFiles/slam_system.dir/src/frontend/frontend.cpp.o] Interrupt
+gmake[1]: *** [CMakeFiles/Makefile2:137: CMakeFiles/slam_system.dir/all] Interrupt
+gmake: *** [Makefile:146: all] Interrupt

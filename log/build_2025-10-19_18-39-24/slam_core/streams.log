@@ -1,0 +1,89 @@
+[0.037s] Invoking command in '/home/dongjae/slambook_ws/build/slam_core': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/dongjae/slambook_ws/build/slam_core -- -j16 -l16
+[0.151s] -- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.535s] -- Found rclcpp: 16.0.15 (/opt/ros/humble/share/rclcpp/cmake)
+[0.872s] -- Found rosidl_generator_c: 3.1.7 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.891s] -- Found rosidl_adapter: 3.1.7 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.942s] -- Found rosidl_generator_cpp: 3.1.7 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[1.012s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[1.079s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[1.294s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[1.314s] -- Found rmw_fastrtps_cpp: 6.2.8 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[6.030s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[6.104s] -- Found cv_bridge: 3.2.1 (/opt/ros/humble/share/cv_bridge/cmake)
+[6.150s] -- Found required Ceres dependency: Eigen version 3.4.0 in /usr/include/eigen3
+[6.155s] -- Found required Ceres dependency: glog
+[6.155s] -- Found required Ceres dependency: gflags
+[6.156s] -- Found Ceres version: 2.0.0 installed in: /usr with components: [EigenSparse, SparseLinearAlgebraLibrary, LAPACK, SuiteSparse, CXSparse, SchurSpecializations, Multithreading]
+[6.158s] -- Found nav_msgs: 4.9.0 (/opt/ros/humble/share/nav_msgs/cmake)
+[6.210s] [33mCMake Warning (dev) at /usr/share/cmake-3.22/Modules/FindOpenGL.cmake:315 (message):
+[6.210s]   Policy CMP0072 is not set: FindOpenGL prefers GLVND by default when
+[6.211s]   available.  Run "cmake --help-policy CMP0072" for policy details.  Use the
+[6.211s]   cmake_policy command to set the policy and suppress this warning.
+[6.211s] 
+[6.211s]   FindOpenGL found both a legacy GL library:
+[6.211s] 
+[6.211s]     OPENGL_gl_LIBRARY: /usr/lib/x86_64-linux-gnu/libGL.so
+[6.211s] 
+[6.211s]   and GLVND libraries for OpenGL and GLX:
+[6.211s] 
+[6.211s]     OPENGL_opengl_LIBRARY: /usr/lib/x86_64-linux-gnu/libOpenGL.so
+[6.211s]     OPENGL_glx_LIBRARY: /usr/lib/x86_64-linux-gnu/libGLX.so
+[6.211s] 
+[6.211s]   OpenGL_GL_PREFERENCE has not been set to "GLVND" or "LEGACY", so for
+[6.211s]   compatibility with CMake 3.10 and below the legacy GL library will be used.
+[6.211s] Call Stack (most recent call first):
+[6.211s]   /usr/share/cmake-3.22/Modules/CMakeFindDependencyMacro.cmake:47 (find_package)
+[6.211s]   /opt/ros/humble/lib/cmake/g2o/g2oConfig.cmake:4 (find_dependency)
+[6.211s]   CMakeLists.txt:18 (find_package)
+[6.211s] This warning is for project developers.  Use -Wno-dev to suppress it.
+[6.211s] [0m
+[6.215s] -- Found ament_lint_auto: 0.12.14 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[6.296s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[6.296s] -- Configured cppcheck include dirs: $<BUILD_INTERFACE:/home/dongjae/slambook_ws/src/slam_core/include>
+[6.296s] -- Configured cppcheck exclude dirs and/or files: 
+[6.297s] -- Added test 'lint_cmake' to check CMake code style
+[6.298s] -- Added test 'uncrustify' to check C / C++ code style
+[6.298s] -- Configured uncrustify additional arguments: 
+[6.299s] -- Added test 'xmllint' to check XML markup files
+[6.301s] -- Configuring done
+[6.320s] -- Generating done
+[6.325s] -- Build files have been written to: /home/dongjae/slambook_ws/build/slam_core
+[6.350s] [35m[1mConsolidate compiler generated dependencies of target slam_system[0m
+[6.372s] [ 20%] [32mBuilding CXX object CMakeFiles/slam_system.dir/src/slam_system.cpp.o[0m
+[6.372s] [ 40%] [32mBuilding CXX object CMakeFiles/slam_system.dir/src/frontend/frontend.cpp.o[0m
+[6.372s] [ 60%] [32mBuilding CXX object CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o[0m
+[6.372s] [ 80%] [32mBuilding CXX object CMakeFiles/slam_system.dir/src/frontend/feature_tracker.cpp.o[0m
+[11.519s] [01m[K/home/dongjae/slambook_ws/src/slam_core/src/frontend/frontend.cpp:[m[K In member function ‘[01m[Kint Frontend::add_keyframe(std::shared_ptr<Frame>&, bool, bool)[m[K’:
+[11.519s] [01m[K/home/dongjae/slambook_ws/src/slam_core/src/frontend/frontend.cpp:91:64:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[KisFirst[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[11.519s]    91 | int Frontend::add_keyframe(std::shared_ptr<Frame> &frame, [01;35m[Kbool isFirst[m[K, bool isInit){
+[11.519s]       |                                                           [01;35m[K~~~~~^~~~~~~[m[K
+[11.519s] [01m[K/home/dongjae/slambook_ws/src/slam_core/src/frontend/frontend.cpp:91:78:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[KisInit[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[11.519s]    91 | int Frontend::add_keyframe(std::shared_ptr<Frame> &frame, bool isFirst, [01;35m[Kbool isInit[m[K){
+[11.519s]       |                                                                         [01;35m[K~~~~~^~~~~~[m[K
+[11.555s] [01m[K/home/dongjae/slambook_ws/src/slam_core/src/frontend/visual_odometry.cpp:[m[K In member function ‘[01m[Kbool VisualOdometry::triangulation(const Frame&, Frame&, const std::vector<cv::DMatch>&, std::vector<std::shared_ptr<MapPoint> >&, bool)[m[K’:
+[11.555s] [01m[K/home/dongjae/slambook_ws/src/slam_core/src/frontend/visual_odometry.cpp:170:18:[m[K [01;35m[Kwarning: [m[Kcomparison of integer expressions of different signedness: ‘[01m[Kint[m[K’ and ‘[01m[Kstd::vector<cv::DMatch>::size_type[m[K’ {aka ‘[01m[Klong unsigned int[m[K’} [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wsign-compare-Wsign-compare]8;;[m[K]
+[11.555s]   170 |     for(int i=0;[01;35m[Ki<matches.size()[m[K;i++){
+[11.555s]       |                 [01;35m[K~^~~~~~~~~~~~~~~[m[K
+[38.214s] [100%] [32m[1mLinking CXX executable slam_system[0m
+[40.467s] [100%] Built target slam_system
+[40.478s] Invoked command in '/home/dongjae/slambook_ws/build/slam_core' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/dongjae/slambook_ws/build/slam_core -- -j16 -l16
+[40.487s] Invoking command in '/home/dongjae/slambook_ws/build/slam_core': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/dongjae/slambook_ws/build/slam_core
+[40.492s] -- Install configuration: "Debug"
+[40.494s] -- Installing: /home/dongjae/slambook_ws/install/slam_core/lib/slam_core/slam_system
+[40.529s] -- Set runtime path of "/home/dongjae/slambook_ws/install/slam_core/lib/slam_core/slam_system" to ""
+[40.529s] -- Up-to-date: /home/dongjae/slambook_ws/install/slam_core/share/ament_index/resource_index/package_run_dependencies/slam_core
+[40.531s] -- Up-to-date: /home/dongjae/slambook_ws/install/slam_core/share/ament_index/resource_index/parent_prefix_path/slam_core
+[40.531s] -- Up-to-date: /home/dongjae/slambook_ws/install/slam_core/share/slam_core/environment/ament_prefix_path.sh
+[40.531s] -- Installing: /home/dongjae/slambook_ws/install/slam_core/share/slam_core/environment/ament_prefix_path.dsv
+[40.532s] -- Up-to-date: /home/dongjae/slambook_ws/install/slam_core/share/slam_core/environment/path.sh
+[40.532s] -- Installing: /home/dongjae/slambook_ws/install/slam_core/share/slam_core/environment/path.dsv
+[40.533s] -- Up-to-date: /home/dongjae/slambook_ws/install/slam_core/share/slam_core/local_setup.bash
+[40.533s] -- Up-to-date: /home/dongjae/slambook_ws/install/slam_core/share/slam_core/local_setup.sh
+[40.533s] -- Up-to-date: /home/dongjae/slambook_ws/install/slam_core/share/slam_core/local_setup.zsh
+[40.533s] -- Installing: /home/dongjae/slambook_ws/install/slam_core/share/slam_core/local_setup.dsv
+[40.533s] -- Installing: /home/dongjae/slambook_ws/install/slam_core/share/slam_core/package.dsv
+[40.534s] -- Up-to-date: /home/dongjae/slambook_ws/install/slam_core/share/ament_index/resource_index/packages/slam_core
+[40.534s] -- Up-to-date: /home/dongjae/slambook_ws/install/slam_core/share/slam_core/cmake/slam_coreConfig.cmake
+[40.534s] -- Up-to-date: /home/dongjae/slambook_ws/install/slam_core/share/slam_core/cmake/slam_coreConfig-version.cmake
+[40.535s] -- Up-to-date: /home/dongjae/slambook_ws/install/slam_core/share/slam_core/package.xml
+[40.538s] Invoked command in '/home/dongjae/slambook_ws/build/slam_core' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/dongjae/slambook_ws/build/slam_core

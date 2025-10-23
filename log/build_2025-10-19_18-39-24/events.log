@@ -1,0 +1,492 @@
+[0.000000] (-) TimerEvent: {}
+[0.000590] (slam_core) JobQueued: {'identifier': 'slam_core', 'dependencies': OrderedDict()}
+[0.000670] (slam_core) JobStarted: {'identifier': 'slam_core'}
+[0.020626] (slam_core) JobProgress: {'identifier': 'slam_core', 'progress': 'cmake'}
+[0.027559] (slam_core) JobProgress: {'identifier': 'slam_core', 'progress': 'build'}
+[0.028469] (slam_core) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/dongjae/slambook_ws/build/slam_core', '--', '-j16', '-l16'], 'cwd': '/home/dongjae/slambook_ws/build/slam_core', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'dongjae'), ('GIT_ASKPASS', '/home/dongjae/.vscode-server/bin/488a1f239235055e34e673291fb8d8c810886f81/extensions/git/dist/askpass.sh'), ('ROS_APT_SOURCE_VERSION', '1.1.0'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('MOTD_SHOWN', 'update-motd'), ('HOME', '/home/dongjae'), ('OLDPWD', '/home/dongjae'), ('TERM_PROGRAM_VERSION', '1.102.3'), ('VSCODE_IPC_HOOK_CLI', '/run/user/1000/vscode-ipc-531973d9-bda8-44c6-9d96-cd3a4acd7463.sock'), ('ROS_PYTHON_VERSION', '3'), ('VSCODE_GIT_ASKPASS_MAIN', '/home/dongjae/.vscode-server/bin/488a1f239235055e34e673291fb8d8c810886f81/extensions/git/dist/askpass-main.js'), ('VSCODE_GIT_ASKPASS_NODE', '/home/dongjae/.vscode-server/bin/488a1f239235055e34e673291fb8d8c810886f81/node'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('WSL_DISTRO_NAME', 'Ubuntu-22.04'), ('WAYLAND_DISPLAY', 'wayland-0'), ('COLCON_PREFIX_PATH', '/home/dongjae/slambook_ws/install'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'dongjae'), ('NAME', 'DESKTOP-6O5P79B'), ('WSL_INTEROP', '/run/WSL/395_interop'), ('PULSE_SERVER', 'unix:/mnt/wslg/PulseServer'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm-256color'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/home/dongjae/.vscode-server/bin/488a1f239235055e34e673291fb8d8c810886f81/bin/remote-cli:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/d/programs/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/x64:/mnt/d/programs/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Program Files/NVIDIA Corporation/NVIDIA App/NvDLISR:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files/Zero Install:/mnt/d/Microsoft VS Code/bin:/mnt/c/Program Files/Microsoft VS Code/bin:/mnt/c/Program Files/Tailscale/:/mnt/d/programs/Git/cmd:/mnt/d/Windows Kits/10/Windows Performance Toolkit/:/mnt/c/Program Files/NVIDIA Corporation/Nsight Compute 2025.3.1/:/mnt/c/Users/Dongjae/AppData/Local/Microsoft/WindowsApps:/snap/bin:/home/dongjae/.vscode-server/data/User/globalStorage/github.copilot-chat/debugCommand'), ('XDG_RUNTIME_DIR', '/run/user/1000/'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('VSCODE_GIT_IPC_HANDLE', '/run/user/1000/vscode-git-86eaa534c4.sock'), ('TERM_PROGRAM', 'vscode'), ('AMENT_PREFIX_PATH', '/home/dongjae/slambook_ws/install/slam_core:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('VSCODE_GIT_ASKPASS_EXTRA_ARGS', ''), ('PWD', '/home/dongjae/slambook_ws/build/slam_core'), ('XDG_DATA_DIRS', '/usr/local/share:/usr/share:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('WSL2_GUI_APPS_ENABLED', '1'), ('HOSTTYPE', 'x86_64'), ('CMAKE_PREFIX_PATH', '/home/dongjae/slambook_ws/install/slam_core:/opt/ros/humble'), ('WSLENV', 'VSCODE_WSL_EXT_LOCATION/up')]), 'shell': False}
+[0.100598] (-) TimerEvent: {}
+[0.151734] (slam_core) StdoutLine: {'line': b'-- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)\n'}
+[0.201043] (-) TimerEvent: {}
+[0.302626] (-) TimerEvent: {}
+[0.403435] (-) TimerEvent: {}
+[0.512305] (-) TimerEvent: {}
+[0.535444] (slam_core) StdoutLine: {'line': b'-- Found rclcpp: 16.0.15 (/opt/ros/humble/share/rclcpp/cmake)\n'}
+[0.612869] (-) TimerEvent: {}
+[0.713589] (-) TimerEvent: {}
+[0.814224] (-) TimerEvent: {}
+[0.872414] (slam_core) StdoutLine: {'line': b'-- Found rosidl_generator_c: 3.1.7 (/opt/ros/humble/share/rosidl_generator_c/cmake)\n'}
+[0.891544] (slam_core) StdoutLine: {'line': b'-- Found rosidl_adapter: 3.1.7 (/opt/ros/humble/share/rosidl_adapter/cmake)\n'}
+[0.916289] (-) TimerEvent: {}
+[0.942371] (slam_core) StdoutLine: {'line': b'-- Found rosidl_generator_cpp: 3.1.7 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)\n'}
+[1.012804] (slam_core) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[1.016594] (-) TimerEvent: {}
+[1.079262] (slam_core) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[1.119027] (-) TimerEvent: {}
+[1.224670] (-) TimerEvent: {}
+[1.294529] (slam_core) StdoutLine: {'line': b'-- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)\n'}
+[1.314625] (slam_core) StdoutLine: {'line': b'-- Found rmw_fastrtps_cpp: 6.2.8 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)\n'}
+[1.325102] (-) TimerEvent: {}
+[1.427513] (-) TimerEvent: {}
+[1.528268] (-) TimerEvent: {}
+[1.629359] (-) TimerEvent: {}
+[1.730216] (-) TimerEvent: {}
+[1.835451] (-) TimerEvent: {}
+[1.942393] (-) TimerEvent: {}
+[2.043855] (-) TimerEvent: {}
+[2.144513] (-) TimerEvent: {}
+[2.249586] (-) TimerEvent: {}
+[2.355588] (-) TimerEvent: {}
+[2.464413] (-) TimerEvent: {}
+[2.566983] (-) TimerEvent: {}
+[2.674977] (-) TimerEvent: {}
+[2.777709] (-) TimerEvent: {}
+[2.879449] (-) TimerEvent: {}
+[2.988303] (-) TimerEvent: {}
+[3.092711] (-) TimerEvent: {}
+[3.193460] (-) TimerEvent: {}
+[3.293933] (-) TimerEvent: {}
+[3.394438] (-) TimerEvent: {}
+[3.494949] (-) TimerEvent: {}
+[3.595532] (-) TimerEvent: {}
+[3.696190] (-) TimerEvent: {}
+[3.796937] (-) TimerEvent: {}
+[3.898024] (-) TimerEvent: {}
+[3.998864] (-) TimerEvent: {}
+[4.099469] (-) TimerEvent: {}
+[4.200233] (-) TimerEvent: {}
+[4.301053] (-) TimerEvent: {}
+[4.410161] (-) TimerEvent: {}
+[4.510619] (-) TimerEvent: {}
+[4.611297] (-) TimerEvent: {}
+[4.711907] (-) TimerEvent: {}
+[4.812628] (-) TimerEvent: {}
+[4.913406] (-) TimerEvent: {}
+[5.013958] (-) TimerEvent: {}
+[5.114469] (-) TimerEvent: {}
+[5.215046] (-) TimerEvent: {}
+[5.315642] (-) TimerEvent: {}
+[5.416326] (-) TimerEvent: {}
+[5.517062] (-) TimerEvent: {}
+[5.621736] (-) TimerEvent: {}
+[5.722911] (-) TimerEvent: {}
+[5.830559] (-) TimerEvent: {}
+[5.934554] (-) TimerEvent: {}
+[6.030411] (slam_core) StdoutLine: {'line': b"-- Using RMW implementation 'rmw_fastrtps_cpp' as default\n"}
+[6.035026] (-) TimerEvent: {}
+[6.104561] (slam_core) StdoutLine: {'line': b'-- Found cv_bridge: 3.2.1 (/opt/ros/humble/share/cv_bridge/cmake)\n'}
+[6.137723] (-) TimerEvent: {}
+[6.150929] (slam_core) StdoutLine: {'line': b'-- Found required Ceres dependency: Eigen version 3.4.0 in /usr/include/eigen3\n'}
+[6.155418] (slam_core) StdoutLine: {'line': b'-- Found required Ceres dependency: glog\n'}
+[6.155856] (slam_core) StdoutLine: {'line': b'-- Found required Ceres dependency: gflags\n'}
+[6.156623] (slam_core) StdoutLine: {'line': b'-- Found Ceres version: 2.0.0 installed in: /usr with components: [EigenSparse, SparseLinearAlgebraLibrary, LAPACK, SuiteSparse, CXSparse, SchurSpecializations, Multithreading]\n'}
+[6.158295] (slam_core) StdoutLine: {'line': b'-- Found nav_msgs: 4.9.0 (/opt/ros/humble/share/nav_msgs/cmake)\n'}
+[6.210672] (slam_core) StderrLine: {'line': b'\x1b[33mCMake Warning (dev) at /usr/share/cmake-3.22/Modules/FindOpenGL.cmake:315 (message):\n'}
+[6.211145] (slam_core) StderrLine: {'line': b'  Policy CMP0072 is not set: FindOpenGL prefers GLVND by default when\n'}
+[6.211226] (slam_core) StderrLine: {'line': b'  available.  Run "cmake --help-policy CMP0072" for policy details.  Use the\n'}
+[6.211274] (slam_core) StderrLine: {'line': b'  cmake_policy command to set the policy and suppress this warning.\n'}
+[6.211304] (slam_core) StderrLine: {'line': b'\n'}
+[6.211331] (slam_core) StderrLine: {'line': b'  FindOpenGL found both a legacy GL library:\n'}
+[6.211359] (slam_core) StderrLine: {'line': b'\n'}
+[6.211382] (slam_core) StderrLine: {'line': b'    OPENGL_gl_LIBRARY: /usr/lib/x86_64-linux-gnu/libGL.so\n'}
+[6.211406] (slam_core) StderrLine: {'line': b'\n'}
+[6.211429] (slam_core) StderrLine: {'line': b'  and GLVND libraries for OpenGL and GLX:\n'}
+[6.211451] (slam_core) StderrLine: {'line': b'\n'}
+[6.211474] (slam_core) StderrLine: {'line': b'    OPENGL_opengl_LIBRARY: /usr/lib/x86_64-linux-gnu/libOpenGL.so\n'}
+[6.211497] (slam_core) StderrLine: {'line': b'    OPENGL_glx_LIBRARY: /usr/lib/x86_64-linux-gnu/libGLX.so\n'}
+[6.211520] (slam_core) StderrLine: {'line': b'\n'}
+[6.211543] (slam_core) StderrLine: {'line': b'  OpenGL_GL_PREFERENCE has not been set to "GLVND" or "LEGACY", so for\n'}
+[6.211566] (slam_core) StderrLine: {'line': b'  compatibility with CMake 3.10 and below the legacy GL library will be used.\n'}
+[6.211590] (slam_core) StderrLine: {'line': b'Call Stack (most recent call first):\n'}
+[6.211621] (slam_core) StderrLine: {'line': b'  /usr/share/cmake-3.22/Modules/CMakeFindDependencyMacro.cmake:47 (find_package)\n'}
+[6.211644] (slam_core) StderrLine: {'line': b'  /opt/ros/humble/lib/cmake/g2o/g2oConfig.cmake:4 (find_dependency)\n'}
+[6.211666] (slam_core) StderrLine: {'line': b'  CMakeLists.txt:18 (find_package)\n'}
+[6.211687] (slam_core) StderrLine: {'line': b'This warning is for project developers.  Use -Wno-dev to suppress it.\n'}
+[6.211708] (slam_core) StderrLine: {'line': b'\x1b[0m\n'}
+[6.215187] (slam_core) StdoutLine: {'line': b'-- Found ament_lint_auto: 0.12.14 (/opt/ros/humble/share/ament_lint_auto/cmake)\n'}
+[6.239722] (-) TimerEvent: {}
+[6.296246] (slam_core) StdoutLine: {'line': b"-- Added test 'cppcheck' to perform static code analysis on C / C++ code\n"}
+[6.296523] (slam_core) StdoutLine: {'line': b'-- Configured cppcheck include dirs: $<BUILD_INTERFACE:/home/dongjae/slambook_ws/src/slam_core/include>\n'}
+[6.296574] (slam_core) StdoutLine: {'line': b'-- Configured cppcheck exclude dirs and/or files: \n'}
+[6.297674] (slam_core) StdoutLine: {'line': b"-- Added test 'lint_cmake' to check CMake code style\n"}
+[6.298960] (slam_core) StdoutLine: {'line': b"-- Added test 'uncrustify' to check C / C++ code style\n"}
+[6.299057] (slam_core) StdoutLine: {'line': b'-- Configured uncrustify additional arguments: \n'}
+[6.299577] (slam_core) StdoutLine: {'line': b"-- Added test 'xmllint' to check XML markup files\n"}
+[6.302067] (slam_core) StdoutLine: {'line': b'-- Configuring done\n'}
+[6.320539] (slam_core) StdoutLine: {'line': b'-- Generating done\n'}
+[6.325189] (slam_core) StdoutLine: {'line': b'-- Build files have been written to: /home/dongjae/slambook_ws/build/slam_core\n'}
+[6.340094] (-) TimerEvent: {}
+[6.350293] (slam_core) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target slam_system\x1b[0m\n'}
+[6.372021] (slam_core) StdoutLine: {'line': b'[ 20%] \x1b[32mBuilding CXX object CMakeFiles/slam_system.dir/src/slam_system.cpp.o\x1b[0m\n'}
+[6.372406] (slam_core) StdoutLine: {'line': b'[ 40%] \x1b[32mBuilding CXX object CMakeFiles/slam_system.dir/src/frontend/frontend.cpp.o\x1b[0m\n'}
+[6.372695] (slam_core) StdoutLine: {'line': b'[ 60%] \x1b[32mBuilding CXX object CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o\x1b[0m\n'}
+[6.372961] (slam_core) StdoutLine: {'line': b'[ 80%] \x1b[32mBuilding CXX object CMakeFiles/slam_system.dir/src/frontend/feature_tracker.cpp.o\x1b[0m\n'}
+[6.440596] (-) TimerEvent: {}
+[6.541344] (-) TimerEvent: {}
+[6.642095] (-) TimerEvent: {}
+[6.742720] (-) TimerEvent: {}
+[6.843739] (-) TimerEvent: {}
+[6.944451] (-) TimerEvent: {}
+[7.045220] (-) TimerEvent: {}
+[7.145700] (-) TimerEvent: {}
+[7.247845] (-) TimerEvent: {}
+[7.348521] (-) TimerEvent: {}
+[7.449304] (-) TimerEvent: {}
+[7.550007] (-) TimerEvent: {}
+[7.652975] (-) TimerEvent: {}
+[7.755906] (-) TimerEvent: {}
+[7.859125] (-) TimerEvent: {}
+[7.962948] (-) TimerEvent: {}
+[8.064029] (-) TimerEvent: {}
+[8.164879] (-) TimerEvent: {}
+[8.266239] (-) TimerEvent: {}
+[8.366992] (-) TimerEvent: {}
+[8.467524] (-) TimerEvent: {}
+[8.570810] (-) TimerEvent: {}
+[8.672049] (-) TimerEvent: {}
+[8.773796] (-) TimerEvent: {}
+[8.875149] (-) TimerEvent: {}
+[8.976127] (-) TimerEvent: {}
+[9.076850] (-) TimerEvent: {}
+[9.178655] (-) TimerEvent: {}
+[9.279340] (-) TimerEvent: {}
+[9.380477] (-) TimerEvent: {}
+[9.482541] (-) TimerEvent: {}
+[9.583365] (-) TimerEvent: {}
+[9.684926] (-) TimerEvent: {}
+[9.787777] (-) TimerEvent: {}
+[9.889434] (-) TimerEvent: {}
+[9.990156] (-) TimerEvent: {}
+[10.092091] (-) TimerEvent: {}
+[10.193006] (-) TimerEvent: {}
+[10.293608] (-) TimerEvent: {}
+[10.395820] (-) TimerEvent: {}
+[10.498246] (-) TimerEvent: {}
+[10.601176] (-) TimerEvent: {}
+[10.702600] (-) TimerEvent: {}
+[10.805878] (-) TimerEvent: {}
+[10.907751] (-) TimerEvent: {}
+[11.010411] (-) TimerEvent: {}
+[11.113156] (-) TimerEvent: {}
+[11.216141] (-) TimerEvent: {}
+[11.319093] (-) TimerEvent: {}
+[11.421838] (-) TimerEvent: {}
+[11.519066] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/src/frontend/frontend.cpp:\x1b[m\x1b[K In member function \xe2\x80\x98\x1b[01m\x1b[Kint Frontend::add_keyframe(std::shared_ptr<Frame>&, bool, bool)\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[11.519327] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/src/frontend/frontend.cpp:91:64:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused parameter \xe2\x80\x98\x1b[01m\x1b[KisFirst\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter\x07-Wunused-parameter\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[11.519376] (slam_core) StderrLine: {'line': b'   91 | int Frontend::add_keyframe(std::shared_ptr<Frame> &frame, \x1b[01;35m\x1b[Kbool isFirst\x1b[m\x1b[K, bool isInit){\n'}
+[11.519409] (slam_core) StderrLine: {'line': b'      |                                                           \x1b[01;35m\x1b[K~~~~~^~~~~~~\x1b[m\x1b[K\n'}
+[11.519549] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/src/frontend/frontend.cpp:91:78:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused parameter \xe2\x80\x98\x1b[01m\x1b[KisInit\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter\x07-Wunused-parameter\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[11.519600] (slam_core) StderrLine: {'line': b'   91 | int Frontend::add_keyframe(std::shared_ptr<Frame> &frame, bool isFirst, \x1b[01;35m\x1b[Kbool isInit\x1b[m\x1b[K){\n'}
+[11.519635] (slam_core) StderrLine: {'line': b'      |                                                                         \x1b[01;35m\x1b[K~~~~~^~~~~~\x1b[m\x1b[K\n'}
+[11.522107] (-) TimerEvent: {}
+[11.555014] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/src/frontend/visual_odometry.cpp:\x1b[m\x1b[K In member function \xe2\x80\x98\x1b[01m\x1b[Kbool VisualOdometry::triangulation(const Frame&, Frame&, const std::vector<cv::DMatch>&, std::vector<std::shared_ptr<MapPoint> >&, bool)\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[11.555294] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/src/frontend/visual_odometry.cpp:170:18:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kcomparison of integer expressions of different signedness: \xe2\x80\x98\x1b[01m\x1b[Kint\x1b[m\x1b[K\xe2\x80\x99 and \xe2\x80\x98\x1b[01m\x1b[Kstd::vector<cv::DMatch>::size_type\x1b[m\x1b[K\xe2\x80\x99 {aka \xe2\x80\x98\x1b[01m\x1b[Klong unsigned int\x1b[m\x1b[K\xe2\x80\x99} [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wsign-compare\x07-Wsign-compare\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[11.555543] (slam_core) StderrLine: {'line': b'  170 |     for(int i=0;\x1b[01;35m\x1b[Ki<matches.size()\x1b[m\x1b[K;i++){\n'}
+[11.555600] (slam_core) StderrLine: {'line': b'      |                 \x1b[01;35m\x1b[K~^~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[11.624060] (-) TimerEvent: {}
+[11.726468] (-) TimerEvent: {}
+[11.830744] (-) TimerEvent: {}
+[11.933845] (-) TimerEvent: {}
+[12.034547] (-) TimerEvent: {}
+[12.137586] (-) TimerEvent: {}
+[12.239699] (-) TimerEvent: {}
+[12.342370] (-) TimerEvent: {}
+[12.444684] (-) TimerEvent: {}
+[12.546326] (-) TimerEvent: {}
+[12.649282] (-) TimerEvent: {}
+[12.752532] (-) TimerEvent: {}
+[12.856843] (-) TimerEvent: {}
+[12.961563] (-) TimerEvent: {}
+[13.062060] (-) TimerEvent: {}
+[13.167056] (-) TimerEvent: {}
+[13.268061] (-) TimerEvent: {}
+[13.372471] (-) TimerEvent: {}
+[13.477144] (-) TimerEvent: {}
+[13.581962] (-) TimerEvent: {}
+[13.686356] (-) TimerEvent: {}
+[13.788757] (-) TimerEvent: {}
+[13.892724] (-) TimerEvent: {}
+[13.994202] (-) TimerEvent: {}
+[14.096828] (-) TimerEvent: {}
+[14.199648] (-) TimerEvent: {}
+[14.302528] (-) TimerEvent: {}
+[14.405858] (-) TimerEvent: {}
+[14.508747] (-) TimerEvent: {}
+[14.611950] (-) TimerEvent: {}
+[14.715386] (-) TimerEvent: {}
+[14.818689] (-) TimerEvent: {}
+[14.921599] (-) TimerEvent: {}
+[15.024968] (-) TimerEvent: {}
+[15.128016] (-) TimerEvent: {}
+[15.231149] (-) TimerEvent: {}
+[15.334184] (-) TimerEvent: {}
+[15.437337] (-) TimerEvent: {}
+[15.540339] (-) TimerEvent: {}
+[15.643521] (-) TimerEvent: {}
+[15.746586] (-) TimerEvent: {}
+[15.847139] (-) TimerEvent: {}
+[15.949846] (-) TimerEvent: {}
+[16.053043] (-) TimerEvent: {}
+[16.155924] (-) TimerEvent: {}
+[16.259042] (-) TimerEvent: {}
+[16.361737] (-) TimerEvent: {}
+[16.465060] (-) TimerEvent: {}
+[16.568022] (-) TimerEvent: {}
+[16.670856] (-) TimerEvent: {}
+[16.774006] (-) TimerEvent: {}
+[16.877153] (-) TimerEvent: {}
+[16.979986] (-) TimerEvent: {}
+[17.080661] (-) TimerEvent: {}
+[17.183488] (-) TimerEvent: {}
+[17.286105] (-) TimerEvent: {}
+[17.386940] (-) TimerEvent: {}
+[17.489610] (-) TimerEvent: {}
+[17.594293] (-) TimerEvent: {}
+[17.698425] (-) TimerEvent: {}
+[17.803012] (-) TimerEvent: {}
+[17.903991] (-) TimerEvent: {}
+[18.005935] (-) TimerEvent: {}
+[18.106509] (-) TimerEvent: {}
+[18.209214] (-) TimerEvent: {}
+[18.312133] (-) TimerEvent: {}
+[18.415295] (-) TimerEvent: {}
+[18.518343] (-) TimerEvent: {}
+[18.621028] (-) TimerEvent: {}
+[18.724222] (-) TimerEvent: {}
+[18.827690] (-) TimerEvent: {}
+[18.930293] (-) TimerEvent: {}
+[19.033473] (-) TimerEvent: {}
+[19.136479] (-) TimerEvent: {}
+[19.237404] (-) TimerEvent: {}
+[19.340313] (-) TimerEvent: {}
+[19.443253] (-) TimerEvent: {}
+[19.546314] (-) TimerEvent: {}
+[19.648852] (-) TimerEvent: {}
+[19.751793] (-) TimerEvent: {}
+[19.854590] (-) TimerEvent: {}
+[19.956464] (-) TimerEvent: {}
+[20.059350] (-) TimerEvent: {}
+[20.162400] (-) TimerEvent: {}
+[20.265388] (-) TimerEvent: {}
+[20.368318] (-) TimerEvent: {}
+[20.471139] (-) TimerEvent: {}
+[20.574155] (-) TimerEvent: {}
+[20.677093] (-) TimerEvent: {}
+[20.779960] (-) TimerEvent: {}
+[20.882834] (-) TimerEvent: {}
+[20.985909] (-) TimerEvent: {}
+[21.088958] (-) TimerEvent: {}
+[21.191812] (-) TimerEvent: {}
+[21.295135] (-) TimerEvent: {}
+[21.398214] (-) TimerEvent: {}
+[21.501229] (-) TimerEvent: {}
+[21.604505] (-) TimerEvent: {}
+[21.707511] (-) TimerEvent: {}
+[21.810299] (-) TimerEvent: {}
+[21.911234] (-) TimerEvent: {}
+[22.013313] (-) TimerEvent: {}
+[22.116196] (-) TimerEvent: {}
+[22.219014] (-) TimerEvent: {}
+[22.321800] (-) TimerEvent: {}
+[22.424943] (-) TimerEvent: {}
+[22.529099] (-) TimerEvent: {}
+[22.634232] (-) TimerEvent: {}
+[22.738963] (-) TimerEvent: {}
+[22.843744] (-) TimerEvent: {}
+[22.948386] (-) TimerEvent: {}
+[23.049107] (-) TimerEvent: {}
+[23.150208] (-) TimerEvent: {}
+[23.250916] (-) TimerEvent: {}
+[23.351757] (-) TimerEvent: {}
+[23.452380] (-) TimerEvent: {}
+[23.553504] (-) TimerEvent: {}
+[23.654172] (-) TimerEvent: {}
+[23.755210] (-) TimerEvent: {}
+[23.855941] (-) TimerEvent: {}
+[23.956928] (-) TimerEvent: {}
+[24.057760] (-) TimerEvent: {}
+[24.158517] (-) TimerEvent: {}
+[24.259247] (-) TimerEvent: {}
+[24.360721] (-) TimerEvent: {}
+[24.461921] (-) TimerEvent: {}
+[24.562654] (-) TimerEvent: {}
+[24.663297] (-) TimerEvent: {}
+[24.764332] (-) TimerEvent: {}
+[24.873183] (-) TimerEvent: {}
+[24.981105] (-) TimerEvent: {}
+[25.090011] (-) TimerEvent: {}
+[25.198397] (-) TimerEvent: {}
+[25.302521] (-) TimerEvent: {}
+[25.403090] (-) TimerEvent: {}
+[25.503652] (-) TimerEvent: {}
+[25.604300] (-) TimerEvent: {}
+[25.706384] (-) TimerEvent: {}
+[25.807982] (-) TimerEvent: {}
+[25.910042] (-) TimerEvent: {}
+[26.013402] (-) TimerEvent: {}
+[26.116706] (-) TimerEvent: {}
+[26.217525] (-) TimerEvent: {}
+[26.324426] (-) TimerEvent: {}
+[26.427399] (-) TimerEvent: {}
+[26.530225] (-) TimerEvent: {}
+[26.632995] (-) TimerEvent: {}
+[26.734184] (-) TimerEvent: {}
+[26.836950] (-) TimerEvent: {}
+[26.938433] (-) TimerEvent: {}
+[27.039190] (-) TimerEvent: {}
+[27.142238] (-) TimerEvent: {}
+[27.245781] (-) TimerEvent: {}
+[27.350064] (-) TimerEvent: {}
+[27.454476] (-) TimerEvent: {}
+[27.559094] (-) TimerEvent: {}
+[27.663366] (-) TimerEvent: {}
+[27.766127] (-) TimerEvent: {}
+[27.870610] (-) TimerEvent: {}
+[27.973332] (-) TimerEvent: {}
+[28.074192] (-) TimerEvent: {}
+[28.178998] (-) TimerEvent: {}
+[28.279608] (-) TimerEvent: {}
+[28.382290] (-) TimerEvent: {}
+[28.486574] (-) TimerEvent: {}
+[28.590850] (-) TimerEvent: {}
+[28.695099] (-) TimerEvent: {}
+[28.795895] (-) TimerEvent: {}
+[28.898680] (-) TimerEvent: {}
+[29.003172] (-) TimerEvent: {}
+[29.103986] (-) TimerEvent: {}
+[29.208572] (-) TimerEvent: {}
+[29.313377] (-) TimerEvent: {}
+[29.418313] (-) TimerEvent: {}
+[29.520765] (-) TimerEvent: {}
+[29.625153] (-) TimerEvent: {}
+[29.729993] (-) TimerEvent: {}
+[29.833905] (-) TimerEvent: {}
+[29.938691] (-) TimerEvent: {}
+[30.040527] (-) TimerEvent: {}
+[30.144766] (-) TimerEvent: {}
+[30.249079] (-) TimerEvent: {}
+[30.349875] (-) TimerEvent: {}
+[30.451216] (-) TimerEvent: {}
+[30.552251] (-) TimerEvent: {}
+[30.654428] (-) TimerEvent: {}
+[30.756418] (-) TimerEvent: {}
+[30.858093] (-) TimerEvent: {}
+[30.959669] (-) TimerEvent: {}
+[31.060631] (-) TimerEvent: {}
+[31.161456] (-) TimerEvent: {}
+[31.262020] (-) TimerEvent: {}
+[31.363730] (-) TimerEvent: {}
+[31.465137] (-) TimerEvent: {}
+[31.566272] (-) TimerEvent: {}
+[31.669378] (-) TimerEvent: {}
+[31.770414] (-) TimerEvent: {}
+[31.872579] (-) TimerEvent: {}
+[31.975987] (-) TimerEvent: {}
+[32.076996] (-) TimerEvent: {}
+[32.179459] (-) TimerEvent: {}
+[32.280446] (-) TimerEvent: {}
+[32.381527] (-) TimerEvent: {}
+[32.483732] (-) TimerEvent: {}
+[32.588272] (-) TimerEvent: {}
+[32.690523] (-) TimerEvent: {}
+[32.794901] (-) TimerEvent: {}
+[32.899409] (-) TimerEvent: {}
+[33.003905] (-) TimerEvent: {}
+[33.106055] (-) TimerEvent: {}
+[33.210584] (-) TimerEvent: {}
+[33.314645] (-) TimerEvent: {}
+[33.416204] (-) TimerEvent: {}
+[33.520542] (-) TimerEvent: {}
+[33.624780] (-) TimerEvent: {}
+[33.729048] (-) TimerEvent: {}
+[33.831978] (-) TimerEvent: {}
+[33.936580] (-) TimerEvent: {}
+[34.041118] (-) TimerEvent: {}
+[34.145697] (-) TimerEvent: {}
+[34.250239] (-) TimerEvent: {}
+[34.354867] (-) TimerEvent: {}
+[34.455452] (-) TimerEvent: {}
+[34.556361] (-) TimerEvent: {}
+[34.657762] (-) TimerEvent: {}
+[34.759202] (-) TimerEvent: {}
+[34.865736] (-) TimerEvent: {}
+[34.972671] (-) TimerEvent: {}
+[35.075770] (-) TimerEvent: {}
+[35.178936] (-) TimerEvent: {}
+[35.285946] (-) TimerEvent: {}
+[35.392958] (-) TimerEvent: {}
+[35.496186] (-) TimerEvent: {}
+[35.602642] (-) TimerEvent: {}
+[35.707817] (-) TimerEvent: {}
+[35.809190] (-) TimerEvent: {}
+[35.910691] (-) TimerEvent: {}
+[36.019100] (-) TimerEvent: {}
+[36.123381] (-) TimerEvent: {}
+[36.230045] (-) TimerEvent: {}
+[36.337148] (-) TimerEvent: {}
+[36.440419] (-) TimerEvent: {}
+[36.541092] (-) TimerEvent: {}
+[36.646220] (-) TimerEvent: {}
+[36.748528] (-) TimerEvent: {}
+[36.853067] (-) TimerEvent: {}
+[36.959869] (-) TimerEvent: {}
+[37.060633] (-) TimerEvent: {}
+[37.161833] (-) TimerEvent: {}
+[37.262569] (-) TimerEvent: {}
+[37.366218] (-) TimerEvent: {}
+[37.471824] (-) TimerEvent: {}
+[37.574862] (-) TimerEvent: {}
+[37.675437] (-) TimerEvent: {}
+[37.776723] (-) TimerEvent: {}
+[37.879077] (-) TimerEvent: {}
+[37.980020] (-) TimerEvent: {}
+[38.080672] (-) TimerEvent: {}
+[38.182278] (-) TimerEvent: {}
+[38.213365] (slam_core) StdoutLine: {'line': b'[100%] \x1b[32m\x1b[1mLinking CXX executable slam_system\x1b[0m\n'}
+[38.284944] (-) TimerEvent: {}
+[38.388552] (-) TimerEvent: {}
+[38.494302] (-) TimerEvent: {}
+[38.595209] (-) TimerEvent: {}
+[38.696804] (-) TimerEvent: {}
+[38.798260] (-) TimerEvent: {}
+[38.904236] (-) TimerEvent: {}
+[39.013041] (-) TimerEvent: {}
+[39.114159] (-) TimerEvent: {}
+[39.214796] (-) TimerEvent: {}
+[39.315681] (-) TimerEvent: {}
+[39.418805] (-) TimerEvent: {}
+[39.520931] (-) TimerEvent: {}
+[39.623188] (-) TimerEvent: {}
+[39.725383] (-) TimerEvent: {}
+[39.826348] (-) TimerEvent: {}
+[39.929679] (-) TimerEvent: {}
+[40.031636] (-) TimerEvent: {}
+[40.133810] (-) TimerEvent: {}
+[40.236481] (-) TimerEvent: {}
+[40.337149] (-) TimerEvent: {}
+[40.437865] (-) TimerEvent: {}
+[40.467733] (slam_core) StdoutLine: {'line': b'[100%] Built target slam_system\n'}
+[40.478049] (slam_core) CommandEnded: {'returncode': 0}
+[40.480029] (slam_core) JobProgress: {'identifier': 'slam_core', 'progress': 'install'}
+[40.487492] (slam_core) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/dongjae/slambook_ws/build/slam_core'], 'cwd': '/home/dongjae/slambook_ws/build/slam_core', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'dongjae'), ('GIT_ASKPASS', '/home/dongjae/.vscode-server/bin/488a1f239235055e34e673291fb8d8c810886f81/extensions/git/dist/askpass.sh'), ('ROS_APT_SOURCE_VERSION', '1.1.0'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('MOTD_SHOWN', 'update-motd'), ('HOME', '/home/dongjae'), ('OLDPWD', '/home/dongjae'), ('TERM_PROGRAM_VERSION', '1.102.3'), ('VSCODE_IPC_HOOK_CLI', '/run/user/1000/vscode-ipc-531973d9-bda8-44c6-9d96-cd3a4acd7463.sock'), ('ROS_PYTHON_VERSION', '3'), ('VSCODE_GIT_ASKPASS_MAIN', '/home/dongjae/.vscode-server/bin/488a1f239235055e34e673291fb8d8c810886f81/extensions/git/dist/askpass-main.js'), ('VSCODE_GIT_ASKPASS_NODE', '/home/dongjae/.vscode-server/bin/488a1f239235055e34e673291fb8d8c810886f81/node'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('WSL_DISTRO_NAME', 'Ubuntu-22.04'), ('WAYLAND_DISPLAY', 'wayland-0'), ('COLCON_PREFIX_PATH', '/home/dongjae/slambook_ws/install'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'dongjae'), ('NAME', 'DESKTOP-6O5P79B'), ('WSL_INTEROP', '/run/WSL/395_interop'), ('PULSE_SERVER', 'unix:/mnt/wslg/PulseServer'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm-256color'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/home/dongjae/.vscode-server/bin/488a1f239235055e34e673291fb8d8c810886f81/bin/remote-cli:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/d/programs/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/x64:/mnt/d/programs/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Program Files/NVIDIA Corporation/NVIDIA App/NvDLISR:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files/Zero Install:/mnt/d/Microsoft VS Code/bin:/mnt/c/Program Files/Microsoft VS Code/bin:/mnt/c/Program Files/Tailscale/:/mnt/d/programs/Git/cmd:/mnt/d/Windows Kits/10/Windows Performance Toolkit/:/mnt/c/Program Files/NVIDIA Corporation/Nsight Compute 2025.3.1/:/mnt/c/Users/Dongjae/AppData/Local/Microsoft/WindowsApps:/snap/bin:/home/dongjae/.vscode-server/data/User/globalStorage/github.copilot-chat/debugCommand'), ('XDG_RUNTIME_DIR', '/run/user/1000/'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('VSCODE_GIT_IPC_HANDLE', '/run/user/1000/vscode-git-86eaa534c4.sock'), ('TERM_PROGRAM', 'vscode'), ('AMENT_PREFIX_PATH', '/home/dongjae/slambook_ws/install/slam_core:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('VSCODE_GIT_ASKPASS_EXTRA_ARGS', ''), ('PWD', '/home/dongjae/slambook_ws/build/slam_core'), ('XDG_DATA_DIRS', '/usr/local/share:/usr/share:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('WSL2_GUI_APPS_ENABLED', '1'), ('HOSTTYPE', 'x86_64'), ('CMAKE_PREFIX_PATH', '/home/dongjae/slambook_ws/install/slam_core:/opt/ros/humble'), ('WSLENV', 'VSCODE_WSL_EXT_LOCATION/up')]), 'shell': False}
+[40.492603] (slam_core) StdoutLine: {'line': b'-- Install configuration: "Debug"\n'}
+[40.494193] (slam_core) StdoutLine: {'line': b'-- Installing: /home/dongjae/slambook_ws/install/slam_core/lib/slam_core/slam_system\n'}
+[40.529787] (slam_core) StdoutLine: {'line': b'-- Set runtime path of "/home/dongjae/slambook_ws/install/slam_core/lib/slam_core/slam_system" to ""\n'}
+[40.530080] (slam_core) StdoutLine: {'line': b'-- Up-to-date: /home/dongjae/slambook_ws/install/slam_core/share/ament_index/resource_index/package_run_dependencies/slam_core\n'}
+[40.531272] (slam_core) StdoutLine: {'line': b'-- Up-to-date: /home/dongjae/slambook_ws/install/slam_core/share/ament_index/resource_index/parent_prefix_path/slam_core\n'}
+[40.531568] (slam_core) StdoutLine: {'line': b'-- Up-to-date: /home/dongjae/slambook_ws/install/slam_core/share/slam_core/environment/ament_prefix_path.sh\n'}
+[40.531662] (slam_core) StdoutLine: {'line': b'-- Installing: /home/dongjae/slambook_ws/install/slam_core/share/slam_core/environment/ament_prefix_path.dsv\n'}
+[40.532436] (slam_core) StdoutLine: {'line': b'-- Up-to-date: /home/dongjae/slambook_ws/install/slam_core/share/slam_core/environment/path.sh\n'}
+[40.532559] (slam_core) StdoutLine: {'line': b'-- Installing: /home/dongjae/slambook_ws/install/slam_core/share/slam_core/environment/path.dsv\n'}
+[40.533251] (slam_core) StdoutLine: {'line': b'-- Up-to-date: /home/dongjae/slambook_ws/install/slam_core/share/slam_core/local_setup.bash\n'}
+[40.533353] (slam_core) StdoutLine: {'line': b'-- Up-to-date: /home/dongjae/slambook_ws/install/slam_core/share/slam_core/local_setup.sh\n'}
+[40.533394] (slam_core) StdoutLine: {'line': b'-- Up-to-date: /home/dongjae/slambook_ws/install/slam_core/share/slam_core/local_setup.zsh\n'}
+[40.533419] (slam_core) StdoutLine: {'line': b'-- Installing: /home/dongjae/slambook_ws/install/slam_core/share/slam_core/local_setup.dsv\n'}
+[40.533884] (slam_core) StdoutLine: {'line': b'-- Installing: /home/dongjae/slambook_ws/install/slam_core/share/slam_core/package.dsv\n'}
+[40.534519] (slam_core) StdoutLine: {'line': b'-- Up-to-date: /home/dongjae/slambook_ws/install/slam_core/share/ament_index/resource_index/packages/slam_core\n'}
+[40.534856] (slam_core) StdoutLine: {'line': b'-- Up-to-date: /home/dongjae/slambook_ws/install/slam_core/share/slam_core/cmake/slam_coreConfig.cmake\n'}
+[40.535022] (slam_core) StdoutLine: {'line': b'-- Up-to-date: /home/dongjae/slambook_ws/install/slam_core/share/slam_core/cmake/slam_coreConfig-version.cmake\n'}
+[40.535222] (slam_core) StdoutLine: {'line': b'-- Up-to-date: /home/dongjae/slambook_ws/install/slam_core/share/slam_core/package.xml\n'}
+[40.537988] (slam_core) CommandEnded: {'returncode': 0}
+[40.538538] (-) TimerEvent: {}
+[40.561746] (slam_core) JobEnded: {'identifier': 'slam_core', 'rc': 0}
+[40.563214] (-) EventReactorShutdown: {}

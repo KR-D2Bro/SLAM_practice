@@ -1,0 +1,125 @@
+[0.108s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build']
+[0.108s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=False, test_result_base=None, continue_on_error=False, executor='parallel', parallel_workers=16, event_handlers=None, ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['.'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=None, packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, allow_overriding=[], cmake_args=None, cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, mixin_files=None, mixin=None, verb_parser=<colcon_mixin.mixin.mixin_argument.MixinArgumentDecorator object at 0x7e035e74d0f0>, verb_extension=<colcon_core.verb.build.BuildVerb object at 0x7e035e74c640>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0x7e035e74c640>>, mixin_verb=('build',))
+[0.207s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[0.207s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[0.207s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[0.207s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[0.207s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[0.207s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[0.207s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/dongjae/slambook_ws'
+[0.207s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[0.207s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[0.207s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[0.208s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[0.208s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[0.208s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[0.208s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[0.208s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[0.208s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[0.216s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['cmake', 'python']
+[0.216s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'cmake'
+[0.216s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python'
+[0.216s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['python_setup_py']
+[0.216s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python_setup_py'
+[0.216s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extensions ['ignore', 'ignore_ament_install']
+[0.216s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extension 'ignore'
+[0.216s] Level 1:colcon.colcon_core.package_identification:_identify(build) ignored
+[0.216s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extensions ['ignore', 'ignore_ament_install']
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extension 'ignore'
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(install) ignored
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extensions ['ignore', 'ignore_ament_install']
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extension 'ignore'
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(log) ignored
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['ignore', 'ignore_ament_install']
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ignore'
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ignore_ament_install'
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['colcon_pkg']
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'colcon_pkg'
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['colcon_meta']
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'colcon_meta'
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['ros']
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ros'
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['cmake', 'python']
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'cmake'
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'python'
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['python_setup_py']
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'python_setup_py'
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(src/slam_core) by extensions ['ignore', 'ignore_ament_install']
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(src/slam_core) by extension 'ignore'
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(src/slam_core) by extension 'ignore_ament_install'
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(src/slam_core) by extensions ['colcon_pkg']
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(src/slam_core) by extension 'colcon_pkg'
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(src/slam_core) by extensions ['colcon_meta']
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(src/slam_core) by extension 'colcon_meta'
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(src/slam_core) by extensions ['ros']
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(src/slam_core) by extension 'ros'
+[0.220s] DEBUG:colcon.colcon_core.package_identification:Package 'src/slam_core' with type 'ros.ament_cmake' and name 'slam_core'
+[0.220s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[0.220s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[0.220s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[0.220s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[0.220s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[0.246s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) check parameters
+[0.246s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) discover
+[0.247s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 1 installed packages in /home/dongjae/slambook_ws/install
+[0.248s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 271 installed packages in /opt/ros/humble
+[0.249s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) using defaults
+[0.268s] Level 5:colcon.colcon_core.verb:set package 'slam_core' build argument 'cmake_args' from command line to 'None'
+[0.268s] Level 5:colcon.colcon_core.verb:set package 'slam_core' build argument 'cmake_target' from command line to 'None'
+[0.268s] Level 5:colcon.colcon_core.verb:set package 'slam_core' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.268s] Level 5:colcon.colcon_core.verb:set package 'slam_core' build argument 'cmake_clean_cache' from command line to 'False'
+[0.269s] Level 5:colcon.colcon_core.verb:set package 'slam_core' build argument 'cmake_clean_first' from command line to 'False'
+[0.269s] Level 5:colcon.colcon_core.verb:set package 'slam_core' build argument 'cmake_force_configure' from command line to 'False'
+[0.269s] Level 5:colcon.colcon_core.verb:set package 'slam_core' build argument 'ament_cmake_args' from command line to 'None'
+[0.269s] Level 5:colcon.colcon_core.verb:set package 'slam_core' build argument 'catkin_cmake_args' from command line to 'None'
+[0.269s] Level 5:colcon.colcon_core.verb:set package 'slam_core' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.269s] DEBUG:colcon.colcon_core.verb:Building package 'slam_core' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/dongjae/slambook_ws/build/slam_core', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/dongjae/slambook_ws/install/slam_core', 'merge_install': False, 'path': '/home/dongjae/slambook_ws/src/slam_core', 'symlink_install': False, 'test_result_base': None}
+[0.269s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[0.270s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[0.270s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/dongjae/slambook_ws/src/slam_core' with build type 'ament_cmake'
+[0.271s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/dongjae/slambook_ws/src/slam_core'
+[0.272s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[0.272s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.272s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.291s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/dongjae/slambook_ws/build/slam_core': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake /home/dongjae/slambook_ws/src/slam_core -DCMAKE_INSTALL_PREFIX=/home/dongjae/slambook_ws/install/slam_core
+[5.581s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/dongjae/slambook_ws/build/slam_core' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake /home/dongjae/slambook_ws/src/slam_core -DCMAKE_INSTALL_PREFIX=/home/dongjae/slambook_ws/install/slam_core
+[5.583s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/dongjae/slambook_ws/build/slam_core': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/dongjae/slambook_ws/build/slam_core -- -j16 -l16
+[27.626s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/dongjae/slambook_ws/build/slam_core' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/dongjae/slambook_ws/build/slam_core -- -j16 -l16
+[27.627s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(slam_core)
+[27.629s] Level 1:colcon.colcon_core.environment:checking '/home/dongjae/slambook_ws/install/slam_core' for CMake module files
+[27.629s] Level 1:colcon.colcon_core.environment:checking '/home/dongjae/slambook_ws/install/slam_core' for CMake config files
+[27.630s] Level 1:colcon.colcon_core.shell:create_environment_hook('slam_core', 'cmake_prefix_path')
+[27.630s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/dongjae/slambook_ws/install/slam_core/share/slam_core/hook/cmake_prefix_path.ps1'
+[27.631s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/dongjae/slambook_ws/install/slam_core/share/slam_core/hook/cmake_prefix_path.dsv'
+[27.631s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/dongjae/slambook_ws/install/slam_core/share/slam_core/hook/cmake_prefix_path.sh'
+[27.632s] Level 1:colcon.colcon_core.environment:checking '/home/dongjae/slambook_ws/install/slam_core/lib'
+[27.633s] Level 1:colcon.colcon_core.environment:checking '/home/dongjae/slambook_ws/install/slam_core/bin'
+[27.633s] Level 1:colcon.colcon_core.environment:checking '/home/dongjae/slambook_ws/install/slam_core/lib/pkgconfig/slam_core.pc'
+[27.633s] Level 1:colcon.colcon_core.environment:checking '/home/dongjae/slambook_ws/install/slam_core/lib/python3.10/site-packages'
+[27.633s] Level 1:colcon.colcon_core.environment:checking '/home/dongjae/slambook_ws/install/slam_core/bin'
+[27.634s] INFO:colcon.colcon_core.shell:Creating package script '/home/dongjae/slambook_ws/install/slam_core/share/slam_core/package.ps1'
+[27.634s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/dongjae/slambook_ws/install/slam_core/share/slam_core/package.dsv'
+[27.635s] INFO:colcon.colcon_core.shell:Creating package script '/home/dongjae/slambook_ws/install/slam_core/share/slam_core/package.sh'
+[27.636s] INFO:colcon.colcon_core.shell:Creating package script '/home/dongjae/slambook_ws/install/slam_core/share/slam_core/package.bash'
+[27.637s] INFO:colcon.colcon_core.shell:Creating package script '/home/dongjae/slambook_ws/install/slam_core/share/slam_core/package.zsh'
+[27.638s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/dongjae/slambook_ws/install/slam_core/share/colcon-core/packages/slam_core)
+[27.649s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[27.649s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[27.649s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '2'
+[27.649s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[27.680s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.notify_send': Could not find 'notify-send'
+[27.681s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[27.681s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[27.681s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[27.681s] DEBUG:colcon.colcon_notification.desktop_notification.notify2:Failed to initialize notify2: org.freedesktop.DBus.Error.FileNotFound: Failed to connect to socket /run/user/1000/bus: No such file or directory
+[27.681s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[27.681s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/dongjae/slambook_ws/install/local_setup.ps1'
+[27.682s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/dongjae/slambook_ws/install/_local_setup_util_ps1.py'
+[27.683s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/dongjae/slambook_ws/install/setup.ps1'
+[27.683s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/dongjae/slambook_ws/install/local_setup.sh'
+[27.684s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/dongjae/slambook_ws/install/_local_setup_util_sh.py'
+[27.684s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/dongjae/slambook_ws/install/setup.sh'
+[27.685s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/dongjae/slambook_ws/install/local_setup.bash'
+[27.685s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/dongjae/slambook_ws/install/setup.bash'
+[27.686s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/dongjae/slambook_ws/install/local_setup.zsh'
+[27.686s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/dongjae/slambook_ws/install/setup.zsh'

@@ -1,0 +1,132 @@
+[35m[1mConsolidate compiler generated dependencies of target slam_system[0m
+[ 60%] [32mBuilding CXX object CMakeFiles/slam_system.dir/src/slam_system.cpp.o[0m
+[ 60%] [32mBuilding CXX object CMakeFiles/slam_system.dir/src/frontend/frontend.cpp.o[0m
+[ 60%] [32mBuilding CXX object CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o[0m
+In file included from [01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/visual_odometry.hpp:6[m[K,
+                 from [01m[K/home/dongjae/slambook_ws/src/slam_core/src/frontend/visual_odometry.cpp:1[m[K:
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:[m[K In member function ‘[01m[Kvirtual bool VertexPose::read(std::istream&)[m[K’:
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:21:51:[m[K [01;35m[Kwarning: [m[Kno return statement in function returning non-void [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreturn-type-Wreturn-type]8;;[m[K]
+   21 |   virtual bool read(std::istream &in) override {  [01;35m[K}[m[K
+      |                                                   [01;35m[K^[m[K
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:21:35:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kin[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+   21 |   virtual bool read([01;35m[Kstd::istream &in[m[K) override {  }
+      |                     [01;35m[K~~~~~~~~~~~~~~^~[m[K
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:[m[K In member function ‘[01m[Kvirtual bool VertexPose::write(std::ostream&) const[m[K’:
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:23:59:[m[K [01;35m[Kwarning: [m[Kno return statement in function returning non-void [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreturn-type-Wreturn-type]8;;[m[K]
+   23 |   virtual bool write(std::ostream &out) const override {  [01;35m[K}[m[K
+      |                                                           [01;35m[K^[m[K
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:23:36:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kout[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+   23 |   virtual bool write([01;35m[Kstd::ostream &out[m[K) const override {  }
+      |                      [01;35m[K~~~~~~~~~~~~~~^~~[m[K
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:[m[K At global scope:
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:28:34:[m[K [01;35m[Kwarning: [m[Kextra ‘[01m[K;[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wpedantic-Wpedantic]8;;[m[K]
+   28 |   EIGEN_MAKE_ALIGNED_OPERATOR_NEW[01;35m[K;[m[K
+      |                                  [01;35m[K^[m[K
+      |                                  [31m[K-[m[K
+In file included from [01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/visual_odometry.hpp:6[m[K,
+                 from [01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/frontend.hpp:6[m[K,
+                 from [01m[K/home/dongjae/slambook_ws/src/slam_core/src/frontend/frontend.cpp:1[m[K:
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:[m[K In member function ‘[01m[Kvirtual bool VertexPose::read(std::istream&)[m[K’:
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:21:51:[m[K [01;35m[Kwarning: [m[Kno return statement in function returning non-void [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreturn-type-Wreturn-type]8;;[m[K]
+   21 |   virtual bool read(std::istream &in) override {  [01;35m[K}[m[K
+      |                                                   [01;35m[K^[m[K
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:21:35:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kin[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+   21 |   virtual bool read([01;35m[Kstd::istream &in[m[K) override {  }
+      |                     [01;35m[K~~~~~~~~~~~~~~^~[m[K
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:[m[K In member function ‘[01m[Kvirtual bool VertexPose::write(std::ostream&) const[m[K’:
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:23:59:[m[K [01;35m[Kwarning: [m[Kno return statement in function returning non-void [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreturn-type-Wreturn-type]8;;[m[K]
+   23 |   virtual bool write(std::ostream &out) const override {  [01;35m[K}[m[K
+      |                                                           [01;35m[K^[m[K
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:23:36:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kout[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+   23 |   virtual bool write([01;35m[Kstd::ostream &out[m[K) const override {  }
+      |                      [01;35m[K~~~~~~~~~~~~~~^~~[m[K
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:[m[K At global scope:
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:28:34:[m[K [01;35m[Kwarning: [m[Kextra ‘[01m[K;[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wpedantic-Wpedantic]8;;[m[K]
+   28 |   EIGEN_MAKE_ALIGNED_OPERATOR_NEW[01;35m[K;[m[K
+      |                                  [01;35m[K^[m[K
+      |                                  [31m[K-[m[K
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:[m[K In member function ‘[01m[Kvirtual bool EdgeProjection::read(std::istream&)[m[K’:
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:55:51:[m[K [01;35m[Kwarning: [m[Kno return statement in function returning non-void [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreturn-type-Wreturn-type]8;;[m[K]
+   55 |   virtual bool read(std::istream &in) override {  [01;35m[K}[m[K
+      |                                                   [01;35m[K^[m[K
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:55:35:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kin[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+   55 |   virtual bool read([01;35m[Kstd::istream &in[m[K) override {  }
+      |                     [01;35m[K~~~~~~~~~~~~~~^~[m[K
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:[m[K In member function ‘[01m[Kvirtual bool EdgeProjection::write(std::ostream&) const[m[K’:
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:57:59:[m[K [01;35m[Kwarning: [m[Kno return statement in function returning non-void [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreturn-type-Wreturn-type]8;;[m[K]
+   57 |   virtual bool write(std::ostream &out) const override {  [01;35m[K}[m[K
+      |                                                           [01;35m[K^[m[K
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:57:36:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kout[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+   57 |   virtual bool write([01;35m[Kstd::ostream &out[m[K) const override {  }
+      |                      [01;35m[K~~~~~~~~~~~~~~^~~[m[K
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:[m[K In member function ‘[01m[Kvirtual bool EdgeProjection::read(std::istream&)[m[K’:
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:55:51:[m[K [01;35m[Kwarning: [m[Kno return statement in function returning non-void [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreturn-type-Wreturn-type]8;;[m[K]
+   55 |   virtual bool read(std::istream &in) override {  [01;35m[K}[m[K
+      |                                                   [01;35m[K^[m[K
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:55:35:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kin[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+   55 |   virtual bool read([01;35m[Kstd::istream &in[m[K) override {  }
+      |                     [01;35m[K~~~~~~~~~~~~~~^~[m[K
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:[m[K In member function ‘[01m[Kvirtual bool EdgeProjection::write(std::ostream&) const[m[K’:
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:57:59:[m[K [01;35m[Kwarning: [m[Kno return statement in function returning non-void [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreturn-type-Wreturn-type]8;;[m[K]
+   57 |   virtual bool write(std::ostream &out) const override {  [01;35m[K}[m[K
+      |                                                           [01;35m[K^[m[K
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:57:36:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kout[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+   57 |   virtual bool write([01;35m[Kstd::ostream &out[m[K) const override {  }
+      |                      [01;35m[K~~~~~~~~~~~~~~^~~[m[K
+[01m[K/home/dongjae/slambook_ws/src/slam_core/src/frontend/visual_odometry.cpp:[m[K In member function ‘[01m[Kbool VisualOdometry::triangulation(const Frame&, Frame&, const std::vector<cv::DMatch>&, std::vector<std::shared_ptr<MapPoint> >&, bool)[m[K’:
+[01m[K/home/dongjae/slambook_ws/src/slam_core/src/frontend/visual_odometry.cpp:170:18:[m[K [01;35m[Kwarning: [m[Kcomparison of integer expressions of different signedness: ‘[01m[Kint[m[K’ and ‘[01m[Kstd::vector<cv::DMatch>::size_type[m[K’ {aka ‘[01m[Klong unsigned int[m[K’} [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wsign-compare-Wsign-compare]8;;[m[K]
+  170 |     for(int i=0;[01;35m[Ki<matches.size()[m[K;i++){
+      |                 [01;35m[K~^~~~~~~~~~~~~~~[m[K
+[01m[K/home/dongjae/slambook_ws/src/slam_core/src/frontend/frontend.cpp:[m[K In member function ‘[01m[Kint Frontend::add_keyframe(std::shared_ptr<Frame>&, bool, bool)[m[K’:
+[01m[K/home/dongjae/slambook_ws/src/slam_core/src/frontend/frontend.cpp:91:64:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[KisFirst[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+   91 | int Frontend::add_keyframe(std::shared_ptr<Frame> &frame, [01;35m[Kbool isFirst[m[K, bool isInit){
+      |                                                           [01;35m[K~~~~~^~~~~~~[m[K
+[01m[K/home/dongjae/slambook_ws/src/slam_core/src/frontend/frontend.cpp:91:78:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[KisInit[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+   91 | int Frontend::add_keyframe(std::shared_ptr<Frame> &frame, bool isFirst, [01;35m[Kbool isInit[m[K){
+      |                                                                         [01;35m[K~~~~~^~~~~~[m[K
+In file included from [01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/visual_odometry.hpp:6[m[K,
+                 from [01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/frontend.hpp:6[m[K,
+                 from [01m[K/home/dongjae/slambook_ws/src/slam_core/src/slam_system.cpp:5[m[K:
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:[m[K In member function ‘[01m[Kvirtual bool VertexPose::read(std::istream&)[m[K’:
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:21:51:[m[K [01;35m[Kwarning: [m[Kno return statement in function returning non-void [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreturn-type-Wreturn-type]8;;[m[K]
+   21 |   virtual bool read(std::istream &in) override {  [01;35m[K}[m[K
+      |                                                   [01;35m[K^[m[K
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:21:35:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kin[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+   21 |   virtual bool read([01;35m[Kstd::istream &in[m[K) override {  }
+      |                     [01;35m[K~~~~~~~~~~~~~~^~[m[K
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:[m[K In member function ‘[01m[Kvirtual bool VertexPose::write(std::ostream&) const[m[K’:
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:23:59:[m[K [01;35m[Kwarning: [m[Kno return statement in function returning non-void [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreturn-type-Wreturn-type]8;;[m[K]
+   23 |   virtual bool write(std::ostream &out) const override {  [01;35m[K}[m[K
+      |                                                           [01;35m[K^[m[K
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:23:36:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kout[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+   23 |   virtual bool write([01;35m[Kstd::ostream &out[m[K) const override {  }
+      |                      [01;35m[K~~~~~~~~~~~~~~^~~[m[K
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:[m[K At global scope:
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:28:34:[m[K [01;35m[Kwarning: [m[Kextra ‘[01m[K;[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wpedantic-Wpedantic]8;;[m[K]
+   28 |   EIGEN_MAKE_ALIGNED_OPERATOR_NEW[01;35m[K;[m[K
+      |                                  [01;35m[K^[m[K
+      |                                  [31m[K-[m[K
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:[m[K In member function ‘[01m[Kvirtual bool EdgeProjection::read(std::istream&)[m[K’:
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:55:51:[m[K [01;35m[Kwarning: [m[Kno return statement in function returning non-void [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreturn-type-Wreturn-type]8;;[m[K]
+   55 |   virtual bool read(std::istream &in) override {  [01;35m[K}[m[K
+      |                                                   [01;35m[K^[m[K
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:55:35:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kin[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+   55 |   virtual bool read([01;35m[Kstd::istream &in[m[K) override {  }
+      |                     [01;35m[K~~~~~~~~~~~~~~^~[m[K
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:[m[K In member function ‘[01m[Kvirtual bool EdgeProjection::write(std::ostream&) const[m[K’:
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:57:59:[m[K [01;35m[Kwarning: [m[Kno return statement in function returning non-void [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreturn-type-Wreturn-type]8;;[m[K]
+   57 |   virtual bool write(std::ostream &out) const override {  [01;35m[K}[m[K
+      |                                                           [01;35m[K^[m[K
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:57:36:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kout[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+   57 |   virtual bool write([01;35m[Kstd::ostream &out[m[K) const override {  }
+      |                      [01;35m[K~~~~~~~~~~~~~~^~~[m[K
+[ 80%] [32m[1mLinking CXX executable slam_system[0m
+/usr/bin/ld: cannot find -lg2o_core: No such file or directory
+/usr/bin/ld: cannot find -lg2o_stuff: No such file or directory
+/usr/bin/ld: cannot find -lg2o_types_sba: No such file or directory
+/usr/bin/ld: cannot find -lg2o_solver_dense: No such file or directory
+/usr/bin/ld: cannot find -lg2o_solver_eigen: No such file or directory
+collect2: error: ld returned 1 exit status
+gmake[2]: *** [CMakeFiles/slam_system.dir/build.make:299: slam_system] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:137: CMakeFiles/slam_system.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2

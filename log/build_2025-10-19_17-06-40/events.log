@@ -1,0 +1,455 @@
+[0.000000] (-) TimerEvent: {}
+[0.000929] (slam_core) JobQueued: {'identifier': 'slam_core', 'dependencies': OrderedDict()}
+[0.000983] (slam_core) JobStarted: {'identifier': 'slam_core'}
+[0.007053] (slam_core) JobProgress: {'identifier': 'slam_core', 'progress': 'cmake'}
+[0.009258] (slam_core) Command: {'cmd': ['/usr/bin/cmake', '/home/dongjae/slambook_ws/src/slam_core', '-DCMAKE_INSTALL_PREFIX=/home/dongjae/slambook_ws/install/slam_core'], 'cwd': '/home/dongjae/slambook_ws/build/slam_core', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'dongjae'), ('GIT_ASKPASS', '/home/dongjae/.vscode-server/bin/488a1f239235055e34e673291fb8d8c810886f81/extensions/git/dist/askpass.sh'), ('ROS_APT_SOURCE_VERSION', '1.1.0'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('MOTD_SHOWN', 'update-motd'), ('HOME', '/home/dongjae'), ('OLDPWD', '/home/dongjae'), ('TERM_PROGRAM_VERSION', '1.102.3'), ('VSCODE_IPC_HOOK_CLI', '/run/user/1000/vscode-ipc-531973d9-bda8-44c6-9d96-cd3a4acd7463.sock'), ('ROS_PYTHON_VERSION', '3'), ('VSCODE_GIT_ASKPASS_MAIN', '/home/dongjae/.vscode-server/bin/488a1f239235055e34e673291fb8d8c810886f81/extensions/git/dist/askpass-main.js'), ('VSCODE_GIT_ASKPASS_NODE', '/home/dongjae/.vscode-server/bin/488a1f239235055e34e673291fb8d8c810886f81/node'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('WSL_DISTRO_NAME', 'Ubuntu-22.04'), ('WAYLAND_DISPLAY', 'wayland-0'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'dongjae'), ('NAME', 'DESKTOP-6O5P79B'), ('WSL_INTEROP', '/run/WSL/395_interop'), ('PULSE_SERVER', 'unix:/mnt/wslg/PulseServer'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm-256color'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/home/dongjae/.vscode-server/bin/488a1f239235055e34e673291fb8d8c810886f81/bin/remote-cli:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/d/programs/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/x64:/mnt/d/programs/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Program Files/NVIDIA Corporation/NVIDIA App/NvDLISR:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files/Zero Install:/mnt/d/Microsoft VS Code/bin:/mnt/c/Program Files/Microsoft VS Code/bin:/mnt/c/Program Files/Tailscale/:/mnt/d/programs/Git/cmd:/mnt/d/Windows Kits/10/Windows Performance Toolkit/:/mnt/c/Program Files/NVIDIA Corporation/Nsight Compute 2025.3.1/:/mnt/c/Users/Dongjae/AppData/Local/Microsoft/WindowsApps:/snap/bin:/home/dongjae/.vscode-server/data/User/globalStorage/github.copilot-chat/debugCommand'), ('XDG_RUNTIME_DIR', '/run/user/1000/'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('VSCODE_GIT_IPC_HANDLE', '/run/user/1000/vscode-git-86eaa534c4.sock'), ('TERM_PROGRAM', 'vscode'), ('AMENT_PREFIX_PATH', '/opt/ros/humble'), ('SHELL', '/bin/bash'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('VSCODE_GIT_ASKPASS_EXTRA_ARGS', ''), ('PWD', '/home/dongjae/slambook_ws/build/slam_core'), ('XDG_DATA_DIRS', '/usr/local/share:/usr/share:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('WSL2_GUI_APPS_ENABLED', '1'), ('HOSTTYPE', 'x86_64'), ('WSLENV', 'VSCODE_WSL_EXT_LOCATION/up'), ('CMAKE_PREFIX_PATH', '/opt/ros/humble')]), 'shell': False}
+[0.099680] (-) TimerEvent: {}
+[0.178598] (slam_core) StdoutLine: {'line': b'-- The C compiler identification is GNU 11.4.0\n'}
+[0.200212] (-) TimerEvent: {}
+[0.306079] (-) TimerEvent: {}
+[0.410974] (-) TimerEvent: {}
+[0.513993] (-) TimerEvent: {}
+[0.527340] (slam_core) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 11.4.0\n'}
+[0.616718] (-) TimerEvent: {}
+[0.722080] (-) TimerEvent: {}
+[0.783423] (slam_core) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[0.822442] (-) TimerEvent: {}
+[0.892602] (slam_core) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[0.897142] (slam_core) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc - skipped\n'}
+[0.898470] (slam_core) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[0.899071] (slam_core) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[0.901345] (slam_core) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[0.922798] (-) TimerEvent: {}
+[1.024003] (slam_core) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[1.024489] (-) TimerEvent: {}
+[1.028173] (slam_core) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ - skipped\n'}
+[1.028506] (slam_core) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[1.028827] (slam_core) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[1.030478] (slam_core) StdoutLine: {'line': b'-- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)\n'}
+[1.124769] (-) TimerEvent: {}
+[1.138402] (slam_core) StdoutLine: {'line': b'-- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter \n'}
+[1.198456] (slam_core) StdoutLine: {'line': b'-- Found rclcpp: 16.0.15 (/opt/ros/humble/share/rclcpp/cmake)\n'}
+[1.225284] (-) TimerEvent: {}
+[1.326130] (-) TimerEvent: {}
+[1.329047] (slam_core) StdoutLine: {'line': b'-- Found rosidl_generator_c: 3.1.7 (/opt/ros/humble/share/rosidl_generator_c/cmake)\n'}
+[1.332673] (slam_core) StdoutLine: {'line': b'-- Found rosidl_adapter: 3.1.7 (/opt/ros/humble/share/rosidl_adapter/cmake)\n'}
+[1.339005] (slam_core) StdoutLine: {'line': b'-- Found rosidl_generator_cpp: 3.1.7 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)\n'}
+[1.348188] (slam_core) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[1.356760] (slam_core) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[1.379641] (slam_core) StdoutLine: {'line': b'-- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)\n'}
+[1.380987] (slam_core) StdoutLine: {'line': b'-- Found rmw_fastrtps_cpp: 6.2.8 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)\n'}
+[1.426449] (-) TimerEvent: {}
+[1.527089] (-) TimerEvent: {}
+[1.627994] (-) TimerEvent: {}
+[1.734354] (-) TimerEvent: {}
+[1.843018] (-) TimerEvent: {}
+[1.944077] (-) TimerEvent: {}
+[2.052913] (-) TimerEvent: {}
+[2.161713] (-) TimerEvent: {}
+[2.262275] (-) TimerEvent: {}
+[2.363231] (-) TimerEvent: {}
+[2.463994] (-) TimerEvent: {}
+[2.529805] (slam_core) StdoutLine: {'line': b'-- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  \n'}
+[2.564224] (-) TimerEvent: {}
+[2.671689] (-) TimerEvent: {}
+[2.780557] (-) TimerEvent: {}
+[2.889148] (-) TimerEvent: {}
+[2.997970] (-) TimerEvent: {}
+[3.106741] (-) TimerEvent: {}
+[3.215526] (-) TimerEvent: {}
+[3.324317] (-) TimerEvent: {}
+[3.433108] (-) TimerEvent: {}
+[3.533689] (-) TimerEvent: {}
+[3.640637] (-) TimerEvent: {}
+[3.714217] (slam_core) StdoutLine: {'line': b'-- Found FastRTPS: /opt/ros/humble/include  \n'}
+[3.743000] (-) TimerEvent: {}
+[3.851788] (-) TimerEvent: {}
+[3.960266] (-) TimerEvent: {}
+[4.069058] (-) TimerEvent: {}
+[4.169821] (-) TimerEvent: {}
+[4.275041] (-) TimerEvent: {}
+[4.375773] (-) TimerEvent: {}
+[4.482924] (-) TimerEvent: {}
+[4.587228] (-) TimerEvent: {}
+[4.688050] (-) TimerEvent: {}
+[4.792230] (-) TimerEvent: {}
+[4.893523] (-) TimerEvent: {}
+[4.996444] (-) TimerEvent: {}
+[5.099617] (-) TimerEvent: {}
+[5.201586] (-) TimerEvent: {}
+[5.305163] (-) TimerEvent: {}
+[5.410768] (-) TimerEvent: {}
+[5.518208] (-) TimerEvent: {}
+[5.619883] (-) TimerEvent: {}
+[5.728747] (-) TimerEvent: {}
+[5.834743] (-) TimerEvent: {}
+[5.848159] (slam_core) StdoutLine: {'line': b"-- Using RMW implementation 'rmw_fastrtps_cpp' as default\n"}
+[5.853889] (slam_core) StdoutLine: {'line': b'-- Looking for pthread.h\n'}
+[5.935118] (-) TimerEvent: {}
+[5.966492] (slam_core) StdoutLine: {'line': b'-- Looking for pthread.h - found\n'}
+[5.966780] (slam_core) StdoutLine: {'line': b'-- Performing Test CMAKE_HAVE_LIBC_PTHREAD\n'}
+[6.035552] (-) TimerEvent: {}
+[6.082515] (slam_core) StdoutLine: {'line': b'-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success\n'}
+[6.083278] (slam_core) StdoutLine: {'line': b'-- Found Threads: TRUE  \n'}
+[6.115914] (slam_core) StdoutLine: {'line': b'-- Found OpenCV: /usr (found version "4.5.4") \n'}
+[6.117063] (slam_core) StdoutLine: {'line': b'-- Found cv_bridge: 3.2.1 (/opt/ros/humble/share/cv_bridge/cmake)\n'}
+[6.135739] (-) TimerEvent: {}
+[6.140653] (slam_core) StdoutLine: {'line': b'-- Found required Ceres dependency: Eigen version 3.4.0 in /usr/include/eigen3\n'}
+[6.142605] (slam_core) StdoutLine: {'line': b'-- Found required Ceres dependency: glog\n'}
+[6.142947] (slam_core) StdoutLine: {'line': b'-- Found required Ceres dependency: gflags\n'}
+[6.143257] (slam_core) StdoutLine: {'line': b'-- Found Ceres version: 2.0.0 installed in: /usr with components: [EigenSparse, SparseLinearAlgebraLibrary, LAPACK, SuiteSparse, CXSparse, SchurSpecializations, Multithreading]\n'}
+[6.144029] (slam_core) StdoutLine: {'line': b'-- Found nav_msgs: 4.9.0 (/opt/ros/humble/share/nav_msgs/cmake)\n'}
+[6.152889] (slam_core) StdoutLine: {'line': b'-- Found visualization_msgs: 4.9.0 (/opt/ros/humble/share/visualization_msgs/cmake)\n'}
+[6.164247] (slam_core) StdoutLine: {'line': b'-- Found ament_lint_auto: 0.12.14 (/opt/ros/humble/share/ament_lint_auto/cmake)\n'}
+[6.218187] (slam_core) StdoutLine: {'line': b"-- Added test 'cppcheck' to perform static code analysis on C / C++ code\n"}
+[6.218423] (slam_core) StdoutLine: {'line': b'-- Configured cppcheck include dirs: $<BUILD_INTERFACE:/home/dongjae/slambook_ws/src/slam_core/include>\n'}
+[6.218475] (slam_core) StdoutLine: {'line': b'-- Configured cppcheck exclude dirs and/or files: \n'}
+[6.219237] (slam_core) StdoutLine: {'line': b"-- Added test 'lint_cmake' to check CMake code style\n"}
+[6.220414] (slam_core) StdoutLine: {'line': b"-- Added test 'uncrustify' to check C / C++ code style\n"}
+[6.220666] (slam_core) StdoutLine: {'line': b'-- Configured uncrustify additional arguments: \n'}
+[6.221065] (slam_core) StdoutLine: {'line': b"-- Added test 'xmllint' to check XML markup files\n"}
+[6.222281] (slam_core) StdoutLine: {'line': b'-- Configuring done\n'}
+[6.235289] (slam_core) StdoutLine: {'line': b'-- Generating done\n'}
+[6.235885] (-) TimerEvent: {}
+[6.239058] (slam_core) StdoutLine: {'line': b'-- Build files have been written to: /home/dongjae/slambook_ws/build/slam_core\n'}
+[6.252302] (slam_core) CommandEnded: {'returncode': 0}
+[6.254238] (slam_core) JobProgress: {'identifier': 'slam_core', 'progress': 'build'}
+[6.254351] (slam_core) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/dongjae/slambook_ws/build/slam_core', '--', '-j16', '-l16'], 'cwd': '/home/dongjae/slambook_ws/build/slam_core', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'dongjae'), ('GIT_ASKPASS', '/home/dongjae/.vscode-server/bin/488a1f239235055e34e673291fb8d8c810886f81/extensions/git/dist/askpass.sh'), ('ROS_APT_SOURCE_VERSION', '1.1.0'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('MOTD_SHOWN', 'update-motd'), ('HOME', '/home/dongjae'), ('OLDPWD', '/home/dongjae'), ('TERM_PROGRAM_VERSION', '1.102.3'), ('VSCODE_IPC_HOOK_CLI', '/run/user/1000/vscode-ipc-531973d9-bda8-44c6-9d96-cd3a4acd7463.sock'), ('ROS_PYTHON_VERSION', '3'), ('VSCODE_GIT_ASKPASS_MAIN', '/home/dongjae/.vscode-server/bin/488a1f239235055e34e673291fb8d8c810886f81/extensions/git/dist/askpass-main.js'), ('VSCODE_GIT_ASKPASS_NODE', '/home/dongjae/.vscode-server/bin/488a1f239235055e34e673291fb8d8c810886f81/node'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('WSL_DISTRO_NAME', 'Ubuntu-22.04'), ('WAYLAND_DISPLAY', 'wayland-0'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'dongjae'), ('NAME', 'DESKTOP-6O5P79B'), ('WSL_INTEROP', '/run/WSL/395_interop'), ('PULSE_SERVER', 'unix:/mnt/wslg/PulseServer'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm-256color'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/home/dongjae/.vscode-server/bin/488a1f239235055e34e673291fb8d8c810886f81/bin/remote-cli:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/d/programs/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin/x64:/mnt/d/programs/NVIDIA GPU Computing Toolkit/CUDA/v13.0/bin:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Program Files/NVIDIA Corporation/NVIDIA App/NvDLISR:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files/Zero Install:/mnt/d/Microsoft VS Code/bin:/mnt/c/Program Files/Microsoft VS Code/bin:/mnt/c/Program Files/Tailscale/:/mnt/d/programs/Git/cmd:/mnt/d/Windows Kits/10/Windows Performance Toolkit/:/mnt/c/Program Files/NVIDIA Corporation/Nsight Compute 2025.3.1/:/mnt/c/Users/Dongjae/AppData/Local/Microsoft/WindowsApps:/snap/bin:/home/dongjae/.vscode-server/data/User/globalStorage/github.copilot-chat/debugCommand'), ('XDG_RUNTIME_DIR', '/run/user/1000/'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('VSCODE_GIT_IPC_HANDLE', '/run/user/1000/vscode-git-86eaa534c4.sock'), ('TERM_PROGRAM', 'vscode'), ('AMENT_PREFIX_PATH', '/opt/ros/humble'), ('SHELL', '/bin/bash'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('VSCODE_GIT_ASKPASS_EXTRA_ARGS', ''), ('PWD', '/home/dongjae/slambook_ws/build/slam_core'), ('XDG_DATA_DIRS', '/usr/local/share:/usr/share:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('WSL2_GUI_APPS_ENABLED', '1'), ('HOSTTYPE', 'x86_64'), ('WSLENV', 'VSCODE_WSL_EXT_LOCATION/up'), ('CMAKE_PREFIX_PATH', '/opt/ros/humble')]), 'shell': False}
+[6.288976] (slam_core) StdoutLine: {'line': b'[ 50%] \x1b[32mBuilding CXX object CMakeFiles/slam_system.dir/src/frontend/visual_odometry.cpp.o\x1b[0m\n'}
+[6.289438] (slam_core) StdoutLine: {'line': b'[ 50%] \x1b[32mBuilding CXX object CMakeFiles/slam_system.dir/src/frontend/feature_tracker.cpp.o\x1b[0m\n'}
+[6.289482] (slam_core) StdoutLine: {'line': b'[ 75%] \x1b[32mBuilding CXX object CMakeFiles/slam_system.dir/src/slam_system.cpp.o\x1b[0m\n'}
+[6.336709] (-) TimerEvent: {}
+[6.437249] (-) TimerEvent: {}
+[6.538121] (-) TimerEvent: {}
+[6.639081] (-) TimerEvent: {}
+[6.739831] (-) TimerEvent: {}
+[6.847312] (-) TimerEvent: {}
+[6.948072] (-) TimerEvent: {}
+[7.049593] (-) TimerEvent: {}
+[7.150384] (-) TimerEvent: {}
+[7.258609] (-) TimerEvent: {}
+[7.366968] (-) TimerEvent: {}
+[7.467680] (-) TimerEvent: {}
+[7.568595] (-) TimerEvent: {}
+[7.677388] (-) TimerEvent: {}
+[7.786193] (-) TimerEvent: {}
+[7.895085] (-) TimerEvent: {}
+[8.004190] (-) TimerEvent: {}
+[8.112819] (-) TimerEvent: {}
+[8.221644] (-) TimerEvent: {}
+[8.329080] (-) TimerEvent: {}
+[8.438114] (-) TimerEvent: {}
+[8.546990] (-) TimerEvent: {}
+[8.655784] (-) TimerEvent: {}
+[8.764621] (-) TimerEvent: {}
+[8.873556] (-) TimerEvent: {}
+[8.982366] (-) TimerEvent: {}
+[9.091175] (-) TimerEvent: {}
+[9.199740] (-) TimerEvent: {}
+[9.308842] (-) TimerEvent: {}
+[9.409326] (-) TimerEvent: {}
+[9.509940] (-) TimerEvent: {}
+[9.610951] (-) TimerEvent: {}
+[9.711714] (-) TimerEvent: {}
+[9.813177] (-) TimerEvent: {}
+[9.914075] (-) TimerEvent: {}
+[10.014679] (-) TimerEvent: {}
+[10.117131] (-) TimerEvent: {}
+[10.220375] (-) TimerEvent: {}
+[10.238318] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/src/frontend/feature_tracker.cpp:\x1b[m\x1b[K In member function \xe2\x80\x98\x1b[01m\x1b[Kvoid FeatureTracker::BfMatch(const cv::Mat&, const cv::Mat&, std::vector<cv::DMatch>&, float)\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[10.238758] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/src/frontend/feature_tracker.cpp:375:27:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kcomparison of integer expressions of different signedness: \xe2\x80\x98\x1b[01m\x1b[Ksize_t\x1b[m\x1b[K\xe2\x80\x99 {aka \xe2\x80\x98\x1b[01m\x1b[Klong unsigned int\x1b[m\x1b[K\xe2\x80\x99} and \xe2\x80\x98\x1b[01m\x1b[Kconst int\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wsign-compare\x07-Wsign-compare\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[10.238848] (slam_core) StderrLine: {'line': b'  375 |     for(size_t i1 = 0; \x1b[01;35m\x1b[Ki1 < desc1.rows\x1b[m\x1b[K; ++i1){\n'}
+[10.238895] (slam_core) StderrLine: {'line': b'      |                        \x1b[01;35m\x1b[K~~~^~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[10.238934] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/src/frontend/feature_tracker.cpp:376:23:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Knarrowing conversion of \xe2\x80\x98\x1b[01m\x1b[Ki1\x1b[m\x1b[K\xe2\x80\x99 from \xe2\x80\x98\x1b[01m\x1b[Ksize_t\x1b[m\x1b[K\xe2\x80\x99 {aka \xe2\x80\x98\x1b[01m\x1b[Klong unsigned int\x1b[m\x1b[K\xe2\x80\x99} to \xe2\x80\x98\x1b[01m\x1b[Kint\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wnarrowing\x07-Wnarrowing\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[10.238983] (slam_core) StderrLine: {'line': b'  376 |         cv::DMatch m1{\x1b[01;35m\x1b[Ki1\x1b[m\x1b[K, 0, 256};\n'}
+[10.239053] (slam_core) StderrLine: {'line': b'      |                       \x1b[01;35m\x1b[K^~\x1b[m\x1b[K\n'}
+[10.239098] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/src/frontend/feature_tracker.cpp:377:23:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Knarrowing conversion of \xe2\x80\x98\x1b[01m\x1b[Ki1\x1b[m\x1b[K\xe2\x80\x99 from \xe2\x80\x98\x1b[01m\x1b[Ksize_t\x1b[m\x1b[K\xe2\x80\x99 {aka \xe2\x80\x98\x1b[01m\x1b[Klong unsigned int\x1b[m\x1b[K\xe2\x80\x99} to \xe2\x80\x98\x1b[01m\x1b[Kint\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wnarrowing\x07-Wnarrowing\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[10.239138] (slam_core) StderrLine: {'line': b'  377 |         cv::DMatch m2{\x1b[01;35m\x1b[Ki1\x1b[m\x1b[K, 0, 256};\n'}
+[10.239170] (slam_core) StderrLine: {'line': b'      |                       \x1b[01;35m\x1b[K^~\x1b[m\x1b[K\n'}
+[10.239201] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/src/frontend/feature_tracker.cpp:379:31:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kcomparison of integer expressions of different signedness: \xe2\x80\x98\x1b[01m\x1b[Ksize_t\x1b[m\x1b[K\xe2\x80\x99 {aka \xe2\x80\x98\x1b[01m\x1b[Klong unsigned int\x1b[m\x1b[K\xe2\x80\x99} and \xe2\x80\x98\x1b[01m\x1b[Kconst int\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wsign-compare\x07-Wsign-compare\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[10.239235] (slam_core) StderrLine: {'line': b'  379 |         for(size_t i2 = 0; \x1b[01;35m\x1b[Ki2 < desc2.rows\x1b[m\x1b[K; ++i2){\n'}
+[10.239265] (slam_core) StderrLine: {'line': b'      |                            \x1b[01;35m\x1b[K~~~^~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[10.320614] (-) TimerEvent: {}
+[10.373103] (slam_core) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/visual_odometry.hpp:6\x1b[m\x1b[K,\n'}
+[10.373343] (slam_core) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/src/frontend/visual_odometry.cpp:1\x1b[m\x1b[K:\n'}
+[10.373405] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:\x1b[m\x1b[K In member function \xe2\x80\x98\x1b[01m\x1b[Kvirtual bool VertexPose::read(std::istream&)\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[10.373446] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:21:51:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kno return statement in function returning non-void [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreturn-type\x07-Wreturn-type\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[10.373488] (slam_core) StderrLine: {'line': b'   21 |   virtual bool read(std::istream &in) override {  \x1b[01;35m\x1b[K}\x1b[m\x1b[K\n'}
+[10.373523] (slam_core) StderrLine: {'line': b'      |                                                   \x1b[01;35m\x1b[K^\x1b[m\x1b[K\n'}
+[10.373556] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:21:35:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused parameter \xe2\x80\x98\x1b[01m\x1b[Kin\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter\x07-Wunused-parameter\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[10.373592] (slam_core) StderrLine: {'line': b'   21 |   virtual bool read(\x1b[01;35m\x1b[Kstd::istream &in\x1b[m\x1b[K) override {  }\n'}
+[10.373633] (slam_core) StderrLine: {'line': b'      |                     \x1b[01;35m\x1b[K~~~~~~~~~~~~~~^~\x1b[m\x1b[K\n'}
+[10.373663] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:\x1b[m\x1b[K In member function \xe2\x80\x98\x1b[01m\x1b[Kvirtual bool VertexPose::write(std::ostream&) const\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[10.373699] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:23:59:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kno return statement in function returning non-void [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreturn-type\x07-Wreturn-type\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[10.373730] (slam_core) StderrLine: {'line': b'   23 |   virtual bool write(std::ostream &out) const override {  \x1b[01;35m\x1b[K}\x1b[m\x1b[K\n'}
+[10.373764] (slam_core) StderrLine: {'line': b'      |                                                           \x1b[01;35m\x1b[K^\x1b[m\x1b[K\n'}
+[10.373794] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:23:36:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused parameter \xe2\x80\x98\x1b[01m\x1b[Kout\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter\x07-Wunused-parameter\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[10.373825] (slam_core) StderrLine: {'line': b'   23 |   virtual bool write(\x1b[01;35m\x1b[Kstd::ostream &out\x1b[m\x1b[K) const override {  }\n'}
+[10.373854] (slam_core) StderrLine: {'line': b'      |                      \x1b[01;35m\x1b[K~~~~~~~~~~~~~~^~~\x1b[m\x1b[K\n'}
+[10.376553] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:\x1b[m\x1b[K At global scope:\n'}
+[10.376796] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:28:34:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kextra \xe2\x80\x98\x1b[01m\x1b[K;\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wpedantic\x07-Wpedantic\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[10.376864] (slam_core) StderrLine: {'line': b'   28 |   EIGEN_MAKE_ALIGNED_OPERATOR_NEW\x1b[01;35m\x1b[K;\x1b[m\x1b[K\n'}
+[10.376895] (slam_core) StderrLine: {'line': b'      |                                  \x1b[01;35m\x1b[K^\x1b[m\x1b[K\n'}
+[10.376920] (slam_core) StderrLine: {'line': b'      |                                  \x1b[31m\x1b[K-\x1b[m\x1b[K\n'}
+[10.416304] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:\x1b[m\x1b[K In member function \xe2\x80\x98\x1b[01m\x1b[Kvirtual bool EdgeProjection::read(std::istream&)\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[10.416630] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:55:51:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kno return statement in function returning non-void [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreturn-type\x07-Wreturn-type\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[10.416763] (slam_core) StderrLine: {'line': b'   55 |   virtual bool read(std::istream &in) override {  \x1b[01;35m\x1b[K}\x1b[m\x1b[K\n'}
+[10.416838] (slam_core) StderrLine: {'line': b'      |                                                   \x1b[01;35m\x1b[K^\x1b[m\x1b[K\n'}
+[10.416893] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:55:35:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused parameter \xe2\x80\x98\x1b[01m\x1b[Kin\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter\x07-Wunused-parameter\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[10.416948] (slam_core) StderrLine: {'line': b'   55 |   virtual bool read(\x1b[01;35m\x1b[Kstd::istream &in\x1b[m\x1b[K) override {  }\n'}
+[10.417010] (slam_core) StderrLine: {'line': b'      |                     \x1b[01;35m\x1b[K~~~~~~~~~~~~~~^~\x1b[m\x1b[K\n'}
+[10.417056] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:\x1b[m\x1b[K In member function \xe2\x80\x98\x1b[01m\x1b[Kvirtual bool EdgeProjection::write(std::ostream&) const\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[10.417103] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:57:59:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kno return statement in function returning non-void [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreturn-type\x07-Wreturn-type\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[10.417148] (slam_core) StderrLine: {'line': b'   57 |   virtual bool write(std::ostream &out) const override {  \x1b[01;35m\x1b[K}\x1b[m\x1b[K\n'}
+[10.417192] (slam_core) StderrLine: {'line': b'      |                                                           \x1b[01;35m\x1b[K^\x1b[m\x1b[K\n'}
+[10.417233] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:57:36:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused parameter \xe2\x80\x98\x1b[01m\x1b[Kout\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter\x07-Wunused-parameter\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[10.417276] (slam_core) StderrLine: {'line': b'   57 |   virtual bool write(\x1b[01;35m\x1b[Kstd::ostream &out\x1b[m\x1b[K) const override {  }\n'}
+[10.417317] (slam_core) StderrLine: {'line': b'      |                      \x1b[01;35m\x1b[K~~~~~~~~~~~~~~^~~\x1b[m\x1b[K\n'}
+[10.421074] (-) TimerEvent: {}
+[10.433939] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/src/frontend/visual_odometry.cpp:\x1b[m\x1b[K In member function \xe2\x80\x98\x1b[01m\x1b[Kbool VisualOdometry::triangulation(const Frame&, Frame&, const std::vector<cv::DMatch>&, std::vector<std::shared_ptr<MapPoint> >&, bool)\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[10.434192] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/src/frontend/visual_odometry.cpp:170:18:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kcomparison of integer expressions of different signedness: \xe2\x80\x98\x1b[01m\x1b[Kint\x1b[m\x1b[K\xe2\x80\x99 and \xe2\x80\x98\x1b[01m\x1b[Kstd::vector<cv::DMatch>::size_type\x1b[m\x1b[K\xe2\x80\x99 {aka \xe2\x80\x98\x1b[01m\x1b[Klong unsigned int\x1b[m\x1b[K\xe2\x80\x99} [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wsign-compare\x07-Wsign-compare\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[10.434319] (slam_core) StderrLine: {'line': b'  170 |     for(int i=0;\x1b[01;35m\x1b[Ki<matches.size()\x1b[m\x1b[K;i++){\n'}
+[10.434457] (slam_core) StderrLine: {'line': b'      |                 \x1b[01;35m\x1b[K~^~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[10.521677] (-) TimerEvent: {}
+[10.601545] (slam_core) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/visual_odometry.hpp:6\x1b[m\x1b[K,\n'}
+[10.602064] (slam_core) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/frontend.hpp:6\x1b[m\x1b[K,\n'}
+[10.602241] (slam_core) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/src/slam_system.cpp:5\x1b[m\x1b[K:\n'}
+[10.602343] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:\x1b[m\x1b[K In member function \xe2\x80\x98\x1b[01m\x1b[Kvirtual bool VertexPose::read(std::istream&)\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[10.602527] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:21:51:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kno return statement in function returning non-void [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreturn-type\x07-Wreturn-type\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[10.602677] (slam_core) StderrLine: {'line': b'   21 |   virtual bool read(std::istream &in) override {  \x1b[01;35m\x1b[K}\x1b[m\x1b[K\n'}
+[10.602726] (slam_core) StderrLine: {'line': b'      |                                                   \x1b[01;35m\x1b[K^\x1b[m\x1b[K\n'}
+[10.602834] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:21:35:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused parameter \xe2\x80\x98\x1b[01m\x1b[Kin\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter\x07-Wunused-parameter\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[10.602879] (slam_core) StderrLine: {'line': b'   21 |   virtual bool read(\x1b[01;35m\x1b[Kstd::istream &in\x1b[m\x1b[K) override {  }\n'}
+[10.602908] (slam_core) StderrLine: {'line': b'      |                     \x1b[01;35m\x1b[K~~~~~~~~~~~~~~^~\x1b[m\x1b[K\n'}
+[10.602933] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:\x1b[m\x1b[K In member function \xe2\x80\x98\x1b[01m\x1b[Kvirtual bool VertexPose::write(std::ostream&) const\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[10.602958] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:23:59:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kno return statement in function returning non-void [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreturn-type\x07-Wreturn-type\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[10.602983] (slam_core) StderrLine: {'line': b'   23 |   virtual bool write(std::ostream &out) const override {  \x1b[01;35m\x1b[K}\x1b[m\x1b[K\n'}
+[10.603007] (slam_core) StderrLine: {'line': b'      |                                                           \x1b[01;35m\x1b[K^\x1b[m\x1b[K\n'}
+[10.603031] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:23:36:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused parameter \xe2\x80\x98\x1b[01m\x1b[Kout\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter\x07-Wunused-parameter\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[10.603057] (slam_core) StderrLine: {'line': b'   23 |   virtual bool write(\x1b[01;35m\x1b[Kstd::ostream &out\x1b[m\x1b[K) const override {  }\n'}
+[10.603080] (slam_core) StderrLine: {'line': b'      |                      \x1b[01;35m\x1b[K~~~~~~~~~~~~~~^~~\x1b[m\x1b[K\n'}
+[10.606678] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:\x1b[m\x1b[K At global scope:\n'}
+[10.606904] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:28:34:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kextra \xe2\x80\x98\x1b[01m\x1b[K;\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wpedantic\x07-Wpedantic\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[10.607008] (slam_core) StderrLine: {'line': b'   28 |   EIGEN_MAKE_ALIGNED_OPERATOR_NEW\x1b[01;35m\x1b[K;\x1b[m\x1b[K\n'}
+[10.607083] (slam_core) StderrLine: {'line': b'      |                                  \x1b[01;35m\x1b[K^\x1b[m\x1b[K\n'}
+[10.607144] (slam_core) StderrLine: {'line': b'      |                                  \x1b[31m\x1b[K-\x1b[m\x1b[K\n'}
+[10.621947] (-) TimerEvent: {}
+[10.642507] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:\x1b[m\x1b[K In member function \xe2\x80\x98\x1b[01m\x1b[Kvirtual bool EdgeProjection::read(std::istream&)\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[10.642750] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:55:51:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kno return statement in function returning non-void [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreturn-type\x07-Wreturn-type\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[10.642810] (slam_core) StderrLine: {'line': b'   55 |   virtual bool read(std::istream &in) override {  \x1b[01;35m\x1b[K}\x1b[m\x1b[K\n'}
+[10.642849] (slam_core) StderrLine: {'line': b'      |                                                   \x1b[01;35m\x1b[K^\x1b[m\x1b[K\n'}
+[10.642883] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:55:35:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused parameter \xe2\x80\x98\x1b[01m\x1b[Kin\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter\x07-Wunused-parameter\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[10.642921] (slam_core) StderrLine: {'line': b'   55 |   virtual bool read(\x1b[01;35m\x1b[Kstd::istream &in\x1b[m\x1b[K) override {  }\n'}
+[10.642954] (slam_core) StderrLine: {'line': b'      |                     \x1b[01;35m\x1b[K~~~~~~~~~~~~~~^~\x1b[m\x1b[K\n'}
+[10.642986] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:\x1b[m\x1b[K In member function \xe2\x80\x98\x1b[01m\x1b[Kvirtual bool EdgeProjection::write(std::ostream&) const\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[10.643021] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:57:59:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kno return statement in function returning non-void [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreturn-type\x07-Wreturn-type\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[10.643052] (slam_core) StderrLine: {'line': b'   57 |   virtual bool write(std::ostream &out) const override {  \x1b[01;35m\x1b[K}\x1b[m\x1b[K\n'}
+[10.643083] (slam_core) StderrLine: {'line': b'      |                                                           \x1b[01;35m\x1b[K^\x1b[m\x1b[K\n'}
+[10.643112] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:57:36:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused parameter \xe2\x80\x98\x1b[01m\x1b[Kout\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter\x07-Wunused-parameter\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[10.643143] (slam_core) StderrLine: {'line': b'   57 |   virtual bool write(\x1b[01;35m\x1b[Kstd::ostream &out\x1b[m\x1b[K) const override {  }\n'}
+[10.643174] (slam_core) StderrLine: {'line': b'      |                      \x1b[01;35m\x1b[K~~~~~~~~~~~~~~^~~\x1b[m\x1b[K\n'}
+[10.722234] (-) TimerEvent: {}
+[10.822828] (-) TimerEvent: {}
+[10.925548] (-) TimerEvent: {}
+[11.027853] (-) TimerEvent: {}
+[11.129351] (-) TimerEvent: {}
+[11.229918] (-) TimerEvent: {}
+[11.334913] (-) TimerEvent: {}
+[11.435679] (-) TimerEvent: {}
+[11.537234] (-) TimerEvent: {}
+[11.645401] (-) TimerEvent: {}
+[11.746005] (-) TimerEvent: {}
+[11.848850] (-) TimerEvent: {}
+[11.956685] (-) TimerEvent: {}
+[12.057151] (-) TimerEvent: {}
+[12.157723] (-) TimerEvent: {}
+[12.259841] (-) TimerEvent: {}
+[12.363309] (-) TimerEvent: {}
+[12.471576] (-) TimerEvent: {}
+[12.572800] (-) TimerEvent: {}
+[12.679080] (-) TimerEvent: {}
+[12.787453] (-) TimerEvent: {}
+[12.888665] (-) TimerEvent: {}
+[12.997028] (-) TimerEvent: {}
+[13.097880] (-) TimerEvent: {}
+[13.202050] (-) TimerEvent: {}
+[13.303425] (-) TimerEvent: {}
+[13.408979] (-) TimerEvent: {}
+[13.510872] (-) TimerEvent: {}
+[13.619171] (-) TimerEvent: {}
+[13.722060] (-) TimerEvent: {}
+[13.822732] (-) TimerEvent: {}
+[13.924430] (-) TimerEvent: {}
+[14.028698] (-) TimerEvent: {}
+[14.131783] (-) TimerEvent: {}
+[14.156018] (slam_core) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/usr/lib/gcc/x86_64-linux-gnu/11/include/smmintrin.h:812\x1b[m\x1b[K,\n'}
+[14.156411] (slam_core) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/usr/lib/gcc/x86_64-linux-gnu/11/include/nmmintrin.h:31\x1b[m\x1b[K,\n'}
+[14.156470] (slam_core) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/feature_tracker.hpp:4\x1b[m\x1b[K,\n'}
+[14.156516] (slam_core) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/src/frontend/feature_tracker.cpp:1\x1b[m\x1b[K:\n'}
+[14.156553] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/lib/gcc/x86_64-linux-gnu/11/include/popcntintrin.h:35:1:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Kinlining failed in call to \xe2\x80\x98\x1b[01m\x1b[Kalways_inline\x1b[m\x1b[K\xe2\x80\x99 \xe2\x80\x98\x1b[01m\x1b[Kint _mm_popcnt_u32(unsigned int)\x1b[m\x1b[K\xe2\x80\x99: target specific option mismatch\n'}
+[14.156593] (slam_core) StderrLine: {'line': b'   35 | \x1b[01;31m\x1b[K_mm_popcnt_u32\x1b[m\x1b[K (unsigned int __X)\n'}
+[14.156626] (slam_core) StderrLine: {'line': b'      | \x1b[01;31m\x1b[K^~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[14.156658] (slam_core) StderrLine: {'line': b'\x1b[01m\x1b[K/home/dongjae/slambook_ws/src/slam_core/src/frontend/feature_tracker.cpp:383:43:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcalled from here\n'}
+[14.156691] (slam_core) StderrLine: {'line': b'  383 |                 distance += \x1b[01;36m\x1b[K_mm_popcnt_u32(d1[k] ^ d2[k])\x1b[m\x1b[K;\n'}
+[14.156722] (slam_core) StderrLine: {'line': b'      |                             \x1b[01;36m\x1b[K~~~~~~~~~~~~~~^~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[14.190339] (slam_core) StderrLine: {'line': b'gmake[2]: *** [CMakeFiles/slam_system.dir/build.make:90: CMakeFiles/slam_system.dir/src/frontend/feature_tracker.cpp.o] Error 1\n'}
+[14.190580] (slam_core) StderrLine: {'line': b'gmake[2]: *** Waiting for unfinished jobs....\n'}
+[14.235379] (-) TimerEvent: {}
+[14.337799] (-) TimerEvent: {}
+[14.445143] (-) TimerEvent: {}
+[14.549016] (-) TimerEvent: {}
+[14.657219] (-) TimerEvent: {}
+[14.762118] (-) TimerEvent: {}
+[14.865090] (-) TimerEvent: {}
+[14.970645] (-) TimerEvent: {}
+[15.078825] (-) TimerEvent: {}
+[15.179503] (-) TimerEvent: {}
+[15.283653] (-) TimerEvent: {}
+[15.390699] (-) TimerEvent: {}
+[15.491601] (-) TimerEvent: {}
+[15.595923] (-) TimerEvent: {}
+[15.699587] (-) TimerEvent: {}
+[15.802063] (-) TimerEvent: {}
+[15.902719] (-) TimerEvent: {}
+[16.006754] (-) TimerEvent: {}
+[16.108761] (-) TimerEvent: {}
+[16.213087] (-) TimerEvent: {}
+[16.319218] (-) TimerEvent: {}
+[16.420089] (-) TimerEvent: {}
+[16.520649] (-) TimerEvent: {}
+[16.628906] (-) TimerEvent: {}
+[16.737343] (-) TimerEvent: {}
+[16.845685] (-) TimerEvent: {}
+[16.953859] (-) TimerEvent: {}
+[17.062088] (-) TimerEvent: {}
+[17.163760] (-) TimerEvent: {}
+[17.272005] (-) TimerEvent: {}
+[17.372573] (-) TimerEvent: {}
+[17.473090] (-) TimerEvent: {}
+[17.574912] (-) TimerEvent: {}
+[17.676535] (-) TimerEvent: {}
+[17.779218] (-) TimerEvent: {}
+[17.880730] (-) TimerEvent: {}
+[17.981283] (-) TimerEvent: {}
+[18.081897] (-) TimerEvent: {}
+[18.183382] (-) TimerEvent: {}
+[18.285934] (-) TimerEvent: {}
+[18.387904] (-) TimerEvent: {}
+[18.488767] (-) TimerEvent: {}
+[18.591816] (-) TimerEvent: {}
+[18.693738] (-) TimerEvent: {}
+[18.796646] (-) TimerEvent: {}
+[18.898370] (-) TimerEvent: {}
+[18.999697] (-) TimerEvent: {}
+[19.103137] (-) TimerEvent: {}
+[19.206464] (-) TimerEvent: {}
+[19.309116] (-) TimerEvent: {}
+[19.412145] (-) TimerEvent: {}
+[19.515533] (-) TimerEvent: {}
+[19.617745] (-) TimerEvent: {}
+[19.721091] (-) TimerEvent: {}
+[19.824163] (-) TimerEvent: {}
+[19.926957] (-) TimerEvent: {}
+[20.027860] (-) TimerEvent: {}
+[20.130608] (-) TimerEvent: {}
+[20.233771] (-) TimerEvent: {}
+[20.337196] (-) TimerEvent: {}
+[20.440186] (-) TimerEvent: {}
+[20.543477] (-) TimerEvent: {}
+[20.645993] (-) TimerEvent: {}
+[20.747989] (-) TimerEvent: {}
+[20.850568] (-) TimerEvent: {}
+[20.953277] (-) TimerEvent: {}
+[21.056432] (-) TimerEvent: {}
+[21.158975] (-) TimerEvent: {}
+[21.261159] (-) TimerEvent: {}
+[21.363513] (-) TimerEvent: {}
+[21.464330] (-) TimerEvent: {}
+[21.568862] (-) TimerEvent: {}
+[21.677754] (-) TimerEvent: {}
+[21.786871] (-) TimerEvent: {}
+[21.895763] (-) TimerEvent: {}
+[22.004661] (-) TimerEvent: {}
+[22.105325] (-) TimerEvent: {}
+[22.211841] (-) TimerEvent: {}
+[22.315611] (-) TimerEvent: {}
+[22.424554] (-) TimerEvent: {}
+[22.525082] (-) TimerEvent: {}
+[22.628417] (-) TimerEvent: {}
+[22.737434] (-) TimerEvent: {}
+[22.846510] (-) TimerEvent: {}
+[22.955313] (-) TimerEvent: {}
+[23.064300] (-) TimerEvent: {}
+[23.171551] (-) TimerEvent: {}
+[23.280348] (-) TimerEvent: {}
+[23.389152] (-) TimerEvent: {}
+[23.497955] (-) TimerEvent: {}
+[23.599046] (-) TimerEvent: {}
+[23.707912] (-) TimerEvent: {}
+[23.815568] (-) TimerEvent: {}
+[23.924383] (-) TimerEvent: {}
+[24.033207] (-) TimerEvent: {}
+[24.133733] (-) TimerEvent: {}
+[24.238399] (-) TimerEvent: {}
+[24.347333] (-) TimerEvent: {}
+[24.456237] (-) TimerEvent: {}
+[24.565273] (-) TimerEvent: {}
+[24.672046] (-) TimerEvent: {}
+[24.781496] (-) TimerEvent: {}
+[24.890445] (-) TimerEvent: {}
+[24.999296] (-) TimerEvent: {}
+[25.100730] (-) TimerEvent: {}
+[25.209620] (-) TimerEvent: {}
+[25.318526] (-) TimerEvent: {}
+[25.425562] (-) TimerEvent: {}
+[25.534390] (-) TimerEvent: {}
+[25.638715] (-) TimerEvent: {}
+[25.740359] (-) TimerEvent: {}
+[25.845137] (-) TimerEvent: {}
+[25.953944] (-) TimerEvent: {}
+[26.062957] (-) TimerEvent: {}
+[26.170028] (-) TimerEvent: {}
+[26.272276] (-) TimerEvent: {}
+[26.381211] (-) TimerEvent: {}
+[26.490031] (-) TimerEvent: {}
+[26.598987] (-) TimerEvent: {}
+[26.707868] (-) TimerEvent: {}
+[26.808448] (-) TimerEvent: {}
+[26.909345] (-) TimerEvent: {}
+[27.014972] (-) TimerEvent: {}
+[27.115737] (-) TimerEvent: {}
+[27.217387] (-) TimerEvent: {}
+[27.320825] (-) TimerEvent: {}
+[27.421349] (-) TimerEvent: {}
+[27.521901] (-) TimerEvent: {}
+[27.623225] (-) TimerEvent: {}
+[27.726492] (-) TimerEvent: {}
+[27.827147] (-) TimerEvent: {}
+[27.935439] (-) TimerEvent: {}
+[28.043562] (-) TimerEvent: {}
+[28.147313] (-) TimerEvent: {}
+[28.248214] (-) TimerEvent: {}
+[28.350921] (-) TimerEvent: {}
+[28.452755] (-) TimerEvent: {}
+[28.555501] (-) TimerEvent: {}
+[28.657983] (-) TimerEvent: {}
+[28.758660] (-) TimerEvent: {}
+[28.861501] (-) TimerEvent: {}
+[28.964750] (-) TimerEvent: {}
+[29.068070] (-) TimerEvent: {}
+[29.169949] (-) TimerEvent: {}
+[29.278737] (-) TimerEvent: {}
+[29.381983] (-) TimerEvent: {}
+[29.490776] (-) TimerEvent: {}
+[29.594816] (-) TimerEvent: {}
+[29.697928] (-) TimerEvent: {}
+[29.798541] (-) TimerEvent: {}
+[29.899348] (-) TimerEvent: {}
+[30.003310] (-) TimerEvent: {}
+[30.106890] (-) TimerEvent: {}
+[30.210282] (-) TimerEvent: {}
+[30.210964] (slam_core) StderrLine: {'line': b'gmake[1]: *** [CMakeFiles/Makefile2:137: CMakeFiles/slam_system.dir/all] Error 2\n'}
+[30.211599] (slam_core) StderrLine: {'line': b'gmake: *** [Makefile:146: all] Error 2\n'}
+[30.216694] (slam_core) CommandEnded: {'returncode': 2}
+[30.229490] (slam_core) JobEnded: {'identifier': 'slam_core', 'rc': 2}
+[30.240713] (-) EventReactorShutdown: {}

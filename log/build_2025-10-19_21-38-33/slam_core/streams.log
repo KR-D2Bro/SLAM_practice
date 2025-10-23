@@ -1,0 +1,26 @@
+[0.016s] Invoking command in '/home/dongjae/slambook_ws/build/slam_core': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/dongjae/slambook_ws/build/slam_core -- -j16 -l16
+[0.056s] [35m[1mConsolidate compiler generated dependencies of target slam_system[0m
+[0.076s] [ 20%] [32mBuilding CXX object CMakeFiles/slam_system.dir/src/frontend/frontend.cpp.o[0m
+[15.453s] [ 40%] [32m[1mLinking CXX executable slam_system[0m
+[17.502s] [100%] Built target slam_system
+[17.513s] Invoked command in '/home/dongjae/slambook_ws/build/slam_core' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/dongjae/slambook_ws/build/slam_core -- -j16 -l16
+[17.521s] Invoking command in '/home/dongjae/slambook_ws/build/slam_core': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/dongjae/slambook_ws/build/slam_core
+[17.525s] -- Install configuration: "Debug"
+[17.526s] -- Installing: /home/dongjae/slambook_ws/install/slam_core/lib/slam_core/slam_system
+[17.561s] -- Set runtime path of "/home/dongjae/slambook_ws/install/slam_core/lib/slam_core/slam_system" to ""
+[17.561s] -- Up-to-date: /home/dongjae/slambook_ws/install/slam_core/share/ament_index/resource_index/package_run_dependencies/slam_core
+[17.561s] -- Up-to-date: /home/dongjae/slambook_ws/install/slam_core/share/ament_index/resource_index/parent_prefix_path/slam_core
+[17.561s] -- Up-to-date: /home/dongjae/slambook_ws/install/slam_core/share/slam_core/environment/ament_prefix_path.sh
+[17.561s] -- Installing: /home/dongjae/slambook_ws/install/slam_core/share/slam_core/environment/ament_prefix_path.dsv
+[17.563s] -- Up-to-date: /home/dongjae/slambook_ws/install/slam_core/share/slam_core/environment/path.sh
+[17.563s] -- Installing: /home/dongjae/slambook_ws/install/slam_core/share/slam_core/environment/path.dsv
+[17.563s] -- Up-to-date: /home/dongjae/slambook_ws/install/slam_core/share/slam_core/local_setup.bash
+[17.563s] -- Up-to-date: /home/dongjae/slambook_ws/install/slam_core/share/slam_core/local_setup.sh
+[17.563s] -- Up-to-date: /home/dongjae/slambook_ws/install/slam_core/share/slam_core/local_setup.zsh
+[17.563s] -- Installing: /home/dongjae/slambook_ws/install/slam_core/share/slam_core/local_setup.dsv
+[17.564s] -- Installing: /home/dongjae/slambook_ws/install/slam_core/share/slam_core/package.dsv
+[17.564s] -- Up-to-date: /home/dongjae/slambook_ws/install/slam_core/share/ament_index/resource_index/packages/slam_core
+[17.564s] -- Up-to-date: /home/dongjae/slambook_ws/install/slam_core/share/slam_core/cmake/slam_coreConfig.cmake
+[17.565s] -- Up-to-date: /home/dongjae/slambook_ws/install/slam_core/share/slam_core/cmake/slam_coreConfig-version.cmake
+[17.565s] -- Up-to-date: /home/dongjae/slambook_ws/install/slam_core/share/slam_core/package.xml
+[17.567s] Invoked command in '/home/dongjae/slambook_ws/build/slam_core' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/dongjae/slambook_ws/build/slam_core

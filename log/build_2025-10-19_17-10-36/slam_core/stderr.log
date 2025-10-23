@@ -1,0 +1,77 @@
+[33mCMake Warning (dev) at /usr/share/cmake-3.22/Modules/FindOpenGL.cmake:315 (message):
+  Policy CMP0072 is not set: FindOpenGL prefers GLVND by default when
+  available.  Run "cmake --help-policy CMP0072" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+
+  FindOpenGL found both a legacy GL library:
+
+    OPENGL_gl_LIBRARY: /usr/lib/x86_64-linux-gnu/libGL.so
+
+  and GLVND libraries for OpenGL and GLX:
+
+    OPENGL_opengl_LIBRARY: /usr/lib/x86_64-linux-gnu/libOpenGL.so
+    OPENGL_glx_LIBRARY: /usr/lib/x86_64-linux-gnu/libGLX.so
+
+  OpenGL_GL_PREFERENCE has not been set to "GLVND" or "LEGACY", so for
+  compatibility with CMake 3.10 and below the legacy GL library will be used.
+Call Stack (most recent call first):
+  /usr/share/cmake-3.22/Modules/CMakeFindDependencyMacro.cmake:47 (find_package)
+  /opt/ros/humble/lib/cmake/g2o/g2oConfig.cmake:4 (find_dependency)
+  CMakeLists.txt:17 (find_package)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+[0m
+In file included from [01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/visual_odometry.hpp:6[m[K,
+                 from [01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/frontend.hpp:6[m[K,
+                 from [01m[K/home/dongjae/slambook_ws/src/slam_core/src/frontend/frontend.cpp:1[m[K:
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:[m[K In member function ‘[01m[Kvirtual bool VertexPose::read(std::istream&)[m[K’:
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:21:51:[m[K [01;35m[Kwarning: [m[Kno return statement in function returning non-void [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreturn-type-Wreturn-type]8;;[m[K]
+   21 |   virtual bool read(std::istream &in) override {  [01;35m[K}[m[K
+      |                                                   [01;35m[K^[m[K
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:21:35:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kin[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+   21 |   virtual bool read([01;35m[Kstd::istream &in[m[K) override {  }
+      |                     [01;35m[K~~~~~~~~~~~~~~^~[m[K
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:[m[K In member function ‘[01m[Kvirtual bool VertexPose::write(std::ostream&) const[m[K’:
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:23:59:[m[K [01;35m[Kwarning: [m[Kno return statement in function returning non-void [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreturn-type-Wreturn-type]8;;[m[K]
+   23 |   virtual bool write(std::ostream &out) const override {  [01;35m[K}[m[K
+      |                                                           [01;35m[K^[m[K
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:23:36:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kout[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+   23 |   virtual bool write([01;35m[Kstd::ostream &out[m[K) const override {  }
+      |                      [01;35m[K~~~~~~~~~~~~~~^~~[m[K
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:[m[K At global scope:
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:28:34:[m[K [01;35m[Kwarning: [m[Kextra ‘[01m[K;[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wpedantic-Wpedantic]8;;[m[K]
+   28 |   EIGEN_MAKE_ALIGNED_OPERATOR_NEW[01;35m[K;[m[K
+      |                                  [01;35m[K^[m[K
+      |                                  [31m[K-[m[K
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:[m[K In member function ‘[01m[Kvirtual bool EdgeProjection::read(std::istream&)[m[K’:
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:55:51:[m[K [01;35m[Kwarning: [m[Kno return statement in function returning non-void [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreturn-type-Wreturn-type]8;;[m[K]
+   55 |   virtual bool read(std::istream &in) override {  [01;35m[K}[m[K
+      |                                                   [01;35m[K^[m[K
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:55:35:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kin[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+   55 |   virtual bool read([01;35m[Kstd::istream &in[m[K) override {  }
+      |                     [01;35m[K~~~~~~~~~~~~~~^~[m[K
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:[m[K In member function ‘[01m[Kvirtual bool EdgeProjection::write(std::ostream&) const[m[K’:
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:57:59:[m[K [01;35m[Kwarning: [m[Kno return statement in function returning non-void [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreturn-type-Wreturn-type]8;;[m[K]
+   57 |   virtual bool write(std::ostream &out) const override {  [01;35m[K}[m[K
+      |                                                           [01;35m[K^[m[K
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/G2oTypes.hpp:57:36:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kout[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+   57 |   virtual bool write([01;35m[Kstd::ostream &out[m[K) const override {  }
+      |                      [01;35m[K~~~~~~~~~~~~~~^~~[m[K
+[01m[K/home/dongjae/slambook_ws/src/slam_core/src/frontend/frontend.cpp:[m[K In member function ‘[01m[Kint8_t Frontend::run(cv::Mat&)[m[K’:
+[01m[K/home/dongjae/slambook_ws/src/slam_core/src/frontend/frontend.cpp:53:68:[m[K [01;31m[Kerror: [m[K‘[01m[Kclass VisualOdometry[m[K’ has no member named ‘[01m[Kpose_inlier_mask[m[K’; did you mean ‘[01m[Kstd::vector<unsigned char> VisualOdometry::pose_inlier_mask_[m[K’? (not accessible from this context)
+   53 |                 vector<uchar> pose_inlier_mask = visual_odometry_->[01;31m[Kpose_inlier_mask[m[K();
+      |                                                                    [01;31m[K^~~~~~~~~~~~~~~~[m[K
+In file included from [01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/frontend.hpp:6[m[K,
+                 from [01m[K/home/dongjae/slambook_ws/src/slam_core/src/frontend/frontend.cpp:1[m[K:
+[01m[K/home/dongjae/slambook_ws/src/slam_core/include/slam_core/visual_odometry.hpp:42:28:[m[K [01;36m[Knote: [m[Kdeclared private here
+   42 |         std::vector<uchar> [01;36m[Kpose_inlier_mask_[m[K;
+      |                            [01;36m[K^~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/dongjae/slambook_ws/src/slam_core/src/frontend/frontend.cpp:[m[K In member function ‘[01m[Kint Frontend::add_keyframe(std::shared_ptr<Frame>&, bool, bool)[m[K’:
+[01m[K/home/dongjae/slambook_ws/src/slam_core/src/frontend/frontend.cpp:91:64:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[KisFirst[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+   91 | int Frontend::add_keyframe(std::shared_ptr<Frame> &frame, [01;35m[Kbool isFirst[m[K, bool isInit){
+      |                                                           [01;35m[K~~~~~^~~~~~~[m[K
+[01m[K/home/dongjae/slambook_ws/src/slam_core/src/frontend/frontend.cpp:91:78:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[KisInit[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+   91 | int Frontend::add_keyframe(std::shared_ptr<Frame> &frame, bool isFirst, [01;35m[Kbool isInit[m[K){
+      |                                                                         [01;35m[K~~~~~^~~~~~[m[K
+gmake[2]: *** [CMakeFiles/slam_system.dir/build.make:90: CMakeFiles/slam_system.dir/src/frontend/frontend.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:137: CMakeFiles/slam_system.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2
