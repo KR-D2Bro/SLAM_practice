@@ -1,9 +1,0 @@
-[0.012s] Invoking command in '/home/dongjae/slambook_ws/build/slam_core': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/dongjae/slambook_ws/build/slam_core -- -j16 -l16
-[0.054s] [35m[1mConsolidate compiler generated dependencies of target slam_system[0m
-[0.077s] [ 40%] [32mBuilding CXX object CMakeFiles/slam_system.dir/src/frontend/frontend.cpp.o[0m
-[0.077s] [ 40%] [32mBuilding CXX object CMakeFiles/slam_system.dir/src/slam_system.cpp.o[0m
-[1.301s] gmake[2]: *** [CMakeFiles/slam_system.dir/build.make:76: CMakeFiles/slam_system.dir/src/slam_system.cpp.o] Interrupt
-[1.301s] gmake[2]: *** [CMakeFiles/slam_system.dir/build.make:118: CMakeFiles/slam_system.dir/src/frontend/frontend.cpp.o] Interrupt
-[1.302s] gmake[1]: *** [CMakeFiles/Makefile2:137: CMakeFiles/slam_system.dir/all] Interrupt
-[1.302s] gmake: *** [Makefile:146: all] Interrupt
-[1.310s] Invoked command in '/home/dongjae/slambook_ws/build/slam_core' returned '-2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/dongjae/slambook_ws/build/slam_core -- -j16 -l16
