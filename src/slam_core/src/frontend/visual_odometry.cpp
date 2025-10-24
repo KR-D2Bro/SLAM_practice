@@ -292,62 +292,6 @@ bool VisualOdometry::rescaleInitialMap(std::vector<Point3d> &world_points, Sophu
     return true;
 }
 
-bool VisualOdometry::PnPcompute(const VecVector3d &points_3d, const VecVector2d &points_2d, Frame &cur_frame){
-    const int iterations = 10;
-    double cost = 0, lastCost = 0;
-    Sophus::SE3d pose_esti = cur_frame.get_pose().inverse();
-    // Sophus::SE3d pose_esti = cur_frame.get_pose();
-
-    for(int iter = 0; iter < iterations; iter++){
-        Eigen::Matrix<double, 6, 6> H = Eigen::Matrix<double, 6, 6>::Zero();
-        Eigen::Matrix<double, 6, 1> b = Eigen::Matrix<double, 6, 1>::Zero();
-        cost = 0;
-        double fx = K.at<double>(0, 0);
-        double fy = K.at<double>(1, 1);
-        double cx = K.at<double>(0, 2);
-        double cy = K.at<double>(1, 2);
-
-        for(int i = 0; i < points_3d.size(); i++){
-            Vec3 pc = pose_esti * points_3d[i];
-            double inv_z = 1.0 / pc.z();
-            double inv_z2 =inv_z * inv_z;
-            Vec2 proj(fx * pc[0] / pc[2] + cx, fy * pc[1] / pc[2] + cy);
-
-            Vec2 e = points_2d[i] - proj;
-
-            cost += e.squaredNorm();
-            Eigen::Matrix<double, 2, 6> J;
-            J << -fx * inv_z, 0, fx * pc[0] * inv_z2, fx * pc[0] * pc[1] * inv_z2, -fx - fx * pc[0] * pc[0] * inv_z2, fx * pc[1] * inv_z,
-                 0, -fy * inv_z, fy * pc[1] * inv_z2, fy + fy * pc[1] * pc[1] * inv_z2, -fy * pc[0] * pc[1] * inv_z2, -fy * pc[0] * inv_z;
-
-            H += J.transpose() * J;
-            b += -J.transpose() * e;
-        }
-
-        Eigen::Matrix<double, 6, 1> dx = H.ldlt().solve(b);
-
-        if(isnan(dx[0])){
-            cout << "result is nan!" << endl;
-            break;
-        }
-
-        if(iter > 0 && cost > lastCost){
-            cout << "cost increased: " << cost << ", break." << endl;
-            break;
-        }
-
-        pose_esti = Sophus::SE3d::exp(dx) * pose_esti;
-        lastCost = cost;
-
-        cout << "iteration " << iter << " cost=" << cost << endl;
-        if(dx.norm() < 1e-6)
-            break;
-    }
-    cout << "pose by PnP = \n" << pose_esti.matrix() << endl;
-    cur_frame.set_pose(pose_esti.inverse());
-    // cur_frame.set_pose(pose_esti);
-    return true;
-}
 
 bool VisualOdometry::PnPcompute_g2o(const VecVector3d &points_3d, const VecVector2d &points_2d, Frame &cur_frame){
     typedef g2o::BlockSolver<g2o::BlockSolverTraits<6, Eigen::Dynamic>> BlockSolverType;   // pose is 6, landmark is 3

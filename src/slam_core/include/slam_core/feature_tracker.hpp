@@ -23,7 +23,7 @@ class FeatureTracker
         std::vector<cv::DMatch> matches;
     private:
         void ComputeORB(cv::Mat &img, std::vector<cv::KeyPoint> &key_points, std::vector<DescType> &descriptors);
-        void BfMatch(const cv::Mat &desc1, const cv::Mat &desc_2, std::vector<cv::DMatch> &matches, float ratio = 0.6);
+        void BfMatch(const cv::Mat &desc1, const cv::Mat &desc_2, std::vector<cv::DMatch> &matches, float ratio = 0.7);
         
 
         cv::Ptr<cv::FeatureDetector> detector_;

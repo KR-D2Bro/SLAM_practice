@@ -452,12 +452,12 @@ bool FeatureTracker::match_3d_2d(const vector<shared_ptr<MapPoint>> &map_points,
     // matcher_->match(cur_frame.descriptors_, descriptors_map, all_matches);
     FeatureTracker::BfMatch(cur_frame.descriptors_, descriptors_map, all_matches);
 
-    if(matches.size() < 15){
-        cout << "Not enough good matches: " << matches.size() << endl;
+    if(all_matches.size() < 15){
+        cout << "Not enough good matches: " << all_matches.size() << endl;
         return false;
     }
 
-    for(const auto &m: matches){
+    for(const auto &m: all_matches){
         points_3d.push_back(points_3d_all[m.trainIdx]);
 
         Point2f p2d = cur_frame.keypoints_[m.queryIdx].pt;
