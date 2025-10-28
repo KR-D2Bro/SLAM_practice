@@ -16,13 +16,13 @@ class VisualOdometry
         bool triangulation(const Frame &frame_1, Frame &frame_2, 
                             const std::vector<cv::DMatch> &matches, std::vector<std::shared_ptr<MapPoint>> &points, bool isFirst = false);
         
-        bool pose_estimate_2d2d(const Frame &frame_1, const Frame &frame_2, const std::vector<cv::DMatch> matches);
+        bool pose_estimate_2d2d(const Frame &frame_1, const Frame &frame_2, const std::vector<cv::DMatch> &matches);
 
         bool PnPcompute(const VecVector3d &points_3d, const VecVector2d &points_2d, Frame &cur_frame);
 
         bool PnPcompute_g2o(const VecVector3d &points_3d, const VecVector2d &points_2d, Frame &cur_frame);
 
-        bool check_parrallax(const Frame &frame_1, const Frame &frame_2, const std::vector<cv::DMatch> matches, double min_parallax_deg);
+        bool check_parrallax(const Frame &frame_1, const Frame &frame_2, const std::vector<cv::DMatch> &matches, double min_parallax_deg);
         
         const std::vector<uchar>& pose_inlier_mask() const { return pose_inlier_mask_; }
 

@@ -14,16 +14,16 @@ class FeatureTracker
 
         void detectAndCompute(Frame &frame);
         
-        void track_feature(Frame &frame_1, Frame &frame_2); 
+        void track_feature(Frame &frame_1, Frame &frame_2, std::vector<cv::DMatch> &matches); 
         
         cv::Mat undistort(cv::Mat &img);
 
-        bool match_3d_2d(const std::vector<std::shared_ptr<MapPoint>> &map_points, const Frame &cur_frame, VecVector3d &points_3d, VecVector2d &points_2d);
+        bool match_3d_2d(const std::vector<std::shared_ptr<MapPoint>> &map_points, const Frame &cur_frame, VecVector3d &points_3d, VecVector2d &points_2d, std::vector<cv::DMatch> &matches);
 
-        std::vector<cv::DMatch> matches;
+        // std::vector<cv::DMatch> matches;
     private:
         void ComputeORB(cv::Mat &img, std::vector<cv::KeyPoint> &key_points, std::vector<DescType> &descriptors);
-        void BfMatch(const cv::Mat &desc1, const cv::Mat &desc_2, std::vector<cv::DMatch> &matches, float ratio = 0.7);
+        void BfMatch(const cv::Mat &desc1, const cv::Mat &desc_2, std::vector<cv::DMatch> &matches, float ratio = 0.6);
         
 
         cv::Ptr<cv::FeatureDetector> detector_;

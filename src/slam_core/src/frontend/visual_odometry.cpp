@@ -12,7 +12,7 @@ Sophus::SE3d VisualOdometry::get_rel_pose(){
     return T_.inverse();
 }
 
-bool VisualOdometry::pose_estimate_2d2d(const Frame &frame_1, const Frame &frame_2, const std::vector<cv::DMatch> matches){
+bool VisualOdometry::pose_estimate_2d2d(const Frame &frame_1, const Frame &frame_2, const std::vector<cv::DMatch> &matches){
     vector<Point2f> points1, n_points1;
     vector<Point2f> points2, n_points2;
 
@@ -161,9 +161,6 @@ bool VisualOdometry::triangulation(const Frame &frame_1, Frame &frame_2,
     T21 = K * T21;
 
     const bool has_pose_mask = !pose_inlier_mask_.empty();
-    if(has_pose_mask){
-        cout << "Pose inlier mask size mismatch, ignoring mask" << endl;
-    }
 
     std::vector<int> inlier_match_indices;
     std::vector<cv::Point2f> pts_1, pts_2;
@@ -212,30 +209,7 @@ bool VisualOdometry::triangulation(const Frame &frame_1, Frame &frame_2,
             }
         }
     }
-
     cout << "Valid points after cheirality check: " << valid_points_local.size() << endl;
-
-    std::vector<double> parallaxes;
-    // 카메라 1의 중심은 원점 (0,0,0)
-    Eigen::Vector3d O1(0, 0, 0);
-    // 카메라 2의 중심은 T_의 역행렬의 translation
-    Eigen::Vector3d O2 = T21_se3.inverse().translation();
-     
-    for(const auto& p_local : valid_points_local){
-       Eigen::Vector3d p(p_local.x, p_local.y, p_local.z);
-       Eigen::Vector3d v1 = p - O1;
-       Eigen::Vector3d v2 = p - O2;
-    
-       double cos_parallax = v1.dot(v2) / (v1.norm() * v2.norm());
-       // acos의 입력은 [-1, 1] 범위여야 함
-       cos_parallax = std::max(-1.0, std::min(1.0, cos_parallax));
-       double parallax_rad = std::acos(cos_parallax);
-       parallaxes.push_back(parallax_rad * 180.0 / M_PI); // degree로 변환
-    }
-    
-    if (parallaxes.empty()) {
-       return false; // 유효 포인트 없음
-    }
     
     if(isFirst){
         rescaleInitialMap(valid_points_local, T21_se3);
@@ -350,7 +324,7 @@ bool VisualOdometry::PnPcompute_g2o(const VecVector3d &points_3d, const VecVecto
     return true;
 }
 
-bool VisualOdometry::check_parrallax(const Frame &frame_1, const Frame &frame_2, const std::vector<cv::DMatch> matches, double min_parallax_deg){
+bool VisualOdometry::check_parrallax(const Frame &frame_1, const Frame &frame_2, const std::vector<cv::DMatch> &matches, double min_parallax_deg){
     Eigen::Matrix3d K_eigen;
     cv::cv2eigen(K, K_eigen);
     Eigen::Matrix3d K_inv = K_eigen.inverse();
@@ -378,6 +352,7 @@ bool VisualOdometry::check_parrallax(const Frame &frame_1, const Frame &frame_2,
     const size_t mid = angles_deg.size() / 2;
     std::nth_element(angles_deg.begin(), angles_deg.begin() + mid, angles_deg.end());
     double median_angle = angles_deg[mid];
-
+    
+    cout << "Median parallax angle : " << median_angle << " degrees" << endl;
     return median_angle >= min_parallax_deg;
 }
