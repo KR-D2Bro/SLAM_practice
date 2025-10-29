@@ -3,8 +3,9 @@
 
 #include "slam_core/common_include.hpp"
 #include "mappoint.hpp"
+#include <memory>
 
-class Frame {
+class Frame : public std::enable_shared_from_this<Frame> {
     public:
         unsigned long id_ = 0;
         unsigned long keyframe_id_ = 0;

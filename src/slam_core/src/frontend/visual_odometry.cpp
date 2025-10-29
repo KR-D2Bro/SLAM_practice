@@ -1,5 +1,6 @@
 #include "slam_core/visual_odometry.hpp"
 #include<iostream>
+#include<memory>
 
 using namespace std;
 using namespace cv;
@@ -226,11 +227,27 @@ bool VisualOdometry::triangulation(const Frame &frame_1, Frame &frame_2,
         Eigen::Vector3d p_eigen_local(p_local.x, p_local.y, p_local.z);
         Eigen::Vector3d p_world = frame_1.get_pose() * p_eigen_local;
 
-        shared_ptr<MapPoint> mp = make_shared<MapPoint>(start_id + k, 
+        shared_ptr<MapPoint> mp = MapPoint::CreateNewMappoint(start_id + k, 
                     p_world,
                     frame_1.descriptors_.row(match.queryIdx).clone());
         
         new_map_points.push_back(mp);
+
+        // 각 프레임에 관측된 맵포인트 추가
+        frame_2.observed_map_points_.push_back(mp);
+        // 맵 포인트에 관측 프레임 추가, 이후에 기존에 있는 mappoint와의 중복 관측 제거 필요
+        try {
+            auto frame2_ptr = frame_2.shared_from_this();
+            mp->observations_.push_back(frame2_ptr);
+        } catch (const std::bad_weak_ptr &) {
+        }
+
+        try {
+            auto frame1_ptr_const = frame_1.shared_from_this();
+            mp->observations_.push_back(std::const_pointer_cast<Frame>(frame1_ptr_const));
+        } catch (const std::bad_weak_ptr &) {
+        }
+        mp->observed_cnt_ = static_cast<int>(mp->observations_.size());
     }
 
     frame_2.observed_map_points_ = new_map_points;
@@ -266,7 +283,7 @@ bool VisualOdometry::rescaleInitialMap(std::vector<Point3d> &world_points, Sophu
     return true;
 }
 
-
+//G2o 라이브러리를 이용한 PnP 최적화
 bool VisualOdometry::PnPcompute_g2o(const VecVector3d &points_3d, const VecVector2d &points_2d, Frame &cur_frame){
     typedef g2o::BlockSolver<g2o::BlockSolverTraits<6, Eigen::Dynamic>> BlockSolverType;   // pose is 6, landmark is 3
     typedef g2o::LinearSolverEigen<BlockSolverType::PoseMatrixType> LinearSolverType;   // Gradient descent type
@@ -309,6 +326,8 @@ bool VisualOdometry::PnPcompute_g2o(const VecVector3d &points_3d, const VecVecto
 
     cur_frame.set_pose(vertex_pose->estimate().inverse());
 
+    // 최종 inlier 마스크 계산
+    // 3D 포인트와 2D 포인트의 재투영 오차 기반으로 outlier 라는 것은 오매칭일 가능성이 높다는 것을 의미
     pose_inlier_mask_.clear();
     pose_inlier_mask_.resize(points_2d.size(), 1);
     const double chi2_threshold = 5.99; // (≈ 2.45px)^2 or 원하는 값

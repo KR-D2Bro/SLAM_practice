@@ -413,9 +413,10 @@ Mat FeatureTracker::undistort(cv::Mat &img){
     return undistortedImg;
 }
 
-bool FeatureTracker::match_3d_2d(const vector<shared_ptr<MapPoint>> &map_points, const Frame &cur_frame, VecVector3d &points_3d, VecVector2d &points_2d, vector<DMatch> &matches){
+bool FeatureTracker::match_3d_2d(const vector<shared_ptr<MapPoint>> &map_points, const Frame &cur_frame, 
+    VecVector3d &points_3d, VecVector2d &points_2d, vector<DMatch> &matches, vector<shared_ptr<MapPoint>> &inliers_mappoints){
+    inliers_mappoints.clear();
     // 1. 포인트를 카메라 프레임으로 옮기고, 영상에 투영해서 유효한 포인트 선별
-    vector<Vec3> points_3d_all;
     Mat descriptors_map;
     for (const auto &mp : map_points) {
         //포인트를 프레임의 coordinate로 변환
@@ -426,12 +427,12 @@ bool FeatureTracker::match_3d_2d(const vector<shared_ptr<MapPoint>> &map_points,
 
         if(mp->descriptor_.empty())   continue;
 
-        points_3d_all.push_back(mp->get_pos());
+        inliers_mappoints.push_back(mp);
         descriptors_map.push_back(mp->descriptor_);
     }
 
-    if(points_3d_all.empty()){
-        cout << "Not enough 3D points: " << points_3d_all.size() << endl;
+    if(inliers_mappoints.empty()){
+        cout << "Not enough 3D points: " << inliers_mappoints.size() << endl;
         return false;
     }
 
@@ -444,7 +445,7 @@ bool FeatureTracker::match_3d_2d(const vector<shared_ptr<MapPoint>> &map_points,
     }
 
     for(const auto &m: matches){
-        points_3d.push_back(points_3d_all[m.trainIdx]);
+        points_3d.push_back(inliers_mappoints[m.trainIdx]->get_pos());
 
         Point2f p2d = cur_frame.keypoints_[m.queryIdx].pt;
         points_2d.push_back(Vec2(p2d.x, p2d.y));

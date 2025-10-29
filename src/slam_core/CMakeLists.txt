@@ -19,7 +19,13 @@ find_package(sensor_msgs REQUIRED)
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
-add_executable(slam_system src/slam_system.cpp src/frontend/feature_tracker.cpp src/frontend/visual_odometry.cpp src/frontend/frontend.cpp)
+add_executable(slam_system
+  src/slam_system.cpp
+  src/frontend/feature_tracker.cpp
+  src/frontend/visual_odometry.cpp
+  src/frontend/frontend.cpp
+  src/frontend/opticalflow_tracker.cpp
+)
 
 ament_target_dependencies( slam_system
   "rclcpp"
