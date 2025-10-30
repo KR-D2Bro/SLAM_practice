@@ -2,8 +2,9 @@
 #define FRAME_HPP_
 
 #include "slam_core/common_include.hpp"
-#include "mappoint.hpp"
 #include <memory>
+
+class MapPoint;
 
 class Frame : public std::enable_shared_from_this<Frame> {
     public:

@@ -1,5 +1,6 @@
 #include "slam_core/feature_tracker.hpp"
 #include<algorithm>
+#include "slam_core/mappoint.hpp"
 
 
 using namespace std;
@@ -358,7 +359,7 @@ void FeatureTracker::ComputeORB(cv::Mat &img, vector<cv::KeyPoint> &key_points, 
 
 //ë¨ìí ë²ì 
 void FeatureTracker::BfMatch(const Mat &desc1, const Mat &desc2, vector<cv::DMatch> &matches, float ratio){
-    const int d_max = 50;
+    const int d_max = 40;
     const uint32_t* d1, *d2;
     matches.clear();
 

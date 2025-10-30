@@ -1,23 +1,52 @@
 #include "slam_core/opticalflow_tracker.hpp"
+#include "slam_core/frame.hpp"
 
 using namespace std;
 using namespace cv;
 
 // Implement pyramidical Lucas-Kanade Optical Flow Tracker
-bool OpticalFlowTracker::track_opticalflow(
+void OpticalFlowTracker::track_opticalflow(
     Frame &frame1,
     Frame &frame2,
+    vector<KeyPoint> &kp2,
+    vector<DMatch> &matches,
     std::vector<bool> &success,
     bool inverse,
     bool has_initial) 
 {
     img1_= &frame1.img_, img2_ = &frame2.img_; 
-    kp1_ = &frame1.keypoints_, kp2_ = &frame2.keypoints_;
-    success_ = success;
+    success_ = &success;
     inverse_ = inverse, has_initial_ = has_initial;
 
-    parallel_for_(Range(0, kp1_->size()),
+    success_->assign(matches.size(), true);
+
+    kp1_.resize(matches.size());
+    kp2_.resize(matches.size());
+    for(int i = 0; i< matches.size(); i++){
+        kp1_[i] = frame1.keypoints_[matches[i].queryIdx];
+        kp2_[i] = frame2.keypoints_[matches[i].trainIdx];
+    }
+
+    cv::parallel_for_(Range(0, matches.size() ),
         std::bind(&OpticalFlowTracker::calculateOpticalFlow, this, std::placeholders::_1));
+
+    vector<bool> isUpdated(kp2_.size(), false);
+    for(int i = 0; i<kp2_.size(); i++){
+        if(success_->at(i) == false || isUpdated[i])
+            continue;
+        kp2[matches[i].trainIdx] = kp2_[i];
+        isUpdated[i] = true;
+    }
+
+    Mat img2_single = img2_->clone();
+    for (int i = 0; i < kp2_.size(); i++) {
+        if (success_->at(i)) {
+            cv::circle(img2_single, kp2_[i].pt, 2, cv::Scalar(0, 250, 0), 2);
+            cv::line(img2_single, kp1_[i].pt, kp2_[i].pt, cv::Scalar(0, 250, 0));
+        }
+    }
+    cv::imshow("tracked single level", img2_single);
+    cv::waitKey(1);
 } 
 
 bool OpticalFlowTracker::calculateOpticalFlow(
@@ -26,10 +55,10 @@ bool OpticalFlowTracker::calculateOpticalFlow(
     int half_patch_size = 4;
     int iterations = 10;
     for(size_t i = range.start; i < range.end; i++){
-        auto kp = kp1_->at(i);
+        auto kp = kp1_[i];
         double dx, dy;
-        dx = kp2_->at(i).pt.x - kp.pt.x;
-        dy = kp2_->at(i).pt.y - kp.pt.y;
+        dx = kp2_[i].pt.x - kp.pt.x;
+        dy = kp2_[i].pt.y - kp.pt.y;
 
         double cost = 0, lastCost = 0;
         bool succ = true;
@@ -74,30 +103,35 @@ bool OpticalFlowTracker::calculateOpticalFlow(
                         H += J * J.transpose();
                     }
                 }
-
-                Eigen::Vector2d update = H.ldlt().solve(b);
-
-                if(std::isnan(update[0])){
-                    cout << "update is nan" << endl;
-                    succ = false;
-                    break;
-                }
-
-                // update dx, dy
-                dx += update[0];
-                dy += update[1];
-                lastCost = cost;
-                succ = true;
-
-                // 수렴한 경우
-                if(update.norm() < 1e-2){
-                    break;
-                }
             }
 
-            success_[i] = succ;
+            Eigen::Vector2d update = H.ldlt().solve(b);
 
-            kp2_->at(i).pt = kp.pt + Point2f(dx, dy);
+            if(std::isnan(update[0])){
+                cout << "update is nan" << endl;
+                succ = false;
+                break;
+            }
+
+            if(iter > 0 && cost > lastCost){
+                break;
+            }
+
+            // update dx, dy
+            dx += update[0];
+            dy += update[1];
+            lastCost = cost;
+            succ = true;
+
+            // 수렴한 경우
+            if(update.norm() < 1e-2){
+                break;
+            }
         }
+
+        success_->at(i) = succ;
+
+        kp2_[i].pt = kp.pt + Point2f(dx, dy);
+        
     }
 }

@@ -4,6 +4,7 @@
 #include "slam_core/common_include.hpp"
 #include "slam_core/feature_tracker.hpp"
 #include "slam_core/visual_odometry.hpp"
+#include "slam_core/opticalflow_tracker.hpp"
 
 class Frontend
 {
@@ -19,6 +20,7 @@ class Frontend
     private:
         std::unique_ptr<FeatureTracker> feature_tracker_;
         std::unique_ptr<VisualOdometry> visual_odometry_;
+        std::unique_ptr<OpticalFlowTracker> opticalflow_tracker_;
         std::shared_ptr<Frame> prev_frame, last_keyframe;
         std::shared_ptr<std::vector<std::shared_ptr<MapPoint>>> map_points_;
 

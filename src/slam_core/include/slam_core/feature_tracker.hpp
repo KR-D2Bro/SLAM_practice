@@ -17,6 +17,7 @@ class FeatureTracker
         
         cv::Mat undistort(cv::Mat &img);
 
+        //inliers_mappoints: 2d 키포인트와 매칭된 3D 포인트들
         bool match_3d_2d(const std::vector<std::shared_ptr<MapPoint>> &map_points, const Frame &cur_frame, 
             VecVector3d &points_3d, VecVector2d &points_2d, std::vector<cv::DMatch> &matches, std::vector<std::shared_ptr<MapPoint>> &inliers_mappoints);
 

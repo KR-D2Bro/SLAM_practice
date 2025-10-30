@@ -1,4 +1,5 @@
 #include "slam_core/visual_odometry.hpp"
+#include "slam_core/mappoint.hpp"
 #include<iostream>
 #include<memory>
 
@@ -157,11 +158,10 @@ bool VisualOdometry::triangulation(const Frame &frame_1, Frame &frame_2,
     
     cv::Mat T21;
     Sophus::SE3d T21_se3 = frame_2.get_pose().inverse() * frame_1.get_pose();
-    // eigen2cv(T_.matrix3x4(), T21);
     eigen2cv(T21_se3.matrix3x4(), T21);
     T21 = K * T21;
 
-    const bool has_pose_mask = !pose_inlier_mask_.empty();
+    const bool has_pose_mask = !pose_inlier_mask_.empty()  && pose_inlier_mask_.size() == matches.size();
 
     std::vector<int> inlier_match_indices;
     std::vector<cv::Point2f> pts_1, pts_2;
@@ -211,6 +211,9 @@ bool VisualOdometry::triangulation(const Frame &frame_1, Frame &frame_2,
         }
     }
     cout << "Valid points after cheirality check: " << valid_points_local.size() << endl;
+    if(valid_points_local.size() < 30){
+        return false; // 유효 포인트 부족
+    }
     
     if(isFirst){
         rescaleInitialMap(valid_points_local, T21_se3);
@@ -343,7 +346,7 @@ bool VisualOdometry::PnPcompute_g2o(const VecVector3d &points_3d, const VecVecto
     return true;
 }
 
-bool VisualOdometry::check_parrallax(const Frame &frame_1, const Frame &frame_2, const std::vector<cv::DMatch> &matches, double min_parallax_deg){
+bool VisualOdometry::check_parrallax(const Frame &frame_1, const vector<KeyPoint> &kp2, const std::vector<cv::DMatch> &matches, double min_parallax_deg){
     Eigen::Matrix3d K_eigen;
     cv::cv2eigen(K, K_eigen);
     Eigen::Matrix3d K_inv = K_eigen.inverse();
@@ -352,7 +355,7 @@ bool VisualOdometry::check_parrallax(const Frame &frame_1, const Frame &frame_2,
     angles_deg.reserve(matches.size());
     for(const auto& m : matches){
         cv::Point2f p1_cv = frame_1.keypoints_[m.queryIdx].pt;
-        cv::Point2f p2_cv = frame_2.keypoints_[m.trainIdx].pt;
+        cv::Point2f p2_cv = kp2[m.trainIdx].pt;
 
         Eigen::Vector3d p1_h(p1_cv.x, p1_cv.y, 1.0);
         Eigen::Vector3d p2_h(p2_cv.x, p2_cv.y, 1.0);

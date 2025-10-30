@@ -40,13 +40,7 @@ struct MapPoint {
             observed_cnt_++;
         }
 
-        void remove_observation(std::shared_ptr<Frame> frame){
-            observations_.remove_if([frame](const std::weak_ptr<Frame>& wp) {
-                auto sp = wp.lock();
-                return sp && sp->id_ == frame->id_;
-            });
-            observed_cnt_ = static_cast<int>(observations_.size());
-        }
+        void remove_observation(std::shared_ptr<Frame> frame);
 
         static MapPoint::Ptr CreateNewMappoint(long id, Vec3 position, cv::Mat descriptor){
             return std::make_shared<MapPoint>(id, position, descriptor);
