@@ -45,6 +45,10 @@ struct MapPoint {
         static MapPoint::Ptr CreateNewMappoint(long id, Vec3 position, cv::Mat descriptor){
             return std::make_shared<MapPoint>(id, position, descriptor);
         }
+
+        inline void update_descriptor(const cv::Mat &new_descriptor){
+            descriptor_ = new_descriptor.clone();
+        }
 };
 
 #endif

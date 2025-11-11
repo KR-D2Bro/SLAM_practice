@@ -6,6 +6,8 @@
 #include "slam_core/visual_odometry.hpp"
 #include "slam_core/opticalflow_tracker.hpp"
 
+struct MapPoint;
+
 class Frontend
 {
     public:
@@ -25,9 +27,10 @@ class Frontend
         std::shared_ptr<std::vector<std::shared_ptr<MapPoint>>> map_points_;
 
         unsigned long frame_cnt = 0;
+        unsigned long last_points_num = 0;
         cv::Mat K = (cv::Mat_<double>(3,3) << 458.654, 0, 367.215, 0, 457.296, 248.375, 0, 0, 1); 
 
-        int add_keyframe(std::shared_ptr<Frame> &cur_frame);
+        int add_keyframe(std::shared_ptr<Frame> &cur_frame, bool hasTriangulated = true);
 };
 
 #endif

@@ -10,9 +10,6 @@ class OpticalFlowTracker{
     OpticalFlowTracker(){}
 
     ~OpticalFlowTracker(){
-        delete(img1_);
-        delete(img2_);
-        delete(success_);
     }
 
     void track_opticalflow(

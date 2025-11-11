@@ -1,5 +1,7 @@
 #include "slam_core/frontend.hpp"
 
+#include "slam_core/mappoint.hpp"
+
 using namespace std;
 using namespace cv;
 
@@ -12,6 +14,13 @@ Frontend::Frontend(std::shared_ptr<vector<shared_ptr<MapPoint>>> map_points) : m
 
 //0: 실패, 1: 일반 프레임, 2: 키프레임
 int8_t Frontend::run(cv::Mat &img){
+    Sophus::SE3d prev_rel_pose;
+    if(prev_frame != nullptr){
+        prev_rel_pose = prev_frame->get_pose().inverse() * cur_frame->get_pose();
+    }
+    else{
+        Sophus::SE3d::exp(Vec6::Zero());
+    }
     prev_frame = cur_frame;
 
     cur_frame = std::make_shared<Frame>(frame_cnt++, prev_frame->get_pose(), feature_tracker_->undistort(img));
@@ -49,39 +58,47 @@ int8_t Frontend::run(cv::Mat &img){
         if(feature_tracker_->match_3d_2d(*map_points_, *cur_frame, points_3d, points_2d, matches, inliers_mappoints)){
             //Pnp 수행.
             if(visual_odometry_->PnPcompute_g2o(points_3d, points_2d, *cur_frame)){
+                // inliers_mappoints의 디스크립터 업데이트
+                vector<uchar> pose_inlier_mask = visual_odometry_->pose_inlier_mask();
+                for(int i=0; i<matches.size(); i++){
+                    auto &m = matches[i];
+                    if(pose_inlier_mask[i]){
+                        inliers_mappoints[i]->update_descriptor(cur_frame->descriptors_.row(m.trainIdx));
+                    }
+                }
+
                 // 기본 키프레임 생성 조건
                 // 1. 30프레임 이상 간격
-                const bool c1 = frame_cnt >= last_keyframe->id_ + 30; 
+                const bool c1 = frame_cnt >= last_keyframe->id_ + 10; 
 
                 // 2. 트래킹 포인트가 키프레임 관측 포인트의 70% 이하이면서 15개 이상
                 // PnPcompute_g2o에서 pose_inlier_mask_ 설정됨
-                vector<uchar> pose_inlier_mask = visual_odometry_->pose_inlier_mask();
                 int num_inliers = std::count(pose_inlier_mask.begin(), pose_inlier_mask.end(), 1);
-                const bool c2 = num_inliers < last_keyframe->observed_map_points_.size() * 0.7 && num_inliers > 15;
-                cout << "PnP inliers: " << num_inliers << " / " << last_keyframe->observed_map_points_.size() << endl;
+                const bool c2 = num_inliers < last_points_num * 0.7 && num_inliers > 15;
+                cout << "PnP inliers: " << num_inliers << " / " << last_points_num << endl;
 
                 // 3. 이동량 검사
                 Sophus::SE3d rel = last_keyframe->get_pose().inverse() * cur_frame->get_pose();
                 double trans = rel.translation().norm();
-                double rot = Sophus::SO3d(rel.rotationMatrix()).log().norm(); // 라디안
                 const double min_trans = 0.1;     // 데이터에 맞게 조정
                 bool c_motion = (trans > min_trans);
                 // c_motion = true; // 일단 모션 조건 무시
 
                 // 4. 시차 검사
-                vector<DMatch> dummy_matches, inliers_matches;
+                vector<DMatch> dummy_matches, inliers_matches, optical_matches;
                 vector<KeyPoint> dummy_kp2; dummy_kp2.resize(cur_frame->keypoints_.size());
                 vector<bool> success;
                 feature_tracker_->track_feature(*last_keyframe, *cur_frame, dummy_matches);
-                opticalflow_tracker_->track_opticalflow(*last_keyframe, *cur_frame, dummy_kp2, dummy_matches, success, true, true);
+                optical_matches = dummy_matches;
+                opticalflow_tracker_->track_opticalflow(*last_keyframe, *cur_frame, dummy_kp2, optical_matches, success, true, true);
                 // 시차 계산시 pose_inlier_mask_를 이용하여 inlier 매칭점만 사용하도록 수정
-                for(size_t i = 0; i < dummy_matches.size(); i++){
+                for(size_t i = 0; i < optical_matches.size(); i++){
                     if(success[i] == true){
-                        inliers_matches.push_back(dummy_matches[i]);
+                        inliers_matches.push_back(optical_matches[i]);
                     }
                 }
                 bool c_parrallax = false;
-                c_parrallax = visual_odometry_->check_parrallax(*last_keyframe, dummy_kp2, inliers_matches, 10.0);
+                c_parrallax = visual_odometry_->check_parrallax(*last_keyframe, dummy_kp2, inliers_matches, 5.0);
 
                 cout << "KeyFrame conditions: " << c1 << ", " << c2 << ", " << c_motion << ", " << c_parrallax << endl;
 
@@ -90,7 +107,7 @@ int8_t Frontend::run(cv::Mat &img){
                     cout << "Adding new KeyFrame." << endl;
                     // triangulation 함수 호출
                     if(!c_motion){
-                        return add_keyframe(cur_frame);
+                        return add_keyframe(cur_frame, false);
                     }
                     else if (visual_odometry_->triangulation(*last_keyframe, *cur_frame,
                                                         dummy_matches, *map_points_))
@@ -98,6 +115,15 @@ int8_t Frontend::run(cv::Mat &img){
                         return add_keyframe(cur_frame);
                     }
                 }
+                // if(c1 || c_parrallax){
+                //     cout << "Adding new KeyFrame." << endl;
+                //     // triangulation 함수 호출
+                //     if (visual_odometry_->triangulation(*last_keyframe, *cur_frame,
+                //                                         dummy_matches, *map_points_))
+                //     {
+                //         return add_keyframe(cur_frame);
+                //     }
+                // }
                 return 1;
             }
             return 0;
@@ -106,11 +132,15 @@ int8_t Frontend::run(cv::Mat &img){
     }
 }
 
-int Frontend::add_keyframe(std::shared_ptr<Frame> &frame){
+int Frontend::add_keyframe(std::shared_ptr<Frame> &frame, bool hasTriangulated){
     last_keyframe = frame;
     frame->set_keyframe(static_cast<unsigned long>(keyframes.size()));
     keyframes.push_back(frame);
     cout << "key frame added" << endl;
+
+    if(hasTriangulated){
+        last_points_num = frame->observed_map_points_.size();
+    }
     
     return 2;
 }

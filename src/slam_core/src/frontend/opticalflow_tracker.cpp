@@ -1,5 +1,6 @@
 #include "slam_core/opticalflow_tracker.hpp"
 #include "slam_core/frame.hpp"
+#include <algorithm>
 
 using namespace std;
 using namespace cv;
@@ -18,7 +19,12 @@ void OpticalFlowTracker::track_opticalflow(
     success_ = &success;
     inverse_ = inverse, has_initial_ = has_initial;
 
-    success_->assign(matches.size(), true);
+    sort(matches.begin(), matches.end(), [](const DMatch &m1, const DMatch &m2){
+        return m1.distance < m2.distance;
+    });
+    if(matches.size() > 10) matches.resize(10); //신뢰도 상위 10개 매칭만 사용
+
+    success_->resize(matches.size(), true);
 
     kp1_.resize(matches.size());
     kp2_.resize(matches.size());
@@ -38,7 +44,8 @@ void OpticalFlowTracker::track_opticalflow(
         isUpdated[i] = true;
     }
 
-    Mat img2_single = img2_->clone();
+    Mat img2_single;
+    cv::cvtColor(*img2_, img2_single, cv::COLOR_GRAY2BGR);
     for (int i = 0; i < kp2_.size(); i++) {
         if (success_->at(i)) {
             cv::circle(img2_single, kp2_[i].pt, 2, cv::Scalar(0, 250, 0), 2);
@@ -66,7 +73,7 @@ bool OpticalFlowTracker::calculateOpticalFlow(
         // Gauss-Newton iterations
         Eigen::Matrix2d H = Eigen::Matrix2d::Zero();
         Eigen::Vector2d b = Eigen::Vector2d::Zero();
-        Eigen::Vector2d J;
+        Eigen::Vector2d J[2*half_patch_size][2*half_patch_size];  // Jacobian을 patch 내 모든 픽셀에 대한 vector로 정의해야됨
         for(int iter = 0; iter < iterations; iter++){
             //inverse : LK optical flow의 inverse Compositional 방식인지 아닌지를 결정하는 것으로 매 반복마다 gradient를 다시 계산할지 말지를 결정.
             if(inverse_ == false){   
@@ -85,22 +92,22 @@ bool OpticalFlowTracker::calculateOpticalFlow(
                     
                     if(inverse_ == false){
                         // inverse 모드가 아닐 때에는 매 iteration마다 라이브 이미지에서 도함수를 계산
-                        J = -1.0 * Eigen::Vector2d(
+                        J[half_patch_size + x][half_patch_size + y] = -1.0 * Eigen::Vector2d(
                             0.5 * (GetPixelValue(*img2_, kp.pt.x + x + dx + 1, kp.pt.y + dy + y) - GetPixelValue(*img2_, kp.pt.x + x + dx - 1, kp.pt.y + dy + y)),
                             0.5 * (GetPixelValue(*img2_, kp.pt.x + x + dx, kp.pt.y + y + dy + 1) - GetPixelValue(*img2_, kp.pt.x + x + dx, kp.pt.y + y + dy - 1))
                         );
                     } else if(iter == 0){
                         //inverse 모드에서는 J가 모든 iteration에서 동일
-                        J = -1.0 * Eigen::Vector2d(
+                        J[half_patch_size + x][half_patch_size + y] = -1.0 * Eigen::Vector2d(
                             0.5 * (GetPixelValue(*img1_, kp.pt.x + x + 1, kp.pt.y + y) - GetPixelValue(*img1_, kp.pt.x + x - 1, kp.pt.y + y)),
                             0.5 * (GetPixelValue(*img1_, kp.pt.x + x, kp.pt.y + y + 1) - GetPixelValue(*img1_, kp.pt.x + x, kp.pt.y + y - 1))
                         );
                     }
                     
-                    b += -error * J;
+                    b += -error * J[half_patch_size + x][half_patch_size + y];
                     cost += error * error;
                     if(inverse_ == false || iter == 0){
-                        H += J * J.transpose();
+                        H += J[half_patch_size + x][half_patch_size + y] * J[half_patch_size + x][half_patch_size + y].transpose();
                     }
                 }
             }
@@ -131,7 +138,9 @@ bool OpticalFlowTracker::calculateOpticalFlow(
 
         success_->at(i) = succ;
 
+        if(!succ){
+            continue;
+        }
         kp2_[i].pt = kp.pt + Point2f(dx, dy);
-        
     }
 }

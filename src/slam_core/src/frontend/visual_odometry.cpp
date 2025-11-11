@@ -31,8 +31,8 @@ bool VisualOdometry::pose_estimate_2d2d(const Frame &frame_1, const Frame &frame
     }
 
     Mat fundamental_matrix, homography_matrix_21;
-    fundamental_matrix = findFundamentalMat(points1, points2, FM_RANSAC, 1.0);
-    homography_matrix_21 = findHomography(points1, points2, cv::RANSAC, 1.0);
+    fundamental_matrix = findFundamentalMat(points1, points2, FM_RANSAC, 0.7);
+    homography_matrix_21 = findHomography(points1, points2, cv::RANSAC, 0.7);
 
     float score_F = calc_fundamental_score(points1, points2, fundamental_matrix);
     float score_H = calc_homography_score(points1, points2, homography_matrix_21); 
@@ -161,12 +161,10 @@ bool VisualOdometry::triangulation(const Frame &frame_1, Frame &frame_2,
     eigen2cv(T21_se3.matrix3x4(), T21);
     T21 = K * T21;
 
-    const bool has_pose_mask = !pose_inlier_mask_.empty()  && pose_inlier_mask_.size() == matches.size();
-
     std::vector<int> inlier_match_indices;
-    std::vector<cv::Point2f> pts_1, pts_2;
+    std::vector<cv::Point2d> pts_1, pts_2;
     for(int i=0;i<matches.size();i++){
-        if(has_pose_mask && pose_inlier_mask_[i] == 0)
+        if(isFirst && pose_inlier_mask_[i] == 0)
             continue;
 
         pts_1.push_back(frame_1.keypoints_[matches[i].queryIdx].pt);
@@ -182,8 +180,9 @@ bool VisualOdometry::triangulation(const Frame &frame_1, Frame &frame_2,
 
     for (int i = 0; i < pts_4d.cols; i++) {
         cv::Mat x = pts_4d.col(i);
-        x /= x.at<float>(3, 0); // 4D -> 3D
-        cv::Point3d p(static_cast<double>(x.at<float>(0, 0)), static_cast<double>(x.at<float>(1, 0)), static_cast<double>(x.at<float>(2, 0)));
+        x /= x.at<double>(3, 0); // 4D -> 3D
+        // cv::Point3d p(static_cast<double>(x.at<float>(0, 0)), static_cast<double>(x.at<float>(1, 0)), static_cast<double>(x.at<float>(2, 0)));
+        cv::Point3d p(x.at<double>(0, 0), x.at<double>(1, 0), x.at<double>(2, 0));
 
         // 검증 1: 첫 번째 카메라 앞에서 포인트가 유효한가 (depth > 0)
         if (p.z > 0) {
@@ -211,7 +210,7 @@ bool VisualOdometry::triangulation(const Frame &frame_1, Frame &frame_2,
         }
     }
     cout << "Valid points after cheirality check: " << valid_points_local.size() << endl;
-    if(valid_points_local.size() < 30){
+    if(valid_points_local.size() < 15){
         return false; // 유효 포인트 부족
     }
     
@@ -230,9 +229,10 @@ bool VisualOdometry::triangulation(const Frame &frame_1, Frame &frame_2,
         Eigen::Vector3d p_eigen_local(p_local.x, p_local.y, p_local.z);
         Eigen::Vector3d p_world = frame_1.get_pose() * p_eigen_local;
 
+        // TODO: 기존에 존재하는 맵 포인트인지 확인 절차 필요.
         shared_ptr<MapPoint> mp = MapPoint::CreateNewMappoint(start_id + k, 
                     p_world,
-                    frame_1.descriptors_.row(match.queryIdx).clone());
+                    frame_2.descriptors_.row(match.trainIdx).clone());
         
         new_map_points.push_back(mp);
 
@@ -327,8 +327,6 @@ bool VisualOdometry::PnPcompute_g2o(const VecVector3d &points_3d, const VecVecto
     optimizer.initializeOptimization();
     optimizer.optimize(10);
 
-    cur_frame.set_pose(vertex_pose->estimate().inverse());
-
     // 최종 inlier 마스크 계산
     // 3D 포인트와 2D 포인트의 재투영 오차 기반으로 outlier 라는 것은 오매칭일 가능성이 높다는 것을 의미
     pose_inlier_mask_.clear();
@@ -342,6 +340,14 @@ bool VisualOdometry::PnPcompute_g2o(const VecVector3d &points_3d, const VecVecto
             pose_inlier_mask_[edge->id()] = 0;
         }
     }
+
+    int num_inliers = std::count(pose_inlier_mask_.begin(), pose_inlier_mask_.end(), 1);
+    if(num_inliers < 10){
+        cout << "PnP inliers are too few: " << num_inliers << endl;
+        return false;
+    }
+
+    cur_frame.set_pose(vertex_pose->estimate().inverse());
 
     return true;
 }

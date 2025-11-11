@@ -264,32 +264,39 @@ static int ORB_pattern[256 * 4] = {
   7, 0, 12, -2/*mean (0.127002), correlation (0.537452)*/,
   -1, -6, 0, -11/*mean (0.127148), correlation (0.547401)*/
 };
+void getCellIndices(const Frame &frame, vector<vector<int>> &cells, int cols, int rows){
+    int cell_h = frame.img_.rows / rows, cell_w = frame.img_.cols / cols;
+    cells.clear();
+    cells.resize(rows * cols);  //셀 안에 들어있는 키포인트 인덱스 리스트
+
+    //키포인트들 셀 설정.
+    for(int i = 0; i < frame.keypoints_.size(); i++){
+        const auto &kp = frame.keypoints_[i];
+        int cx = static_cast<int>(kp.pt.x / cell_w);
+        int cy = static_cast<int>(kp.pt.y / cell_h);
+
+        if(cx < 0 || cx >= cols || cy < 0 || cy >= rows)    continue;
+        cells[cx + cy * cols].push_back(i);
+    }
+}
+
 
 FeatureTracker::FeatureTracker(cv::Mat &K) {
     this->K = K;
     detector_ = cv::ORB::create(3000);  //3000ê° í¤íë ì ì¶ì¶
     descriptor_ = cv::ORB::create();
-    // matcher_ = cv::DescriptorMatcher::create("BruteForce-Hamming");
+    matcher_ = cv::DescriptorMatcher::create("BruteForce-Hamming");
 }
 
-// inline int popcount32(uint32_t value) {
-// #if defined(__SSE4_2__) || defined(__POPCNT__)
-//     return static_cast<int>(_mm_popcnt_u32(value));
-// #else
-//     return __builtin_popcount(value);
-// #endif
-// }
 
 void FeatureTracker::detectAndCompute(Frame &frame){
-    // int rows=16, cols=16;
-    // int width = frame.img_.cols/cols, height = frame.img_.rows/rows;
-    // vector<KeyPoint> all_keypoints;
-    // vector<vector<KeyPoint>> grid_kps(rows * cols, vector<KeyPoint>());
     cv::Mat output_image;
 
     detector_->detect(frame.img_, frame.keypoints_);
     descriptor_->compute(frame.img_, frame.keypoints_, frame.descriptors_);
     // FeatureTracker::ComputeORB(frame.img_, frame.keypoints_, frame.descriptors_);
+    // 관측한 3D 포인트관리를 위해 초기화.
+    frame.observed_map_points_.resize(frame.keypoints_.size(), nullptr);
 }
 
 //matching two frames' kp
@@ -360,7 +367,8 @@ void FeatureTracker::ComputeORB(cv::Mat &img, vector<cv::KeyPoint> &key_points, 
 //ë¨ìí ë²ì 
 void FeatureTracker::BfMatch(const Mat &desc1, const Mat &desc2, vector<cv::DMatch> &matches, float ratio){
     const int d_max = 40;
-    const uint32_t* d1, *d2;
+    const uint32_t* d1;
+    const uint32_t* d2;
     matches.clear();
 
     const int rows1 = desc1.rows;
@@ -369,10 +377,10 @@ void FeatureTracker::BfMatch(const Mat &desc1, const Mat &desc2, vector<cv::DMat
     for(int i1 = 0; i1 < rows1; ++i1){
         cv::DMatch best{i1, -1, std::numeric_limits<float>::max()};
         cv::DMatch second{i1, -1, std::numeric_limits<float>::max()};
-        d1 = desc1.ptr<uint32_t>(i1);
+        d1 = reinterpret_cast<const uint32_t*>(desc1.ptr<uchar>(i1));
         for(int i2 = 0; i2 < rows2; ++i2){
             int distance = 0;
-            d2 = desc2.ptr<uint32_t>(i2);
+            d2 = reinterpret_cast<const uint32_t*>(desc2.ptr<uchar>(i2));
             for(int k=0;k<8;k++){
                 distance += __builtin_popcount(d1[k] ^ d2[k]);
             }
@@ -393,13 +401,11 @@ void FeatureTracker::BfMatch(const Mat &desc1, const Mat &desc2, vector<cv::DMat
         if(best.trainIdx == -1)   continue;
 
         if(second.trainIdx != -1 && second.distance > 0.0f){
-            if (best.distance < d_max && best.distance / second.distance < ratio) {
+            if (best.distance < d_max && static_cast<float>(best.distance) / second.distance < ratio) {
                 matches.push_back(best);
             }
             continue;
         }
-
-        matches.push_back(best);
     }
 }
 
@@ -417,40 +423,96 @@ Mat FeatureTracker::undistort(cv::Mat &img){
 bool FeatureTracker::match_3d_2d(const vector<shared_ptr<MapPoint>> &map_points, const Frame &cur_frame, 
     VecVector3d &points_3d, VecVector2d &points_2d, vector<DMatch> &matches, vector<shared_ptr<MapPoint>> &inliers_mappoints){
     inliers_mappoints.clear();
+    vector<int> inliers_idx;
+    int InFrustrum_cnt = 0;
+
+    // 그리드를 나눠서 인근 9개 그리드에서 매칭 시도
+    vector<vector<int>> cells;
+    int cols = 32, rows = 24;
+    getCellIndices(cur_frame, cells, cols, rows);
     // 1. 포인트를 카메라 프레임으로 옮기고, 영상에 투영해서 유효한 포인트 선별
     Mat descriptors_map;
-    for (const auto &mp : map_points) {
+    for (int i = 0; i<map_points.size(); i++) {
+        const auto &mp = map_points[i];
         //포인트를 프레임의 coordinate로 변환
         Vec3 p_c = cur_frame.get_pose().inverse() * mp->get_pos();
-        if(p_c[2] < 0)   continue;
+        if(p_c[2] <= 0)   continue;
         Vec2 p_img = cam2pixel(p_c, K);
         if(p_img.x() < 0 || p_img.x() >= cur_frame.img_.cols || p_img.y() < 0 || p_img.y() >= cur_frame.img_.rows)   continue;
+        InFrustrum_cnt++;
 
         if(mp->descriptor_.empty())   continue;
 
-        inliers_mappoints.push_back(mp);
-        descriptors_map.push_back(mp->descriptor_);
+        // 이미지를 셀로 나눠서 키포인트 인덱스를 셀 단위로 리스트업
+        DMatch match = queryMatch(cur_frame, p_img, mp->descriptor_, cells, cols, rows);
+
+        //매칭이 없으면 
+        if(match.queryIdx == -1)    continue;
+
+        // 좋은 매칭 추가
+        match.queryIdx = i;
+        matches.push_back(match);
     }
 
-    if(inliers_mappoints.empty()){
-        cout << "Not enough 3D points: " << inliers_mappoints.size() << endl;
-        return false;
-    }
-
-    // matcher_->match(cur_frame.descriptors_, descriptors_map, all_matches);
-    FeatureTracker::BfMatch(cur_frame.descriptors_, descriptors_map, matches);
-
+    cout << "In frustrum point cnt: " << InFrustrum_cnt << endl;
     if(matches.size() < 15){
         cout << "Not enough good matches: " << matches.size() << endl;
         return false;
     }
 
-    for(const auto &m: matches){
-        points_3d.push_back(inliers_mappoints[m.trainIdx]->get_pos());
+    cout << "3D-2D matches: " << matches.size() << endl;
 
-        Point2f p2d = cur_frame.keypoints_[m.queryIdx].pt;
+    for(const auto &m: matches){
+        points_3d.push_back(map_points[m.queryIdx]->get_pos());
+        inliers_mappoints.push_back(map_points[m.queryIdx]);
+
+        Point2f p2d = cur_frame.keypoints_[m.trainIdx].pt;
         points_2d.push_back(Vec2(p2d.x, p2d.y));
     }
 
     return true;
+}
+
+DMatch FeatureTracker::queryMatch(const Frame &frame, const Vec2 &mp2pix, const Mat &mpDescriptor, vector<vector<int>> &cells, int cols, int rows, float search_area){
+    int cell_h = frame.img_.rows / rows, cell_w = frame.img_.cols / cols;
+    float u = mp2pix.x(), v = mp2pix.y();
+    vector<int> indices;
+    Mat kp_descriptors;
+
+    int cx_center = std::clamp(static_cast<int>(u / cell_w), 0, cols - 1);
+    int cy_center = std::clamp(static_cast<int>(v / cell_h), 0, rows - 1);
+    int margin_x = std::max(1, static_cast<int>(std::ceil(search_area / cell_w)));
+    int margin_y = std::max(1, static_cast<int>(std::ceil(search_area / cell_h)));
+
+    int cx_min = std::max(0, cx_center - margin_x);
+    int cx_max = std::min(cols - 1, cx_center + margin_x);
+    int cy_min = std::max(0, cy_center - margin_y);
+    int cy_max = std::min(rows - 1, cy_center + margin_y);
+
+    for(int cy = cy_min; cy <= cy_max; cy++){
+        for(int cx = cx_min; cx <= cx_max; cx++){
+            const auto &cell = cells[cx + cy * cols];
+            indices.insert(indices.end(), cell.begin(), cell.end());
+        }
+    }
+
+    for(auto &idx : indices){
+        kp_descriptors.push_back(frame.descriptors_.row(idx).clone());
+    }
+
+    vector<DMatch> match;
+    BfMatch(mpDescriptor, kp_descriptors, match, 0.8);
+    
+    if(match.empty()){
+        return DMatch{-1, -1, -1};
+    }
+
+    match[0].trainIdx = indices[match[0].trainIdx];
+
+    float distance = norm(Point2f(mp2pix.x(), mp2pix.y()) - frame.keypoints_[match[0].trainIdx].pt);
+    cout << "distance : " << distance << endl;
+    if(distance > search_area) 
+        return DMatch{-1, -1, -1};
+    
+    return match[0]; 
 }
