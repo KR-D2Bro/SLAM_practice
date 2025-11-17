@@ -276,7 +276,7 @@ void getCellIndices(const Frame &frame, vector<vector<int>> &cells, int cols, in
         int cy = static_cast<int>(kp.pt.y / cell_h);
 
         if(cx < 0 || cx >= cols || cy < 0 || cy >= rows)    continue;
-        cells[cx + cy * cols].push_back(i);
+        cells[cx + cy * cols].push_back(i); // 키포인트 인덱스 저장
     }
 }
 
@@ -285,7 +285,7 @@ FeatureTracker::FeatureTracker(cv::Mat &K) {
     this->K = K;
     detector_ = cv::ORB::create(3000);  //3000ê° í¤íë ì ì¶ì¶
     descriptor_ = cv::ORB::create();
-    matcher_ = cv::DescriptorMatcher::create("BruteForce-Hamming");
+    // matcher_ = cv::DescriptorMatcher::create("BruteForce-Hamming");
 }
 
 
@@ -300,10 +300,10 @@ void FeatureTracker::detectAndCompute(Frame &frame){
 }
 
 //matching two frames' kp
-void FeatureTracker::track_feature(Frame &frame_1, Frame &frame_2, std::vector<DMatch> &matches){
+void FeatureTracker::track_feature(const Frame &frame_1, const Frame &frame_2, std::vector<DMatch> &matches, float ratio ,bool visualize){
     // matcher_->match(frame_1.descriptors_, frame_2.descriptors_, all_matches);
     matches.clear();
-    FeatureTracker::BfMatch(frame_1.descriptors_, frame_2.descriptors_, matches);
+    FeatureTracker::BfMatch(frame_1.descriptors_, frame_2.descriptors_, matches, ratio);
 
     if(matches.empty()){
         cout << "No matches: " << matches.size() << endl;
@@ -311,9 +311,11 @@ void FeatureTracker::track_feature(Frame &frame_1, Frame &frame_2, std::vector<D
     }
 
     Mat result_img;
-    drawMatches(frame_1.img_, frame_1.keypoints_, frame_2.img_, frame_2.keypoints_, matches, result_img);
-    imshow("good matches", result_img);
-    waitKey(1);
+    if(visualize){
+        drawMatches(frame_1.img_, frame_1.keypoints_, frame_2.img_, frame_2.keypoints_, matches, result_img);
+        imshow("good matches", result_img);
+        waitKey(1);
+    }
 }
 
 void FeatureTracker::ComputeORB(cv::Mat &img, vector<cv::KeyPoint> &key_points, vector<DescType> &descriptors){
@@ -379,7 +381,7 @@ void FeatureTracker::BfMatch(const Mat &desc1, const Mat &desc2, vector<cv::DMat
         cv::DMatch second{i1, -1, std::numeric_limits<float>::max()};
         d1 = reinterpret_cast<const uint32_t*>(desc1.ptr<uchar>(i1));
         for(int i2 = 0; i2 < rows2; ++i2){
-            int distance = 0;
+            float distance = 0;
             d2 = reinterpret_cast<const uint32_t*>(desc2.ptr<uchar>(i2));
             for(int k=0;k<8;k++){
                 distance += __builtin_popcount(d1[k] ^ d2[k]);
@@ -424,14 +426,12 @@ bool FeatureTracker::match_3d_2d(const vector<shared_ptr<MapPoint>> &map_points,
     VecVector3d &points_3d, VecVector2d &points_2d, vector<DMatch> &matches, vector<shared_ptr<MapPoint>> &inliers_mappoints){
     inliers_mappoints.clear();
     vector<int> inliers_idx;
-    int InFrustrum_cnt = 0;
 
     // 그리드를 나눠서 인근 9개 그리드에서 매칭 시도
     vector<vector<int>> cells;
     int cols = 32, rows = 24;
     getCellIndices(cur_frame, cells, cols, rows);
     // 1. 포인트를 카메라 프레임으로 옮기고, 영상에 투영해서 유효한 포인트 선별
-    Mat descriptors_map;
     for (int i = 0; i<map_points.size(); i++) {
         const auto &mp = map_points[i];
         //포인트를 프레임의 coordinate로 변환
@@ -439,9 +439,11 @@ bool FeatureTracker::match_3d_2d(const vector<shared_ptr<MapPoint>> &map_points,
         if(p_c[2] <= 0)   continue;
         Vec2 p_img = cam2pixel(p_c, K);
         if(p_img.x() < 0 || p_img.x() >= cur_frame.img_.cols || p_img.y() < 0 || p_img.y() >= cur_frame.img_.rows)   continue;
-        InFrustrum_cnt++;
 
-        if(mp->descriptor_.empty())   continue;
+        if(mp->descriptor_.empty()){
+            cout << "Empty descriptor in map point." << endl;
+            continue;
+        }
 
         // 이미지를 셀로 나눠서 키포인트 인덱스를 셀 단위로 리스트업
         DMatch match = queryMatch(cur_frame, p_img, mp->descriptor_, cells, cols, rows);
@@ -454,8 +456,7 @@ bool FeatureTracker::match_3d_2d(const vector<shared_ptr<MapPoint>> &map_points,
         matches.push_back(match);
     }
 
-    cout << "In frustrum point cnt: " << InFrustrum_cnt << endl;
-    if(matches.size() < 15){
+    if(matches.size() < 10){
         cout << "Not enough good matches: " << matches.size() << endl;
         return false;
     }
@@ -489,6 +490,8 @@ DMatch FeatureTracker::queryMatch(const Frame &frame, const Vec2 &mp2pix, const 
     int cy_min = std::max(0, cy_center - margin_y);
     int cy_max = std::min(rows - 1, cy_center + margin_y);
 
+    // cout << "checking cells from (" << cx_min << ", " << cy_min << ") to (" << cx_max << ", " << cy_max << ")" << endl;
+
     for(int cy = cy_min; cy <= cy_max; cy++){
         for(int cx = cx_min; cx <= cx_max; cx++){
             const auto &cell = cells[cx + cy * cols];
@@ -510,7 +513,6 @@ DMatch FeatureTracker::queryMatch(const Frame &frame, const Vec2 &mp2pix, const 
     match[0].trainIdx = indices[match[0].trainIdx];
 
     float distance = norm(Point2f(mp2pix.x(), mp2pix.y()) - frame.keypoints_[match[0].trainIdx].pt);
-    cout << "distance : " << distance << endl;
     if(distance > search_area) 
         return DMatch{-1, -1, -1};
     

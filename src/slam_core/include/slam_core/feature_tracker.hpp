@@ -13,7 +13,7 @@ class FeatureTracker
 
         void detectAndCompute(Frame &frame);
         
-        void track_feature(Frame &frame_1, Frame &frame_2, std::vector<cv::DMatch> &matches); 
+        void track_feature(const Frame &frame_1, const Frame &frame_2, std::vector<cv::DMatch> &matches, float ratio = 0.7, bool visualize = true); 
         
         cv::Mat undistort(cv::Mat &img);
 

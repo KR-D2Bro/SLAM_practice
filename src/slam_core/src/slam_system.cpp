@@ -21,7 +21,7 @@ class SlamSystem : public rclcpp::Node
     public:
         SlamSystem() : Node("slam_system") {
             image_subscription_ = this->create_subscription<sensor_msgs::msg::Image>
-            ("/cam0/image_raw", 2, bind(&SlamSystem::topic_callback, this, placeholders::_1));
+            ("/cam0/image_raw", 10, bind(&SlamSystem::topic_callback, this, placeholders::_1));
 
             map_points_ = std::make_shared<std::vector<std::shared_ptr<MapPoint>>>();
             frontend_ = std::make_unique<Frontend>(map_points_);

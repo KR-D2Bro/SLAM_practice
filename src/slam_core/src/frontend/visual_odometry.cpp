@@ -31,8 +31,8 @@ bool VisualOdometry::pose_estimate_2d2d(const Frame &frame_1, const Frame &frame
     }
 
     Mat fundamental_matrix, homography_matrix_21;
-    fundamental_matrix = findFundamentalMat(points1, points2, FM_RANSAC, 0.7);
-    homography_matrix_21 = findHomography(points1, points2, cv::RANSAC, 0.7);
+    fundamental_matrix = findFundamentalMat(points1, points2, FM_RANSAC);
+    homography_matrix_21 = findHomography(points1, points2, cv::RANSAC);
 
     float score_F = calc_fundamental_score(points1, points2, fundamental_matrix);
     float score_H = calc_homography_score(points1, points2, homography_matrix_21); 
@@ -44,14 +44,12 @@ bool VisualOdometry::pose_estimate_2d2d(const Frame &frame_1, const Frame &frame
     
     Mat essential_matrix;
     essential_matrix = findEssentialMat(points1, points2, K);
-    // cv::Mat essential_matrix_hand = K.t() * fundamental_matrix * K;
     cout << "E: "<< essential_matrix <<endl;
-    // cout << "E_hand: "<< essential_matrix_hand <<endl;
 
     Mat inlier_mask;
     int inliers = recoverPose(essential_matrix, points1, points2, K, R, t, inlier_mask);
 
-    if(inliers < 50){
+    if(inliers < 30){
         cout << "inliers is too small: " << inliers << endl;
         return false;
     }
@@ -144,7 +142,7 @@ float VisualOdometry::calc_fundamental_score(const vector<Point2f> &points1, con
 }
 
 //상대 좌표를 이용한 방법
-bool VisualOdometry::triangulation(const Frame &frame_1, Frame &frame_2, 
+bool VisualOdometry::triangulation(Frame &frame_1, Frame &frame_2, 
                                     const std::vector<cv::DMatch> &matches, 
                                     std::vector<shared_ptr<MapPoint>> &points, bool isFirst
                                     ){
@@ -171,7 +169,30 @@ bool VisualOdometry::triangulation(const Frame &frame_1, Frame &frame_2,
         pts_2.push_back(frame_2.keypoints_[matches[i].trainIdx].pt);
         inlier_match_indices.push_back(static_cast<int>(i));
     }
+    
+    // inlier 거르기
+    cv::Mat mask;
+    cv::findFundamentalMat(pts_1, pts_2, FM_RANSAC, 3.0, 0.99, mask);
 
+    std::vector<cv::Point2d> inlier_pts1, inlier_pts2;
+    std::vector<int> inlier_idx;
+    inlier_pts1.reserve(pts_1.size());
+    inlier_pts2.reserve(pts_2.size());
+    inlier_idx.reserve(inlier_match_indices.size());
+
+    for (int i = 0; i < mask.rows; ++i) {
+        if (mask.at<uchar>(i)) {
+            inlier_pts1.push_back(pts_1[i]);
+            inlier_pts2.push_back(pts_2[i]);
+            inlier_idx.push_back(inlier_match_indices[i]);
+        }
+    }
+
+    pts_1.swap(inlier_pts1);
+    pts_2.swap(inlier_pts2);
+    inlier_match_indices.swap(inlier_idx);
+    
+    // inlier pts로 삼각측량 수행
     cv::Mat pts_4d;
     cv::triangulatePoints(T1, T21, pts_1, pts_2, pts_4d);
 
@@ -181,7 +202,6 @@ bool VisualOdometry::triangulation(const Frame &frame_1, Frame &frame_2,
     for (int i = 0; i < pts_4d.cols; i++) {
         cv::Mat x = pts_4d.col(i);
         x /= x.at<double>(3, 0); // 4D -> 3D
-        // cv::Point3d p(static_cast<double>(x.at<float>(0, 0)), static_cast<double>(x.at<float>(1, 0)), static_cast<double>(x.at<float>(2, 0)));
         cv::Point3d p(x.at<double>(0, 0), x.at<double>(1, 0), x.at<double>(2, 0));
 
         // 검증 1: 첫 번째 카메라 앞에서 포인트가 유효한가 (depth > 0)
@@ -229,7 +249,25 @@ bool VisualOdometry::triangulation(const Frame &frame_1, Frame &frame_2,
         Eigen::Vector3d p_eigen_local(p_local.x, p_local.y, p_local.z);
         Eigen::Vector3d p_world = frame_1.get_pose() * p_eigen_local;
 
-        // TODO: 기존에 존재하는 맵 포인트인지 확인 절차 필요.
+        // 기존에 존재하는 맵 포인트인지 확인 절차.
+        if(frame_1.observed_map_points_[match.queryIdx] != nullptr){
+            frame_2.observed_map_points_[match.trainIdx] = frame_1.observed_map_points_[match.queryIdx];
+            try {
+                auto frame2_ptr = frame_2.shared_from_this();
+                frame_2.observed_map_points_[match.trainIdx]->observations_.push_back(frame2_ptr);
+            } catch (const std::bad_weak_ptr &) {
+            }
+            continue; 
+        } else if(frame_2.observed_map_points_[match.trainIdx] != nullptr){
+            frame_1.observed_map_points_[match.queryIdx] = frame_2.observed_map_points_[match.trainIdx];
+            try {
+                auto frame1_ptr_const = frame_1.shared_from_this();
+                frame_1.observed_map_points_[match.queryIdx]->observations_.push_back(std::const_pointer_cast<Frame>(frame1_ptr_const));
+            } catch (const std::bad_weak_ptr &) {
+            }
+            continue; 
+        }
+
         shared_ptr<MapPoint> mp = MapPoint::CreateNewMappoint(start_id + k, 
                     p_world,
                     frame_2.descriptors_.row(match.trainIdx).clone());
@@ -237,7 +275,8 @@ bool VisualOdometry::triangulation(const Frame &frame_1, Frame &frame_2,
         new_map_points.push_back(mp);
 
         // 각 프레임에 관측된 맵포인트 추가
-        frame_2.observed_map_points_.push_back(mp);
+        frame_1.observed_map_points_[match.queryIdx] = mp;
+        frame_2.observed_map_points_[match.trainIdx] = mp;
         // 맵 포인트에 관측 프레임 추가, 이후에 기존에 있는 mappoint와의 중복 관측 제거 필요
         try {
             auto frame2_ptr = frame_2.shared_from_this();
@@ -253,7 +292,7 @@ bool VisualOdometry::triangulation(const Frame &frame_1, Frame &frame_2,
         mp->observed_cnt_ = static_cast<int>(mp->observations_.size());
     }
 
-    frame_2.observed_map_points_ = new_map_points;
+    cout << "New MapPoints: " << new_map_points.size() << endl;
     points.insert(points.end(), new_map_points.begin(), new_map_points.end());
 
     return true; // 성공
@@ -330,7 +369,7 @@ bool VisualOdometry::PnPcompute_g2o(const VecVector3d &points_3d, const VecVecto
     // 최종 inlier 마스크 계산
     // 3D 포인트와 2D 포인트의 재투영 오차 기반으로 outlier 라는 것은 오매칭일 가능성이 높다는 것을 의미
     pose_inlier_mask_.clear();
-    pose_inlier_mask_.resize(points_2d.size(), 1);
+    pose_inlier_mask_.resize(points_3d.size(), 1);
     const double chi2_threshold = 5.99; // (≈ 2.45px)^2 or 원하는 값
 
     for (auto edge_ptr : optimizer.edges()) {
@@ -352,7 +391,7 @@ bool VisualOdometry::PnPcompute_g2o(const VecVector3d &points_3d, const VecVecto
     return true;
 }
 
-bool VisualOdometry::check_parrallax(const Frame &frame_1, const vector<KeyPoint> &kp2, const std::vector<cv::DMatch> &matches, double min_parallax_deg){
+double VisualOdometry::check_parrallax(const Frame &frame_1, const vector<KeyPoint> &kp2, const std::vector<cv::DMatch> &matches){
     Eigen::Matrix3d K_eigen;
     cv::cv2eigen(K, K_eigen);
     Eigen::Matrix3d K_inv = K_eigen.inverse();
@@ -382,5 +421,5 @@ bool VisualOdometry::check_parrallax(const Frame &frame_1, const vector<KeyPoint
     double median_angle = angles_deg[mid];
     
     cout << "Median parallax angle : " << median_angle << " degrees" << endl;
-    return median_angle >= min_parallax_deg;
+    return median_angle;
 }

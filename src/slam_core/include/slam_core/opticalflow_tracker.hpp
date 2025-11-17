@@ -9,12 +9,20 @@ class OpticalFlowTracker{
     public:
     OpticalFlowTracker(){}
 
+    OpticalFlowTracker(const cv::Mat &img1, const cv::Mat &img2, const std::vector<cv::KeyPoint> &kp1, std::vector<cv::KeyPoint> &kp2,
+        std::vector<bool> &success, bool inverse = true, bool has_initial = false)
+        : img1_(img1), img2_(img2), kp1_(kp1), kp2_(kp2), success_(&success),
+        inverse_(inverse), has_initial_(has_initial) {}
+
     ~OpticalFlowTracker(){
     }
 
+    const std::vector<cv::KeyPoint>& tracked_keypoints() const { return kp2_; }
+    const std::vector<bool>& get_success() const { return *success_; }
+
     void track_opticalflow(
-        Frame &frame1,
-        Frame &frame2,
+        const Frame &frame1,
+        const Frame &frame2,
         std::vector<cv::KeyPoint> &kp2,
         std::vector<cv::DMatch> &matches,
         std::vector<bool> &success,
@@ -22,11 +30,19 @@ class OpticalFlowTracker{
         bool has_initial = false
     );
 
-    private:
     bool calculateOpticalFlow(const cv::Range &range);
 
+    void track_pyramid_opticalflow(
+    Frame &frame1,
+    Frame &frame2,
+    std::vector<cv::KeyPoint> &kp2,
+    std::vector<bool> &success,
+    bool inverse);
+
     private:
-    cv::Mat *img1_, *img2_;
+
+    private:
+    cv::Mat img1_, img2_;
     std::vector<cv::KeyPoint> kp1_, kp2_;
     std::vector<bool> *success_;
     bool inverse_ = true;
