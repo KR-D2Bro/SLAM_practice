@@ -18,7 +18,6 @@ class OpticalFlowTracker{
     }
 
     const std::vector<cv::KeyPoint>& tracked_keypoints() const { return kp2_; }
-    const std::vector<bool>& get_success() const { return *success_; }
 
     void track_opticalflow(
         const Frame &frame1,

@@ -20,12 +20,16 @@ class FeatureTracker
         //inliers_mappoints: 2d 키포인트와 매칭된 3D 포인트들
         bool match_3d_2d(const std::vector<std::shared_ptr<MapPoint>> &map_points, const Frame &cur_frame, 
             VecVector3d &points_3d, VecVector2d &points_2d, std::vector<cv::DMatch> &matches, std::vector<std::shared_ptr<MapPoint>> &inliers_mappoints);
+        
+        // optical flow로 매칭된 2D 키포인트와 3D 포인트들 매칭
+        bool match_3d_2d_opticalflow(const Frame &prev_frame, const Frame &cur_frame, const std::vector<cv::KeyPoint> &kp2, const std::vector<bool> &success, VecVector3d &points_3d, VecVector2d &points_2d, std::vector<cv::DMatch> &matches, std::vector<std::shared_ptr<MapPoint>> &inliers_mappoints);
+    
+        bool match_from_kf(const Frame &keyframe, const Frame &cur_frame, VecVector3d &points_3d, VecVector2d &points_2d, std::vector<cv::DMatch> &matches, std::vector<std::shared_ptr<MapPoint>> &inliers_mappoints);
 
-        // std::vector<cv::DMatch> matches;
-    private:
+        private:
         void ComputeORB(cv::Mat &img, std::vector<cv::KeyPoint> &key_points, std::vector<DescType> &descriptors);
         void BfMatch(const cv::Mat &desc1, const cv::Mat &desc_2, std::vector<cv::DMatch> &matches, float ratio = 0.7);
-        cv::DMatch queryMatch(const Frame &frame, const Vec2 &mp2pix, const cv::Mat &mpDescriptor, std::vector<std::vector<int>> &cells, int cols, int rows, float search_area = 24.0f);
+        cv::DMatch queryMatch(const Frame &frame, const Vec2 &mp2pix, const cv::Mat &mpDescriptor, std::vector<std::vector<int>> &cells, int cols, int rows, float search_area = 16.0f);
         
 
         cv::Ptr<cv::FeatureDetector> detector_;

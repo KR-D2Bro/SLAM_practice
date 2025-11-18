@@ -15,20 +15,46 @@ Frontend::Frontend(std::shared_ptr<vector<shared_ptr<MapPoint>>> map_points) : m
 //0: 실패, 1: 일반 프레임, 2: 키프레임
 int8_t Frontend::run(cv::Mat &img){
     Sophus::SE3d initial_rel_pose = prev_frame ? prev_frame->get_pose().inverse() * cur_frame->get_pose() : Sophus::SE3d();
+    vector<KeyPoint> kp2;
+    vector<Point2f> prev_pts2d, cur_pts2d;
+    vector<bool> success;
+    vector<uchar> status;
 
+    // 이전 프레임 저장 및 현재 프레임 생성
     prev_frame = cur_frame;
-
     cur_frame = std::make_shared<Frame>(frame_cnt++, prev_frame->get_pose(), feature_tracker_->undistort(img));
-    feature_tracker_->detectAndCompute(*cur_frame);
+    feature_tracker_->detectAndCompute(*cur_frame); // cur_frame의 keypoints_, descriptors_ 세팅
 
-    // if(prev_frame->id_ != -1){
-    //     // 매 프레임 Optical flow 트래킹 수행.
-    //     vector<KeyPoint> kp2;
-    //     vector<bool> success;
-    //     opticalflow_tracker_->track_pyramid_opticalflow(*prev_frame, *cur_frame, kp2, success, true);
-    //     per_frame_parallax = cal_parallax_opticalflow(*prev_frame, kp2, success);
-    // }
-    
+    if(prev_frame->id_ != -1){
+        // 매 프레임 Optical flow 트래킹 수행.
+        chrono::steady_clock::time_point t1 = chrono::steady_clock::now();
+        // opticalflow_tracker_->track_pyramid_opticalflow(*prev_frame, *cur_frame, kp2, success, false);
+        KeyPoint::convert(prev_frame->keypoints_,prev_pts2d);
+        kp2.resize(prev_pts2d.size());
+        KeyPoint::convert(kp2, cur_pts2d);
+        status.resize(prev_pts2d.size());
+        calcOpticalFlowPyrLK(prev_frame->img_, cur_frame->img_, prev_pts2d, cur_pts2d, status, noArray());
+        Mat img2_single;
+        cv::cvtColor(cur_frame->img_, img2_single, cv::COLOR_GRAY2BGR);
+        for (int i = 0; i < status.size(); i++) {
+            if (status.at(i)) {
+                cv::circle(img2_single, cur_pts2d[i], 2, cv::Scalar(0, 250, 0), 2);
+                cv::line(img2_single, prev_pts2d[i], cur_pts2d[i], cv::Scalar(0, 250, 0));
+            }
+        }
+        cv::imshow("tracked multi level", img2_single);
+        cv::waitKey(1);
+
+        chrono::steady_clock::time_point t2 = chrono::steady_clock::now();
+        cout << "Optical Flow Pyramid costs time: " << chrono::duration_cast<chrono::duration<double>>(t2 - t1).count() << " ms" << endl;
+        per_frame_parallax = cal_parallax_opticalflow(*prev_frame, kp2, status);
+    }
+
+    int num_tracked = 0;
+    for(const auto &s : status){
+        if(s)   num_tracked++;
+    }
+    cout << "number of tracked points by opticalflow: " << num_tracked <<endl;
     
     //첫번 째 frame을 key frame으로 등록 후 종료: 비교할 이미지 없음.
     if(keyframes.size()==0){
@@ -59,7 +85,22 @@ int8_t Frontend::run(cv::Mat &img){
         VecVector2d points_2d;
         vector<DMatch> matches;
         vector<shared_ptr<MapPoint>> inliers_mappoints;
-        if(feature_tracker_->match_3d_2d(*map_points_, *cur_frame, points_3d, points_2d, matches, inliers_mappoints)){
+
+        for(int i = 0; i<status.size(); i++){
+            if(status[i]){
+                success.push_back(true);
+            }
+            else{
+                success.push_back(false);
+            }
+        }
+        KeyPoint::convert(cur_pts2d, kp2);
+
+        matches.clear();
+        inliers_mappoints.clear();
+        if(feature_tracker_->match_3d_2d_opticalflow(*prev_frame, *cur_frame, kp2, success, points_3d, points_2d, matches, inliers_mappoints) ||
+            feature_tracker_->match_3d_2d(*map_points_, *cur_frame, points_3d, points_2d, matches, inliers_mappoints) ||
+            feature_tracker_->match_from_kf(*last_keyframe, *cur_frame, points_3d, points_2d, matches, inliers_mappoints)){
             //Pnp 수행.
             if(visual_odometry_->PnPcompute_g2o(points_3d, points_2d, *cur_frame)){
                 // inliers_mappoints의 디스크립터 업데이트 및 observed_map_points_ 설정
@@ -85,18 +126,20 @@ int8_t Frontend::run(cv::Mat &img){
                 // 3. 이동량 검사
                 Sophus::SE3d rel = last_keyframe->get_pose().inverse() * cur_frame->get_pose();
                 double trans = rel.translation().norm();
-                const double min_trans = 0.1;     // 데이터에 맞게 조정
+                const double min_trans = 0.12;     // 데이터에 맞게 조정
                 bool c_motion = (trans > min_trans);
+                cout << "Translation since last keyframe : " << trans << endl;
 
                 // 4. 시차 검사
                 total_parallax += per_frame_parallax;
                 bool c_parrallax = total_parallax > 5.0;
-                // c_parrallax = true;
-                // c_parrallax = visual_odometry_->check_parrallax(*last_keyframe, dummy_kp2, inliers_matches, 5.0);
 
                 cout << "KeyFrame conditions: " << c1 << ", " << c2 << ", " << c_motion << ", " << c_parrallax << endl;
 
                 if(c1 || (c_motion && c_parrallax)){
+                    if(!c_motion){
+                        return add_keyframe(cur_frame, num_inliers);
+                    }
                     //트래킹 포인트가 너무 적으면 키프레임 추가
                     cout << "Adding new KeyFrame." << endl;
                     // triangulation 함수 호출
@@ -129,7 +172,7 @@ int Frontend::add_keyframe(std::shared_ptr<Frame> &frame, int num_inliers){
 }
 
 // Optical flow로 얻은 키포인트 매칭으로 시차 계산
-double Frontend::cal_parallax_opticalflow(const Frame &frame_1, const vector<KeyPoint> &kp2, const vector<bool> &success){
+double Frontend::cal_parallax_opticalflow(const Frame &frame_1, const vector<KeyPoint> &kp2, const vector<uchar> &success){
     vector<DMatch> inliers_matches, optical_matches;
 
     for(int i = 0; i<(int)success.size(); i++){

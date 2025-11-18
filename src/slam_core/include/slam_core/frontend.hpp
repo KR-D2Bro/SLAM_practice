@@ -20,7 +20,7 @@ class Frontend
         std::vector<std::shared_ptr<Frame>> frames;
 
     private:
-        double cal_parallax_opticalflow(const Frame &frame_1, const std::vector<cv::KeyPoint> &kp2, const std::vector<bool> &success);
+        double cal_parallax_opticalflow(const Frame &frame_1, const std::vector<cv::KeyPoint> &kp2, const std::vector<uchar> &success);
 
         std::unique_ptr<FeatureTracker> feature_tracker_;
         std::unique_ptr<VisualOdometry> visual_odometry_;

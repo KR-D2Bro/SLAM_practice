@@ -107,9 +107,9 @@ void OpticalFlowTracker::track_pyramid_opticalflow(
         kp2_pyr.push_back(kp_top);
     }
 
+    success.assign(kp1_.size(), true);
     for (int level = pyramids - 1; level >= 0; level--) {
         // from coarse to fine
-        success.clear();
         OpticalFlowSingleLevel(pyr1[level], pyr2[level], kp1_pyr, kp2_pyr, success, inverse, true);
 
         if (level > 0) {
@@ -121,15 +121,13 @@ void OpticalFlowTracker::track_pyramid_opticalflow(
     }
 
     for(int i = 0; i<kp2_pyr.size(); i++){
-        if(success[i] == false)
-            continue;
         kp2.push_back(kp2_pyr[i]);
     }
 
     Mat img2_single;
     cv::cvtColor(img2_, img2_single, cv::COLOR_GRAY2BGR);
     for (int i = 0; i < kp2.size(); i++) {
-        if (success_->at(i)) {
+        if (success.at(i)) {
             cv::circle(img2_single, kp2[i].pt, 2, cv::Scalar(0, 250, 0), 2);
             cv::line(img2_single, kp1_[i].pt, kp2[i].pt, cv::Scalar(0, 250, 0));
         }
@@ -144,6 +142,10 @@ bool OpticalFlowTracker::calculateOpticalFlow(
     int half_patch_size = 4;
     int iterations = 10;
     for(size_t i = range.start; i < range.end; i++){
+        // 이전에 실패했다면 continue
+        if(!success_->at(i))
+            continue;
+
         auto kp = kp1_[i];
         double dx=0, dy=0;
         if(has_initial_){
@@ -236,12 +238,9 @@ void OpticalFlowSingleLevel(
     vector<KeyPoint> &kp2,
     vector<bool> &success,
     bool inverse, bool has_initial) {
-    kp2.resize(kp1.size());
-    success.resize(kp1.size());
     OpticalFlowTracker opticalFlowTracker(img1, img2, kp1, kp2, success, inverse, has_initial);
     parallel_for_(Range(0, kp1.size()),
                   std::bind(&OpticalFlowTracker::calculateOpticalFlow, &opticalFlowTracker, placeholders::_1));
                   
     kp2 = opticalFlowTracker.tracked_keypoints();
-    success = opticalFlowTracker.get_success();
 }

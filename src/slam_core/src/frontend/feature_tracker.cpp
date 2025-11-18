@@ -283,7 +283,7 @@ void getCellIndices(const Frame &frame, vector<vector<int>> &cells, int cols, in
 
 FeatureTracker::FeatureTracker(cv::Mat &K) {
     this->K = K;
-    detector_ = cv::ORB::create(3000);  //3000ê° í¤íë ì ì¶ì¶
+    detector_ = cv::ORB::create(2000);  //3000ê° í¤íë ì ì¶ì¶
     descriptor_ = cv::ORB::create();
     // matcher_ = cv::DescriptorMatcher::create("BruteForce-Hamming");
 }
@@ -424,8 +424,7 @@ Mat FeatureTracker::undistort(cv::Mat &img){
 
 bool FeatureTracker::match_3d_2d(const vector<shared_ptr<MapPoint>> &map_points, const Frame &cur_frame, 
     VecVector3d &points_3d, VecVector2d &points_2d, vector<DMatch> &matches, vector<shared_ptr<MapPoint>> &inliers_mappoints){
-    inliers_mappoints.clear();
-    vector<int> inliers_idx;
+    vector<DMatch> proj_matches;
 
     // 그리드를 나눠서 인근 9개 그리드에서 매칭 시도
     vector<vector<int>> cells;
@@ -437,13 +436,9 @@ bool FeatureTracker::match_3d_2d(const vector<shared_ptr<MapPoint>> &map_points,
         //포인트를 프레임의 coordinate로 변환
         Vec3 p_c = cur_frame.get_pose().inverse() * mp->get_pos();
         if(p_c[2] <= 0)   continue;
+        // 이미지 밖에 투영되는 포인트는 제외
         Vec2 p_img = cam2pixel(p_c, K);
         if(p_img.x() < 0 || p_img.x() >= cur_frame.img_.cols || p_img.y() < 0 || p_img.y() >= cur_frame.img_.rows)   continue;
-
-        if(mp->descriptor_.empty()){
-            cout << "Empty descriptor in map point." << endl;
-            continue;
-        }
 
         // 이미지를 셀로 나눠서 키포인트 인덱스를 셀 단위로 리스트업
         DMatch match = queryMatch(cur_frame, p_img, mp->descriptor_, cells, cols, rows);
@@ -453,22 +448,22 @@ bool FeatureTracker::match_3d_2d(const vector<shared_ptr<MapPoint>> &map_points,
 
         // 좋은 매칭 추가
         match.queryIdx = i;
-        matches.push_back(match);
+        proj_matches.push_back(match);
     }
+    cout << "3D-2D projected matches after adding proj matches: " << proj_matches.size() << endl;
 
-    if(matches.size() < 10){
-        cout << "Not enough good matches: " << matches.size() << endl;
-        return false;
-    }
-
-    cout << "3D-2D matches: " << matches.size() << endl;
-
-    for(const auto &m: matches){
+    for(const auto &m: proj_matches){
         points_3d.push_back(map_points[m.queryIdx]->get_pos());
         inliers_mappoints.push_back(map_points[m.queryIdx]);
 
         Point2f p2d = cur_frame.keypoints_[m.trainIdx].pt;
         points_2d.push_back(Vec2(p2d.x, p2d.y));
+        matches.push_back(m);
+    }
+
+    if(matches.size() < 10){
+        cout << "Not enough good matches after adding proj matches: " << matches.size() << endl;
+        return false;
     }
 
     return true;
@@ -517,4 +512,81 @@ DMatch FeatureTracker::queryMatch(const Frame &frame, const Vec2 &mp2pix, const 
         return DMatch{-1, -1, -1};
     
     return match[0]; 
+}
+
+bool FeatureTracker::match_3d_2d_opticalflow(const Frame &prev_frame, const Frame &cur_frame, const vector<KeyPoint> &kp2, const vector<bool> &success, VecVector3d &points_3d, VecVector2d &points_2d, vector<DMatch> &matches, vector<shared_ptr<MapPoint>> &inliers_mappoints){
+    // cur_frame keypoints 셀 단위로 나누기
+    vector<vector<int>> cells;
+    int cols = 32, rows = 24;
+    getCellIndices(cur_frame, cells, cols, rows);
+
+    int total_checked = 0;
+
+    // Optical flow로 구한 키포인트의 cur_frame 좌표계의 추정 위치에서 3D-2D 매칭 시도
+    for(int i = 0; i < prev_frame.keypoints_.size(); i++){
+        if(!success[i])   continue;
+
+        const auto &mp = prev_frame.observed_map_points_[i];
+        if(mp == nullptr)   continue;
+        total_checked++;
+
+        Vec2 p_img = Vec2(kp2[i].pt.x, kp2[i].pt.y);
+        if(p_img.x() < 0 || p_img.x() >= cur_frame.img_.cols || p_img.y() < 0 || p_img.y() >= cur_frame.img_.rows)   continue;
+
+        DMatch match = queryMatch(cur_frame, p_img, mp->descriptor_, cells, cols, rows, 8.0f);
+
+        //매칭이 없으면 
+        if(match.queryIdx == -1)    {
+            // cout << "No match for keypoint " << i << endl;
+            continue;
+        }
+        // 좋은 매칭 추가
+        match.queryIdx = i;
+        matches.push_back(match);
+    }
+    cout << "Total checked keypoints: " << total_checked << endl;
+    cout << "3D-2D matches after adding opticalflow matches: " << matches.size() << endl;
+
+    for(const auto &m: matches){
+        // cout << "pixel distance: " << norm(cur_frame.keypoints_[m.trainIdx].pt - kp2[m.queryIdx].pt) << endl;
+        points_3d.push_back(prev_frame.observed_map_points_[m.queryIdx]->get_pos());
+        inliers_mappoints.push_back(prev_frame.observed_map_points_[m.queryIdx]);
+
+        Point2f p2d = cur_frame.keypoints_[m.trainIdx].pt;
+        points_2d.push_back(Vec2(p2d.x, p2d.y));
+    }
+
+    if(matches.size() < 10){
+        cout << "Not enough good matches after adding opticalflow matches: " << matches.size() << endl;
+        return false;
+    }
+
+    return true;
+}
+
+bool FeatureTracker::match_from_kf(const Frame &keyframe, const Frame &cur_frame, VecVector3d &points_3d, VecVector2d &points_2d, vector<DMatch> &matches, vector<shared_ptr<MapPoint>> &inliers_mappoints){
+    vector<DMatch> new_matches;
+
+    BfMatch(keyframe.descriptors_, cur_frame.descriptors_, new_matches, 0.8);
+
+    cout << "3D-2D matches after adding Keyframe matches: " << new_matches.size() << endl;
+    
+    for(int i = 0; i < new_matches.size(); i++){
+        DMatch &m = new_matches[i];
+        auto mp = keyframe.observed_map_points_[m.queryIdx];
+        if(mp == nullptr)   continue;
+
+       
+        points_3d.push_back(mp->get_pos());
+        inliers_mappoints.push_back(mp);
+
+        points_2d.push_back(Vec2(cur_frame.keypoints_[m.trainIdx].pt.x, cur_frame.keypoints_[m.trainIdx].pt.y));
+        matches.push_back(m);
+    }
+
+    if(matches.size() < 10){
+        cout << "Not enough good matches after adding keyframe matches: " << matches.size() << endl;
+        return false;
+    }
+    return true;
 }
