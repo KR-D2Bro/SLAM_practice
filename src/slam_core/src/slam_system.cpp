@@ -3,7 +3,10 @@
 #include "slam_core/frame.hpp"
 #include "slam_core/mappoint.hpp"
 #include "slam_core/frontend.hpp"
+#include "slam_core/Map.hpp"
+#include "slam_core/LocalMapping.hpp"
 #include<iostream>
+#include <chrono>
 
 #include "rclcpp/rclcpp.hpp"
 #include "sensor_msgs/msg/image.hpp"
@@ -23,8 +26,10 @@ class SlamSystem : public rclcpp::Node
             image_subscription_ = this->create_subscription<sensor_msgs::msg::Image>
             ("/cam0/image_raw", 10, bind(&SlamSystem::topic_callback, this, placeholders::_1));
 
-            map_points_ = std::make_shared<std::vector<std::shared_ptr<MapPoint>>>();
-            frontend_ = std::make_unique<Frontend>(map_points_);
+            map_ = std::make_shared<Map>();
+            frontend_ = std::make_unique<Frontend>(map_);
+            cv::Mat K = (cv::Mat_<double>(3,3) << 458.654, 0, 367.215, 0, 457.296, 248.375, 0, 0, 1);
+            local_mapping_ = std::make_unique<LocalMapping>(map_, K);
             keyframes_ = std::make_unique<nav_msgs::msg::Path>();
 
             pose_publisher_ = this->create_publisher<geometry_msgs::msg::PoseStamped>("/pose", 10);
@@ -32,6 +37,12 @@ class SlamSystem : public rclcpp::Node
                 this->create_publisher<nav_msgs::msg::Path>("/keyframe_trajectory", 10);
             map_points_publisher_ =
                 this->create_publisher<sensor_msgs::msg::PointCloud2>("/map_points", 10);
+        }
+
+        ~SlamSystem() {
+            local_mapping_.reset();
+            frontend_.reset();
+            map_.reset();
         }
 
     private:
@@ -43,7 +54,8 @@ class SlamSystem : public rclcpp::Node
             publish_pose(frontend_->cur_frame->get_pose());
 
             if (res == 2) {
-                publish_path(keyframes_, frontend_->cur_frame->get_pose(), keyframe_pose_publisher_);
+                local_mapping_->insert_kf2queue(frontend_->cur_frame);
+                publish_path(keyframe_pose_publisher_);
                 publish_map_points();
             }
             
@@ -57,25 +69,29 @@ class SlamSystem : public rclcpp::Node
             return {R_ros, t_ros};
         }
 
-        void publish_path(std::unique_ptr<nav_msgs::msg::Path> &path, const Sophus::SE3d &pose, rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr publisher) {
-            Sophus::SE3d ros_pose = convert_cv_to_ros(pose);
+        void publish_path(rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr publisher) {
+            nav_msgs::msg::Path path;
+            for(const auto &kf : map_->keyframes()){
+                Sophus::SE3d pose = kf->get_pose();
+                Sophus::SE3d ros_pose = convert_cv_to_ros(pose);
             
-            auto pose_stamp = geometry_msgs::msg::PoseStamped();
-            pose_stamp.pose.position.x = ros_pose.translation().x();
-            pose_stamp.pose.position.y = ros_pose.translation().y();
-            pose_stamp.pose.position.z = ros_pose.translation().z();
-            pose_stamp.pose.orientation.w = ros_pose.unit_quaternion().w();
-            pose_stamp.pose.orientation.x = ros_pose.unit_quaternion().x();
-            pose_stamp.pose.orientation.y = ros_pose.unit_quaternion().y();
-            pose_stamp.pose.orientation.z = ros_pose.unit_quaternion().z();
-            pose_stamp.header.set__stamp(this->get_clock()->now());
-            pose_stamp.header.set__frame_id("map");
+                auto pose_stamp = geometry_msgs::msg::PoseStamped();
+                pose_stamp.pose.position.x = ros_pose.translation().x();
+                pose_stamp.pose.position.y = ros_pose.translation().y();
+                pose_stamp.pose.position.z = ros_pose.translation().z();
+                pose_stamp.pose.orientation.w = ros_pose.unit_quaternion().w();
+                pose_stamp.pose.orientation.x = ros_pose.unit_quaternion().x();
+                pose_stamp.pose.orientation.y = ros_pose.unit_quaternion().y();
+                pose_stamp.pose.orientation.z = ros_pose.unit_quaternion().z();
+                pose_stamp.header.set__stamp(this->get_clock()->now());
+                pose_stamp.header.set__frame_id("map");
 
-            path->poses.push_back(pose_stamp);
-            path->header.stamp = this->get_clock()->now();
-            path->header.frame_id = "map";
-
-            publisher->publish(*path);
+                path.poses.push_back(pose_stamp);
+                path.header.stamp = this->get_clock()->now();
+                path.header.frame_id = "map";
+            }
+            
+            publisher->publish(path);
             RCLCPP_INFO_STREAM(this->get_logger(), "Publishing" );
         }
 
@@ -98,13 +114,14 @@ class SlamSystem : public rclcpp::Node
 
 
         void publish_map_points() {
-            if (!map_points_publisher_ || !map_points_) {
+            const vector<shared_ptr<MapPoint>> &map_points = map_->mappoints();
+            if (!map_points_publisher_ || ! map_points.size()) {
                 return;
             }
 
             const auto now = this->get_clock()->now();
             std::size_t valid_count = 0;
-            for (const auto &mp : *map_points_) {
+            for (const auto &mp : map_points) {
                 if (mp && !mp->is_outlier_) {
                     ++valid_count;
                 }
@@ -122,7 +139,7 @@ class SlamSystem : public rclcpp::Node
             sensor_msgs::PointCloud2Iterator<float> iter_y(cloud, "y");
             sensor_msgs::PointCloud2Iterator<float> iter_z(cloud, "z");
 
-            for (const auto &mp : *map_points_) {
+            for (const auto &mp : map_points) {
                 if (!mp || mp->is_outlier_) {
                     continue;
                 }
@@ -139,14 +156,16 @@ class SlamSystem : public rclcpp::Node
             map_points_publisher_->publish(cloud);
         }
 
+        std::shared_ptr<Map> map_;
         cv::Point3f position_;
         std::unique_ptr<nav_msgs::msg::Path> path_, keyframes_;
-        std::shared_ptr<std::vector<std::shared_ptr<MapPoint>>> map_points_;
-        std::unique_ptr<Frontend> frontend_;
+        std::unique_ptr<Frontend> frontend_;\
+        std::unique_ptr<LocalMapping> local_mapping_;
         rclcpp::Subscription<sensor_msgs::msg::Image>::SharedPtr image_subscription_;
         rclcpp::Publisher<geometry_msgs::msg::PoseStamped>::SharedPtr pose_publisher_;
         rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr keyframe_pose_publisher_;
         rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr map_points_publisher_;
+        rclcpp::TimerBase::SharedPtr path_timer_;
 };
 
 int main(int argc, char **argv)

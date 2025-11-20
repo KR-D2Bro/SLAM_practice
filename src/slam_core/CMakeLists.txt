@@ -25,6 +25,10 @@ add_executable(slam_system
   src/frontend/visual_odometry.cpp
   src/frontend/frontend.cpp
   src/frontend/opticalflow_tracker.cpp
+  src/backend/LocalMapping.cpp
+  src/structure/frame.cpp
+  src/structure/Map.cpp
+  src/structure/mappoint.cpp
 )
 
 ament_target_dependencies( slam_system
@@ -39,7 +43,11 @@ ament_target_dependencies( slam_system
   "Sophus"
 )
 
-target_include_directories(slam_system PUBLIC ${OpenCV_INCLUDE_DIRS} $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include> )
+target_include_directories(slam_system PUBLIC
+  ${OpenCV_INCLUDE_DIRS}
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  /usr/include/suitesparse
+)
 target_link_libraries(slam_system
   ${OpenCV_LIBRARIES}
   Sophus::Sophus
@@ -47,6 +55,7 @@ target_link_libraries(slam_system
   g2o::stuff
   g2o::types_sba
   g2o::solver_dense
+  g2o::solver_csparse
   g2o::solver_eigen
 )
 

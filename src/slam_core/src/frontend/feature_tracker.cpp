@@ -283,7 +283,7 @@ void getCellIndices(const Frame &frame, vector<vector<int>> &cells, int cols, in
 
 FeatureTracker::FeatureTracker(cv::Mat &K) {
     this->K = K;
-    detector_ = cv::ORB::create(2000);  //3000ê° í¤íë ì ì¶ì¶
+    detector_ = cv::ORB::create(1000);  //1000ê° í¤íë ì ì¶ì¶
     descriptor_ = cv::ORB::create();
     // matcher_ = cv::DescriptorMatcher::create("BruteForce-Hamming");
 }
@@ -368,7 +368,7 @@ void FeatureTracker::ComputeORB(cv::Mat &img, vector<cv::KeyPoint> &key_points, 
 
 //ë¨ìí ë²ì 
 void FeatureTracker::BfMatch(const Mat &desc1, const Mat &desc2, vector<cv::DMatch> &matches, float ratio){
-    const int d_max = 40;
+    const int d_max = 50;
     const uint32_t* d1;
     const uint32_t* d2;
     matches.clear();
@@ -461,7 +461,7 @@ bool FeatureTracker::match_3d_2d(const vector<shared_ptr<MapPoint>> &map_points,
         matches.push_back(m);
     }
 
-    if(matches.size() < 10){
+    if(matches.size() < 40){
         cout << "Not enough good matches after adding proj matches: " << matches.size() << endl;
         return false;
     }
@@ -556,7 +556,7 @@ bool FeatureTracker::match_3d_2d_opticalflow(const Frame &prev_frame, const Fram
         points_2d.push_back(Vec2(p2d.x, p2d.y));
     }
 
-    if(matches.size() < 10){
+    if(matches.size() < 40){
         cout << "Not enough good matches after adding opticalflow matches: " << matches.size() << endl;
         return false;
     }
@@ -584,7 +584,7 @@ bool FeatureTracker::match_from_kf(const Frame &keyframe, const Frame &cur_frame
         matches.push_back(m);
     }
 
-    if(matches.size() < 10){
+    if(matches.size() < 50){
         cout << "Not enough good matches after adding keyframe matches: " << matches.size() << endl;
         return false;
     }

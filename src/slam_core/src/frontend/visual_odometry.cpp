@@ -1,5 +1,9 @@
 #include "slam_core/visual_odometry.hpp"
+
 #include "slam_core/mappoint.hpp"
+#include "slam_core/frame.hpp"
+#include "slam_core/Map.hpp"
+
 #include<iostream>
 #include<memory>
 
@@ -36,7 +40,7 @@ bool VisualOdometry::pose_estimate_2d2d(const Frame &frame_1, const Frame &frame
 
     float score_F = calc_fundamental_score(points1, points2, fundamental_matrix);
     float score_H = calc_homography_score(points1, points2, homography_matrix_21); 
-    cout << "score_F : " << score_F << endl << "score_H : " << score_H << endl;
+    // cout << "score_F : " << score_F << endl << "score_H : " << score_H << endl;
 
     if(score_H / (score_H + score_F) > 0.45){
         return false;
@@ -44,7 +48,7 @@ bool VisualOdometry::pose_estimate_2d2d(const Frame &frame_1, const Frame &frame
     
     Mat essential_matrix;
     essential_matrix = findEssentialMat(points1, points2, K);
-    cout << "E: "<< essential_matrix <<endl;
+    // cout << "E: "<< essential_matrix <<endl;
 
     Mat inlier_mask;
     int inliers = recoverPose(essential_matrix, points1, points2, K, R, t, inlier_mask);
@@ -63,7 +67,7 @@ bool VisualOdometry::pose_estimate_2d2d(const Frame &frame_1, const Frame &frame
         }
     }
 
-    cout << "R: " << R << endl << "t: " << t << endl;
+    // cout << "R: " << R << endl << "t: " << t << endl;
 
     //calculate T_
     //T_는 cam1 좌표계의 포인트들을 cam2좌표계로 변환하는 행렬
@@ -74,7 +78,7 @@ bool VisualOdometry::pose_estimate_2d2d(const Frame &frame_1, const Frame &frame
     cv2eigen(t,tran);
     T_ = Sophus::SE3d(rot, tran);
 
-    cout << "T_rel: " << T_.matrix3x4() << endl;
+    // cout << "T_rel: " << T_.matrix3x4() << endl;
 
     return true;
 }
@@ -144,7 +148,7 @@ float VisualOdometry::calc_fundamental_score(const vector<Point2f> &points1, con
 //상대 좌표를 이용한 방법
 bool VisualOdometry::triangulation(Frame &frame_1, Frame &frame_2, 
                                     const std::vector<cv::DMatch> &matches, 
-                                    std::vector<shared_ptr<MapPoint>> &points, bool isFirst
+                                    std::shared_ptr<Map> &map, bool isFirst
                                     ){
     // --- 1. 기존 삼각측량 준비 ---
     cv::Mat T1 = (cv::Mat_<double>(3, 4) <<
@@ -241,8 +245,8 @@ bool VisualOdometry::triangulation(Frame &frame_1, Frame &frame_2,
 
     // 3. 최종 월드 좌표계 포인트 계산
     vector<Vec3> world_points;
-    vector<shared_ptr<MapPoint>> new_map_points;
-    int start_id = points.size();
+    int start_id = map->get_mps_size();
+    int new_mp_cnt = 0;
     for(size_t k = 0; k < valid_points_local.size(); ++k){
         const auto& p_local = valid_points_local[k];
         const auto& match = matches[valid_match_indices[k]];
@@ -254,25 +258,28 @@ bool VisualOdometry::triangulation(Frame &frame_1, Frame &frame_2,
             frame_2.observed_map_points_[match.trainIdx] = frame_1.observed_map_points_[match.queryIdx];
             try {
                 auto frame2_ptr = frame_2.shared_from_this();
-                frame_2.observed_map_points_[match.trainIdx]->observations_.push_back(frame2_ptr);
+                frame_2.observed_map_points_[match.trainIdx]->add_observation(frame2_ptr, match.trainIdx);
             } catch (const std::bad_weak_ptr &) {
             }
             continue; 
         } else if(frame_2.observed_map_points_[match.trainIdx] != nullptr){
             frame_1.observed_map_points_[match.queryIdx] = frame_2.observed_map_points_[match.trainIdx];
             try {
-                auto frame1_ptr_const = frame_1.shared_from_this();
-                frame_1.observed_map_points_[match.queryIdx]->observations_.push_back(std::const_pointer_cast<Frame>(frame1_ptr_const));
+                auto frame1_ptr = frame_1.shared_from_this();
+                frame_1.observed_map_points_[match.queryIdx]->add_observation(frame1_ptr, match.queryIdx);
             } catch (const std::bad_weak_ptr &) {
             }
             continue; 
         }
 
-        shared_ptr<MapPoint> mp = MapPoint::CreateNewMappoint(start_id + k, 
+        shared_ptr<MapPoint> mp = MapPoint::CreateNewMappoint(start_id++, 
                     p_world,
                     frame_2.descriptors_.row(match.trainIdx).clone());
         
-        new_map_points.push_back(mp);
+        // 맵에 맵포인트 추가
+        // TODO: 뮤텍스 필요
+        map->insert_mappoint(mp);
+        new_mp_cnt++;
 
         // 각 프레임에 관측된 맵포인트 추가
         frame_1.observed_map_points_[match.queryIdx] = mp;
@@ -280,20 +287,18 @@ bool VisualOdometry::triangulation(Frame &frame_1, Frame &frame_2,
         // 맵 포인트에 관측 프레임 추가, 이후에 기존에 있는 mappoint와의 중복 관측 제거 필요
         try {
             auto frame2_ptr = frame_2.shared_from_this();
-            mp->observations_.push_back(frame2_ptr);
+            mp->add_observation(frame2_ptr, match.trainIdx);
         } catch (const std::bad_weak_ptr &) {
         }
 
         try {
-            auto frame1_ptr_const = frame_1.shared_from_this();
-            mp->observations_.push_back(std::const_pointer_cast<Frame>(frame1_ptr_const));
+            auto frame1_ptr = frame_1.shared_from_this();
+            mp->add_observation(frame1_ptr, match.queryIdx);
         } catch (const std::bad_weak_ptr &) {
         }
-        mp->observed_cnt_ = static_cast<int>(mp->observations_.size());
     }
 
-    cout << "New MapPoints: " << new_map_points.size() << endl;
-    points.insert(points.end(), new_map_points.begin(), new_map_points.end());
+    cout << "New MapPoints: " << new_mp_cnt << endl;
 
     return true; // 성공
 }
@@ -391,10 +396,11 @@ bool VisualOdometry::PnPcompute_g2o(const VecVector3d &points_3d, const VecVecto
     return true;
 }
 
-double VisualOdometry::check_parrallax(const Frame &frame_1, const vector<KeyPoint> &kp2, const std::vector<cv::DMatch> &matches){
+double VisualOdometry::check_parrallax(const Frame &frame_1, const Frame &frame_2, const vector<KeyPoint> &kp2, const std::vector<cv::DMatch> &matches){
     Eigen::Matrix3d K_eigen;
     cv::cv2eigen(K, K_eigen);
     Eigen::Matrix3d K_inv = K_eigen.inverse();
+    Sophus::SO3d R21 = frame_1.get_pose().so3().inverse() * frame_2.get_pose().so3();
 
     std::vector<double> angles_deg;
     angles_deg.reserve(matches.size());
@@ -409,8 +415,9 @@ double VisualOdometry::check_parrallax(const Frame &frame_1, const vector<KeyPoi
         f1.normalize();
         Eigen::Vector3d f2 = K_inv * p2_h;
         f2.normalize();
+        Eigen::Vector3d f2_in_1 = R21 * f2;
 
-        double cos_angle = f1.dot(f2);
+        double cos_angle = f1.dot(f2_in_1);
         cos_angle = std::max(-1.0, std::min(1.0, cos_angle));
         double angle_rad = std::acos(cos_angle);
         angles_deg.push_back(angle_rad * 180.0 / M_PI);

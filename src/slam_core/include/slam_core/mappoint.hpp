@@ -4,6 +4,7 @@
 #include "slam_core/common_include.hpp"
 #include <list>
 #include <memory>
+#include <unordered_map>
 
 class Frame;
 
@@ -20,7 +21,7 @@ struct MapPoint {
 
         int observed_cnt_ = 0;
         cv::Mat descriptor_; //descriptor for matching
-        std::list<std::weak_ptr<Frame>> observations_;
+        std::unordered_map<Frame*, int> observations_; // 관측 프레임과 키포인트 인덱스 매핑
 
     public:
         MapPoint() {}
@@ -35,8 +36,8 @@ struct MapPoint {
             pos_ = pos;
         }
 
-        void add_observation(std::shared_ptr<Frame> frame){
-            observations_.push_back(frame);
+        void add_observation(const std::shared_ptr<Frame> &frame, int keypoint_index){
+            observations_.emplace(frame.get(), keypoint_index);
             observed_cnt_++;
         }
 

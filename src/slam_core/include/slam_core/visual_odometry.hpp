@@ -2,8 +2,10 @@
 #define VISUAL_ODOMETRY_HPP_
 
 #include "slam_core/common_include.hpp"
-#include "slam_core/frame.hpp"
 #include "slam_core/G2oTypes.hpp"
+
+class Frame;
+class Map;
 
 class VisualOdometry
 {
@@ -14,7 +16,7 @@ class VisualOdometry
         void visual_odometry(cv::Mat &img_1, cv::Mat &img_2);
 
         bool triangulation( Frame &frame_1, Frame &frame_2, 
-                            const std::vector<cv::DMatch> &matches, std::vector<std::shared_ptr<MapPoint>> &points, bool isFirst = false);
+                            const std::vector<cv::DMatch> &matches, std::shared_ptr<Map> &map, bool isFirst = false);
         
         bool pose_estimate_2d2d(const Frame &frame_1, const Frame &frame_2, const std::vector<cv::DMatch> &matches);
 
@@ -22,7 +24,7 @@ class VisualOdometry
 
         bool PnPcompute_g2o(const VecVector3d &points_3d, const VecVector2d &points_2d, Frame &cur_frame);
 
-        double check_parrallax(const Frame &frame_1, const std::vector<cv::KeyPoint> &kp2, const std::vector<cv::DMatch> &matches);
+        double check_parrallax(const Frame &frame_1, const Frame &frame_2, const std::vector<cv::KeyPoint> &kp2, const std::vector<cv::DMatch> &matches);
         
         const std::vector<uchar>& pose_inlier_mask() const { return pose_inlier_mask_; }
 

@@ -4,9 +4,9 @@
 using namespace std;
 
 void MapPoint::remove_observation(std::shared_ptr<Frame> frame){
-    observations_.remove_if([frame](const std::weak_ptr<Frame>& wp) {
-        auto sp = wp.lock();
-        return sp && sp.get() == frame.get();
-    });
-    observed_cnt_ = static_cast<int>(observations_.size());
+    auto iter = observations_.find(frame.get());
+    if(iter != observations_.end()){
+        observations_.erase(iter);
+        observed_cnt_ = static_cast<int>(observations_.size());
+    }
 }

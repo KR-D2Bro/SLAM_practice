@@ -3,6 +3,7 @@
 
 #include "slam_core/common_include.hpp"
 
+// PnP + local BA vertex for camera pose
 class VertexPose : public g2o::BaseVertex<6, Sophus::SE3d> {
 public:
   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
@@ -18,6 +19,12 @@ public:
     _estimate = Sophus::SE3d::exp(update_eigen) * _estimate;
   }
 
+  Eigen::Vector2d project(const Eigen::Vector3d &pos_world, const Eigen::Matrix3d &K) {
+    Eigen::Vector3d pos_pixel = K * (_estimate * pos_world);
+    pos_pixel /= pos_pixel[2];
+    return pos_pixel.head<2>();
+  }
+
   virtual bool read(std::istream &in) override {
     (void)in;
     return true;
@@ -29,6 +36,7 @@ public:
   }
 };
 
+// PnP edge
 class EdgeProjection : public g2o::BaseUnaryEdge<2, Eigen::Vector2d, VertexPose> {
 public:
   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
@@ -71,6 +79,48 @@ public:
 private:
   Eigen::Vector3d _pos3d;
   Eigen::Matrix3d _K;
+};
+
+// local BA vertex for 3D point
+class VertexPoint : public g2o::BaseVertex<3, Eigen::Vector3d> {
+  public:
+    EIGEN_MAKE_ALIGNED_OPERATOR_NEW
+
+    virtual void setToOriginImpl() override {
+      _estimate = Eigen::Vector3d::Zero();
+    }
+
+    virtual void oplusImpl(const double *update) override {
+      Eigen::Vector3d update_eigen;
+      update_eigen << update[0], update[1], update[2];
+      _estimate += update_eigen;
+    }
+
+    virtual bool read(std::istream &in) override {}
+    virtual bool write(std::ostream &out) const override {}
+};
+
+// local BA edge
+class EdgeProjectionBA : public g2o::BaseBinaryEdge<2, Eigen::Vector2d, VertexPose, VertexPoint> {
+  public:
+    EIGEN_MAKE_ALIGNED_OPERATOR_NEW
+
+    EdgeProjectionBA(const Eigen::Matrix3d &K) : K_(K) {}
+
+    virtual void computeError() override {
+      auto *v0 = (VertexPose *)_vertices[0];
+      auto *v1 = (VertexPoint *)_vertices[1];
+      auto proj = v0->project(v1->estimate(), K_);
+      _error = _measurement - proj;
+    }
+
+    // virtual linearizeOplus() override {}
+
+    virtual bool read(std::istream &in) override {}
+    virtual bool write(std::ostream &out) const override {}
+
+  private:
+    Eigen::Matrix3d K_; //intrinsic matrix
 };
 
 #endif

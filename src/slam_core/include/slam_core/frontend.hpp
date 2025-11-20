@@ -7,16 +7,16 @@
 #include "slam_core/opticalflow_tracker.hpp"
 
 struct MapPoint;
+class Map;
 
 class Frontend
 {
     public:
-        Frontend(std::shared_ptr<std::vector<std::shared_ptr<MapPoint>>> map_points);
+        Frontend(std::shared_ptr<Map> &map);
 
         std::int8_t run(cv::Mat &img);
 
         std::shared_ptr<Frame> cur_frame;
-        std::vector<std::shared_ptr<Frame>> keyframes;
         std::vector<std::shared_ptr<Frame>> frames;
 
     private:
@@ -26,7 +26,7 @@ class Frontend
         std::unique_ptr<VisualOdometry> visual_odometry_;
         std::unique_ptr<OpticalFlowTracker> opticalflow_tracker_;
         std::shared_ptr<Frame> prev_frame, last_keyframe;
-        std::shared_ptr<std::vector<std::shared_ptr<MapPoint>>> map_points_;
+        std::shared_ptr<Map> map_;
 
         unsigned long frame_cnt = 0;
         unsigned long last_points_num = 0;
