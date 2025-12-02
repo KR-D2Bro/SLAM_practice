@@ -30,6 +30,7 @@ void publishGTPause(rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr path_pub);
 std::vector<GroundTruthPose> loadEuRoCGroundTruth(const std::string& filename);
 Sophus::SE3d groundTruthToSE3(const GroundTruthPose& pose);
 
+// ORB based SLAM system
 class SlamSystem : public rclcpp::Node
 {
     public:
