@@ -281,9 +281,10 @@ void getCellIndices(const Frame &frame, vector<vector<int>> &cells, int cols, in
 }
 
 
+
 FeatureTracker::FeatureTracker(cv::Mat &K) {
     this->K = K;
-    detector_ = cv::ORB::create(1000);  //1000ê° í¤íë ì ì¶ì¶
+    detector_ = cv::ORB::create(2000);  //1000
     descriptor_ = cv::ORB::create();
     // matcher_ = cv::DescriptorMatcher::create("BruteForce-Hamming");
 }
@@ -293,6 +294,10 @@ void FeatureTracker::detectAndCompute(Frame &frame){
     cv::Mat output_image;
 
     detector_->detect(frame.img_, frame.keypoints_);
+    // std::vector<cv::KeyPoint> balanced;
+    // distributeKeypointsQuadtree(frame.keypoints_, frame.img_.size(), 800, balanced);
+
+    // frame.keypoints_ = balanced;
     descriptor_->compute(frame.img_, frame.keypoints_, frame.descriptors_);
     // FeatureTracker::ComputeORB(frame.img_, frame.keypoints_, frame.descriptors_);
     // 관측한 3D 포인트관리를 위해 초기화.
@@ -461,7 +466,7 @@ bool FeatureTracker::match_3d_2d(const vector<shared_ptr<MapPoint>> &map_points,
         matches.push_back(m);
     }
 
-    if(matches.size() < 40){
+    if(matches.size() < 60){
         cout << "Not enough good matches after adding proj matches: " << matches.size() << endl;
         return false;
     }
@@ -556,7 +561,7 @@ bool FeatureTracker::match_3d_2d_opticalflow(const Frame &prev_frame, const Fram
         points_2d.push_back(Vec2(p2d.x, p2d.y));
     }
 
-    if(matches.size() < 40){
+    if(matches.size() < 60){
         cout << "Not enough good matches after adding opticalflow matches: " << matches.size() << endl;
         return false;
     }
@@ -568,8 +573,6 @@ bool FeatureTracker::match_from_kf(const Frame &keyframe, const Frame &cur_frame
     vector<DMatch> new_matches;
 
     BfMatch(keyframe.descriptors_, cur_frame.descriptors_, new_matches, 0.8);
-
-    cout << "3D-2D matches after adding Keyframe matches: " << new_matches.size() << endl;
     
     for(int i = 0; i < new_matches.size(); i++){
         DMatch &m = new_matches[i];
@@ -584,9 +587,145 @@ bool FeatureTracker::match_from_kf(const Frame &keyframe, const Frame &cur_frame
         matches.push_back(m);
     }
 
-    if(matches.size() < 50){
+    cout << "3D-2D matches after adding Keyframe matches: " << matches.size() << endl;
+
+    if(matches.size() < 10){
         cout << "Not enough good matches after adding keyframe matches: " << matches.size() << endl;
         return false;
     }
     return true;
+}
+
+
+
+
+
+
+// 임시
+#include <opencv2/opencv.hpp>
+#include <list>
+
+struct QuadNode {
+    cv::Rect rect;                      // 이 노드가 담당하는 영역
+    std::vector<cv::KeyPoint> kps;      // 이 영역 안의 키포인트들
+    bool noMore = false;                // 더 이상 쪼갤 수 없는 노드인지
+};
+
+void distributeKeypointsQuadtree(const std::vector<cv::KeyPoint>& inputKps,
+                                 const cv::Size& imageSize,
+                                 int desiredNum,
+                                 std::vector<cv::KeyPoint>& outputKps)
+{
+    outputKps.clear();
+    if (inputKps.empty() || desiredNum <= 0) {
+        return;
+    }
+
+    // 1. 루트 노드 생성 (이미지 전체)
+    QuadNode root;
+    root.rect = cv::Rect(0, 0, imageSize.width, imageSize.height);
+    root.kps = inputKps;
+
+    std::list<QuadNode> nodes;
+    nodes.push_back(root);
+
+    // 2. 노드를 쪼개가며 노드 수를 늘림
+    bool finished = false;
+    while (!finished) {
+        // 더 이상 쪼갤 수 있는 노드가 없으면 종료
+        bool anySplit = false;
+
+        // 노드 개수가 원하는 키포인트 개수보다 작을 때만 분할 시도
+        if ((int)nodes.size() >= desiredNum) break;
+
+        // 키포인트가 가장 많이 들어있는 노드를 하나 골라서 분할하는 식으로 구현 (간단 버전)
+        auto nodeToSplitIt = nodes.end();
+        int maxKps = 0;
+
+        for (auto it = nodes.begin(); it != nodes.end(); ++it) {
+            if (it->noMore) continue;
+            int n = (int)it->kps.size();
+            if (n > maxKps && n > 1) {  // 1개 이하면 쪼갤 필요 없음
+                maxKps = n;
+                nodeToSplitIt = it;
+            }
+        }
+
+        if (nodeToSplitIt == nodes.end()) {
+            // 더 이상 쪼갤 후보가 없다
+            finished = true;
+            break;
+        }
+
+        QuadNode node = *nodeToSplitIt;
+
+        // 사각형이 너무 작으면 더이상 분할 X
+        if (node.rect.width <= 4 || node.rect.height <= 4) {
+            nodeToSplitIt->noMore = true;
+            continue;
+        }
+
+        // 4등분
+        int halfW = node.rect.width / 2;
+        int halfH = node.rect.height / 2;
+
+        QuadNode child[4];
+        child[0].rect = cv::Rect(node.rect.x,               node.rect.y,               halfW,       halfH);
+        child[1].rect = cv::Rect(node.rect.x + halfW,       node.rect.y,               node.rect.width - halfW, halfH);
+        child[2].rect = cv::Rect(node.rect.x,               node.rect.y + halfH,       halfW,       node.rect.height - halfH);
+        child[3].rect = cv::Rect(node.rect.x + halfW,       node.rect.y + halfH,       node.rect.width - halfW, node.rect.height - halfH);
+
+        // 키포인트들을 네 자식에게 분배
+        for (const auto& kp : node.kps) {
+            cv::Point2f pt = kp.pt;
+            for (int i = 0; i < 4; ++i) {
+                if (child[i].rect.contains(pt)) {
+                    child[i].kps.push_back(kp);
+                    break;
+                }
+            }
+        }
+
+        // 부모 노드를 리스트에서 제거
+        nodes.erase(nodeToSplitIt);
+
+        // 자식 노드들 중 키포인트가 0개인 노드는 버리고, 1개 이상이면 리스트에 추가
+        for (int i = 0; i < 4; ++i) {
+            if (child[i].kps.empty())
+                continue;
+            if ((int)child[i].kps.size() == 1)
+                child[i].noMore = true;
+            nodes.push_back(child[i]);
+        }
+
+        anySplit = true;
+        if (!anySplit) {
+            finished = true;
+        }
+    }
+
+    // 3. 각 노드 당 가장 response가 큰 키포인트 1개 선택
+    std::vector<cv::KeyPoint> tmp;
+    tmp.reserve(nodes.size());
+    for (auto& n : nodes) {
+        auto& v = n.kps;
+        if (v.empty()) continue;
+        // 가장 response 큰 키포인트 고르기
+        auto bestIt = std::max_element(v.begin(), v.end(),
+                                       [](const cv::KeyPoint& a, const cv::KeyPoint& b) {
+                                           return a.response < b.response;
+                                       });
+        tmp.push_back(*bestIt);
+    }
+
+    // 4. 너무 많으면 response 기준으로 정렬 후 desiredNum 개만 사용
+    if ((int)tmp.size() > desiredNum) {
+        std::sort(tmp.begin(), tmp.end(),
+                  [](const cv::KeyPoint& a, const cv::KeyPoint& b) {
+                      return a.response > b.response;
+                  });
+        tmp.resize(desiredNum);
+    }
+
+    outputKps = std::move(tmp);
 }

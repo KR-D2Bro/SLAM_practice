@@ -337,7 +337,7 @@ bool VisualOdometry::PnPcompute_g2o(const VecVector3d &points_3d, const VecVecto
     
     Eigen::Matrix3d K_eigen;
     cv2eigen(K, K_eigen);
-    auto solver = new g2o::OptimizationAlgorithmGaussNewton(
+    auto solver = new g2o::OptimizationAlgorithmLevenberg(
         std::make_unique<BlockSolverType>(std::make_unique<LinearSolverType>())
     );
     g2o::SparseOptimizer optimizer;

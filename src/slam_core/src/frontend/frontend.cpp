@@ -15,7 +15,6 @@ Frontend::Frontend(shared_ptr<Map> &map) : map_(map) {
 
 //0: 실패, 1: 일반 프레임, 2: 키프레임
 int8_t Frontend::run(cv::Mat &img){
-    Sophus::SE3d initial_rel_pose = prev_frame ? prev_frame->get_pose().inverse() * cur_frame->get_pose() : Sophus::SE3d();
     vector<KeyPoint> kp2;
     vector<Point2f> prev_pts2d, cur_pts2d;
     vector<bool> success;
@@ -32,11 +31,12 @@ int8_t Frontend::run(cv::Mat &img){
         // opticalflow_tracker_->track_pyramid_opticalflow(*prev_frame, *cur_frame, kp2, success, false);
         KeyPoint::convert(prev_frame->keypoints_,prev_pts2d);
         kp2.resize(prev_pts2d.size());
-        KeyPoint::convert(kp2, cur_pts2d);
+        cur_pts2d.resize(prev_pts2d.size());
         status.resize(prev_pts2d.size());
         calcOpticalFlowPyrLK(prev_frame->img_, cur_frame->img_, prev_pts2d, cur_pts2d, status, noArray());
         Mat img2_single;
         cv::cvtColor(cur_frame->img_, img2_single, cv::COLOR_GRAY2BGR);
+        
         for (int i = 0; i < status.size(); i++) {
             if (status.at(i)) {
                 cv::circle(img2_single, cur_pts2d[i], 2, cv::Scalar(0, 250, 0), 2);
@@ -115,7 +115,7 @@ int8_t Frontend::run(cv::Mat &img){
 
                 // 기본 키프레임 생성 조건
                 // 1. 30프레임 이상 간격
-                const bool c1 = cur_frame->id_ >= last_keyframe->id_ + 25; 
+                const bool c1 = cur_frame->id_ >= last_keyframe->id_ + 15; 
 
                 // 2. 트래킹 포인트가 키프레임 관측 포인트의 70% 이하이면서 15개 이상
                 // PnPcompute_g2o에서 pose_inlier_mask_ 설정됨
@@ -148,10 +148,11 @@ int8_t Frontend::run(cv::Mat &img){
                 cout << "KeyFrame conditions: " << c1 << ", " << c2 << ", " << c_motion << ", " << c_parrallax << endl;
 
                 if(c1 || (c_motion && c_parrallax)){
-                    if(num_inliers < 60 || c3){
+                    if(num_inliers < 20 || c3 ){
                         cout << "Fail adding KeyFrame due to motion/parallax/inliers condition." << endl;
+                        return 1;
                         // return add_keyframe(cur_frame, num_inliers);
-                    }                 
+                    }                
                     //트래킹 포인트가 너무 적으면 키프레임 추가        
                     cout << "Adding new KeyFrame.!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
                     // triangulation 함수 호출                                      
@@ -163,6 +164,7 @@ int8_t Frontend::run(cv::Mat &img){
                         return add_keyframe(cur_frame, dummy_matches.size());
                     }
                 }
+                
                 return 1;
             }
             return 0;

@@ -113,6 +113,14 @@ const Eigen::Matrix3d R_ros_cv = (Eigen::Matrix3d() << 0, 0, 1,
                                                         -1, 0, 0,
                                                         0, -1, 0).finished();
 
+inline Sophus::SE3d convert_cv_to_ros(const Sophus::SE3d &pose_cv) {
+    const Sophus::SO3d R_ros_cv_so3(R_ros_cv);
+    const Sophus::SO3d R_cv_ros_so3(R_ros_cv.transpose());
+    Sophus::SO3d R_ros = R_ros_cv_so3 * pose_cv.so3() * R_cv_ros_so3;
+    Eigen::Vector3d t_ros = R_ros_cv * pose_cv.translation();
+    return {R_ros, t_ros};
+}
+
 inline cv::Point2f pixel2cam(const cv::Point2d &p, const cv::Mat &K){
     return cv::Point2f(
         (p.x - K.at<double>(0,2)) / K.at<double>(0,0),

@@ -19,6 +19,17 @@
 using namespace std;
 using namespace cv;
 
+struct GroundTruthPose {
+    long long timestamp; // 나노초 단위
+    double x, y, z;      // 위치
+    double qw, qx, qy, qz; // 회전 (Quaternion)
+};
+
+void publishGTPause(rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr path_pub);
+// CSV 파일을 읽는 함수
+std::vector<GroundTruthPose> loadEuRoCGroundTruth(const std::string& filename);
+Sophus::SE3d groundTruthToSE3(const GroundTruthPose& pose);
+
 class SlamSystem : public rclcpp::Node
 {
     public:
@@ -37,6 +48,9 @@ class SlamSystem : public rclcpp::Node
                 this->create_publisher<nav_msgs::msg::Path>("/keyframe_trajectory", 10);
             map_points_publisher_ =
                 this->create_publisher<sensor_msgs::msg::PointCloud2>("/map_points", 10);
+            gt_traj_publisher_ = this->create_publisher<nav_msgs::msg::Path>("/gt_trajectory", 10);
+
+            publishGTPause(gt_traj_publisher_);
         }
 
         ~SlamSystem() {
@@ -61,13 +75,7 @@ class SlamSystem : public rclcpp::Node
             
         }
 
-        Sophus::SE3d convert_cv_to_ros(const Sophus::SE3d &pose_cv) const {
-            const Sophus::SO3d R_ros_cv_so3(R_ros_cv);
-            const Sophus::SO3d R_cv_ros_so3(R_ros_cv.transpose());
-            Sophus::SO3d R_ros = R_ros_cv_so3 * pose_cv.so3() * R_cv_ros_so3;
-            Eigen::Vector3d t_ros = R_ros_cv * pose_cv.translation();
-            return {R_ros, t_ros};
-        }
+        
 
         void publish_path(rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr publisher) {
             nav_msgs::msg::Path path;
@@ -159,11 +167,11 @@ class SlamSystem : public rclcpp::Node
         std::shared_ptr<Map> map_;
         cv::Point3f position_;
         std::unique_ptr<nav_msgs::msg::Path> path_, keyframes_;
-        std::unique_ptr<Frontend> frontend_;\
+        std::unique_ptr<Frontend> frontend_;
         std::unique_ptr<LocalMapping> local_mapping_;
         rclcpp::Subscription<sensor_msgs::msg::Image>::SharedPtr image_subscription_;
         rclcpp::Publisher<geometry_msgs::msg::PoseStamped>::SharedPtr pose_publisher_;
-        rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr keyframe_pose_publisher_;
+        rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr keyframe_pose_publisher_, gt_traj_publisher_;
         rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr map_points_publisher_;
         rclcpp::TimerBase::SharedPtr path_timer_;
 };
@@ -174,4 +182,100 @@ int main(int argc, char **argv)
     rclcpp::spin(std::make_shared<SlamSystem>()); 
     rclcpp::shutdown();
     return 0;
+}
+
+
+void publishGTPause(rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr path_pub) {
+    auto gt_data = loadEuRoCGroundTruth("/home/dongjae/V1_01_easy/data.csv");
+
+    if (gt_data.empty()) {
+        return;
+    }
+    // EuRoC cam0: body(IMU)->cam extrinsic
+    Eigen::Matrix3d R_bc;
+    R_bc << 0.0148655429818, -0.999880929698, 0.00414029679422,
+            0.999557249008,  0.0149672133247, 0.025715529948,
+           -0.0257744366974, 0.00375618835797, 0.999660727178;
+    const Eigen::Vector3d t_bc(-0.0216401454975, -0.064676986768, 0.00981073058949);
+    const Sophus::SE3d T_bc(R_bc, t_bc);
+
+    // 기준 포즈: GT 첫 바디포즈 -> 카메라 -> ROS 로 변환 후 역행렬
+    const Sophus::SE3d T_wb0 = groundTruthToSE3(gt_data.front());
+    const Sophus::SE3d T_wc0 = T_wb0 * T_bc;
+    const Sophus::SE3d T_ros0 = convert_cv_to_ros(T_wc0);
+    const Sophus::SE3d T_ros0_inv = T_ros0.inverse();
+    
+    nav_msgs::msg::Path path_msg;
+    path_msg.header.frame_id = "map"; // 혹은 "world"
+    path_msg.header.stamp = rclcpp::Clock().now();
+
+    for (const auto& pose : gt_data) {
+        const Sophus::SE3d T_wb = groundTruthToSE3(pose);
+        const Sophus::SE3d T_wc = T_wb * T_bc;
+        const Sophus::SE3d T_ros = convert_cv_to_ros(T_wc);
+        const Sophus::SE3d T_rel = T_ros0_inv * T_ros; // 시작을 원점/단위회전에 정렬
+
+        geometry_msgs::msg::PoseStamped ps;
+        ps.header = path_msg.header; 
+        ps.pose.position.x = T_rel.translation().x();
+        ps.pose.position.y = T_rel.translation().y();
+        ps.pose.position.z = T_rel.translation().z();
+        ps.pose.orientation.w = T_rel.unit_quaternion().w();
+        ps.pose.orientation.x = T_rel.unit_quaternion().x();
+        ps.pose.orientation.y = T_rel.unit_quaternion().y();
+        ps.pose.orientation.z = T_rel.unit_quaternion().z();
+        path_msg.poses.push_back(ps);
+    }
+
+    path_pub->publish(path_msg);
+}
+
+// CSV 파일을 읽는 함수
+std::vector<GroundTruthPose> loadEuRoCGroundTruth(const std::string& filename) {
+    std::vector<GroundTruthPose> gt_poses;
+    std::ifstream file(filename);
+
+    if (!file.is_open()) {
+        std::cerr << "파일을 열 수 없습니다: " << filename << std::endl;
+        return gt_poses;
+    }
+
+    std::string line;
+    // 첫 번째 줄(헤더)은 건너뜁니다 (#timestamp, p_RS_R_x, ...)
+    std::getline(file, line);
+
+    while (std::getline(file, line)) {
+        std::stringstream ss(line);
+        std::string cell;
+        std::vector<std::string> row;
+
+        // 콤마(,)를 기준으로 분리
+        while (std::getline(ss, cell, ',')) {
+            row.push_back(cell);
+        }
+
+        // 데이터 파싱 (이미지의 컬럼 순서에 맞춤)
+        // 0: timestamp, 1: px, 2: py, 3: pz, 4: qw, 5: qx, 6: qy, 7: qz
+        if (row.size() >= 8) {
+            GroundTruthPose pose;
+            pose.timestamp = std::stoll(row[0]);
+            pose.x = std::stod(row[1]);
+            pose.y = std::stod(row[2]);
+            pose.z = std::stod(row[3]);
+            pose.qw = std::stod(row[4]);
+            pose.qx = std::stod(row[5]);
+            pose.qy = std::stod(row[6]);
+            pose.qz = std::stod(row[7]);
+            
+            gt_poses.push_back(pose);
+        }
+    }
+    return gt_poses;
+}
+
+Sophus::SE3d groundTruthToSE3(const GroundTruthPose& pose) {
+    Eigen::Quaterniond q(pose.qw, pose.qx, pose.qy, pose.qz);
+    q.normalize();
+    const Eigen::Vector3d t(pose.x, pose.y, pose.z);
+    return Sophus::SE3d(q, t);
 }
