@@ -24,7 +24,7 @@ class LocalMapping{
             worker_.join();
         }
 
-        void insert_kf2queue(std::shared_ptr<Frame> &keyframe){
+        void insert_kf2queue(const std::shared_ptr<Frame> &keyframe){
             {
                 std::lock_guard<std::mutex> lk(queue_mutex_);
                 keyframe_queue_.push(keyframe);

@@ -15,6 +15,7 @@ find_package(Sophus REQUIRED)
 find_package(nav_msgs REQUIRED)
 find_package(g2o REQUIRED COMPONENTS core stuff types_sba solver_dense solver_eigen)
 find_package(sensor_msgs REQUIRED)
+find_package(interface_pkg REQUIRED)
 
 # uncomment the following section in order to fill in
 # further dependencies manually.
@@ -37,6 +38,7 @@ ament_target_dependencies( slam_system
   "cv_bridge"
   "sensor_msgs"
   "nav_msgs"
+  "interface_pkg"
   #"std_msgs"
   # "OpenCV"
   #"PCL"

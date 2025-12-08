@@ -25,6 +25,7 @@
 
 #include<opencv2/opencv.hpp>
 #include<opencv2/core/eigen.hpp>
+#include <opencv2/flann.hpp>
 
 #include<sophus/se3.hpp>
 #include<sophus/so3.hpp>

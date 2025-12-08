@@ -2,6 +2,8 @@
 
 #include "slam_core/Map.hpp"
 #include "slam_core/mappoint.hpp"
+#include <limits>
+
 
 using namespace std;
 using namespace cv;
@@ -13,7 +15,7 @@ Frontend::Frontend(shared_ptr<Map> &map) : map_(map) {
     cur_frame = std::make_shared<Frame>(-1, Sophus::SE3d(), cv::Mat()); prev_frame = nullptr;
 }
 
-//0: 실패, 1: 일반 프레임, 2: 키프레임
+//-1: 실패, 0: 일반 키프레임, 1: 첫 키프레임, 2: 두번째 키프레임, 3: 일반 프레임
 int8_t Frontend::run(cv::Mat &img){
     vector<KeyPoint> kp2;
     vector<Point2f> prev_pts2d, cur_pts2d;
@@ -58,7 +60,8 @@ int8_t Frontend::run(cv::Mat &img){
     
     //첫번 째 frame을 key frame으로 등록 후 종료: 비교할 이미지 없음.
     if(map_->get_kfs_size() == 0){
-        return add_keyframe(cur_frame);
+        add_keyframe_ORB(cur_frame);        
+        return 1;
     }
     else if(map_->get_kfs_size() == 1){ //아직 3D 포인트가 없으므로 2d2d pose estimation
         //새로운 키프레임 추가
@@ -69,16 +72,12 @@ int8_t Frontend::run(cv::Mat &img){
             cur_frame->set_pose(last_keyframe->get_pose() * rel_pose);
             cout << "cur_frame pose: \n" << cur_frame->get_pose().matrix() << endl;
 
-            // triangulation 함수 호출
-            if (visual_odometry_->triangulation(*last_keyframe, *cur_frame,
-                                                matches,
-                                                map_, true))
-            {      
-                return add_keyframe(cur_frame, map_->get_mps_size());
-            }
-            return 0;
+            visual_odometry_->triangulation(*last_keyframe, *cur_frame, matches, map_, true);
+            add_keyframe_ORB(cur_frame);
+
+            return 2;
         }
-        return 0;
+        return -1;
     }
     else{   
         VecVector3d points_3d;
@@ -137,7 +136,7 @@ int8_t Frontend::run(cv::Mat &img){
                 // 4. 시차 검사
                 per_frame_parallax = cal_parallax_opticalflow(*prev_frame, kp2, status);
                 total_parallax += per_frame_parallax;
-                bool c_parrallax = total_parallax > 5.0;
+                bool c_parrallax = total_parallax > 7.0;
 
                 // 5. 과도한 키프레임 추가 방지
                 const bool c3 = cur_frame->id_ <= last_keyframe->id_ + 5; 
@@ -147,41 +146,72 @@ int8_t Frontend::run(cv::Mat &img){
 
                 cout << "KeyFrame conditions: " << c1 << ", " << c2 << ", " << c_motion << ", " << c_parrallax << endl;
 
-                if(c1 || (c_motion && c_parrallax)){
-                    if(num_inliers < 20 || c3 ){
-                        cout << "Fail adding KeyFrame due to motion/parallax/inliers condition." << endl;
-                        return 1;
-                        // return add_keyframe(cur_frame, num_inliers);
-                    }                
+                if((c_motion && c_parrallax)){
+                    // if(num_inliers < 20 || c3 ){
+                    //     cout << "Fail adding KeyFrame due to motion/parallax/inliers condition." << endl;
+                    //     return 3;
+                    //     // return add_keyframe(cur_frame, num_inliers);
+                    // }                
                     //트래킹 포인트가 너무 적으면 키프레임 추가        
                     cout << "Adding new KeyFrame.!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
-                    // triangulation 함수 호출                                      
-                    vector<DMatch> dummy_matches;
-                    feature_tracker_->track_feature(*last_keyframe, *cur_frame, dummy_matches);
-                    if (visual_odometry_->triangulation(*last_keyframe, *cur_frame,
-                                                    dummy_matches, map_))
-                    {
-                        return add_keyframe(cur_frame, dummy_matches.size());
-                    }
+                    // 키프레임 생성과 삼각화     
+                    total_parallax = 0.0;                              
+                    return 0;
                 }
                 
-                return 1;
+                return 3;
             }
-            return 0;
+            return -1;
         }
-        return 0;
+        return -1;
     }
 }
 
-int Frontend::add_keyframe(std::shared_ptr<Frame> &frame, int num_inliers){
+
+int Frontend::add_keyframe_ORB(shared_ptr<Frame> &frame){
     last_keyframe = frame;
     frame->set_keyframe(static_cast<unsigned long>(map_->get_kfs_size()));
     // TODO: 뮤텍스 필요
     map_->insert_keyframe(frame);
     cout << "key frame added" << endl;
 
-    last_points_num = num_inliers;
     total_parallax = 0.0;
+
+    return 2;
+}
+// 이 함수는 현재 프레임을 키프레임으로 설정하고, 삼각화 후 맵에 추가합니다.
+// loftr_kps_1: 이전 키프레임의 LoFTR 키포인트들
+// loftr_kps_2: 현재 프레임의 LoFTR 키포인트
+// confidence: LoFTR 키포인트의 신뢰도
+// mode: 키프레임 추가 모드 0: 일반 키프레임, 1: 첫 키프레임, 2: 두번째 키프레임(rescale 필요)
+int Frontend::add_keyframe(const std::shared_ptr<Frame> &frame, vector<KeyPoint> &loftr_kps_1, vector<KeyPoint> &loftr_kps_2, vector<float> &confidence, int mode){
+    // LoFTR 키포인트와 ORB 키포인트 매핑
+    vector<pair<int, int>> loftr_orb_mappings_kf = map_loftr_to_orb(
+        last_keyframe->keypoints_, loftr_kps_1);
+    vector<pair<int, int>> loftr_orb_mappings_curr = map_loftr_to_orb(
+        frame->keypoints_, loftr_kps_2);
+    
+    vector<DMatch> matches;
+    // 삼각측량을 위한 DMatch 벡터 생성
+    for(int i=0; i<(int)loftr_orb_mappings_kf.size(); i++){
+        int orb_idx_1 = loftr_orb_mappings_kf[i].second;
+        int orb_idx_2 = loftr_orb_mappings_curr[i].second;
+        if(orb_idx_1 < 0 || orb_idx_2 < 0)
+            continue; // 매핑이 실패한 경우 건너뜀
+
+        DMatch m(orb_idx_1, orb_idx_2, 0.0f);
+        
+        // 신뢰도 기반 필터링: confidence가 0.5 이상인 경우만 사용
+        if(confidence[i] >= 0.5f){
+            matches.push_back(m);
+        }
+    }
+    visual_odometry_->triangulation(*last_keyframe, *frame, matches, map_, mode==2);
+    last_keyframe = frame;
+    frame->set_keyframe(static_cast<unsigned long>(map_->get_kfs_size()));
+    // TODO: 뮤텍스 필요
+    map_->insert_keyframe(frame);
+    cout << "key frame added" << endl;
     
     return 2;
 }
@@ -201,4 +231,53 @@ double Frontend::cal_parallax_opticalflow(const Frame &frame_1, const vector<Key
         }
     }
     return visual_odometry_->check_parrallax(frame_1, *cur_frame, kp2, inliers_matches);
+}
+
+// Greedy nearest-neighbor mapping: LoFTR kp idx -> ORB kp idx (one-to-one within max_dist_px)
+vector<pair<int, int>> Frontend::map_loftr_to_orb(
+    const vector<KeyPoint> &orb_kps,
+    const vector<KeyPoint> &loftr_kps,
+    float max_dist_px) {
+    vector<pair<int, int>> mappings;
+    if (orb_kps.empty() || loftr_kps.empty()) {
+        return mappings;
+    }
+
+    const int n_orb = static_cast<int>(orb_kps.size());
+    const int k_search = std::min(5, n_orb);
+    const float max_d2 = max_dist_px * max_dist_px;
+    vector<bool> orb_used(n_orb, false);
+
+    cv::Mat orb_mat(n_orb, 2, CV_32F);
+    for (int i = 0; i < n_orb; ++i) {
+        orb_mat.at<float>(i, 0) = orb_kps[i].pt.x;
+        orb_mat.at<float>(i, 1) = orb_kps[i].pt.y;
+    }
+    cv::flann::Index flann_index(orb_mat, cv::flann::KDTreeIndexParams(4), cvflann::FLANN_DIST_EUCLIDEAN);
+
+    for (int li = 0; li < static_cast<int>(loftr_kps.size()); ++li) {
+        cv::Mat query(1, 2, CV_32F);
+        query.at<float>(0) = loftr_kps[li].pt.x;
+        query.at<float>(1) = loftr_kps[li].pt.y;
+
+        std::vector<int> indices(k_search, -1);
+        std::vector<float> dists(k_search, std::numeric_limits<float>::max());
+        flann_index.knnSearch(query, indices, dists, k_search, cv::flann::SearchParams(32));
+
+        int chosen = -1;
+        float best_d2 = max_d2;
+        for (int j = 0; j < k_search; ++j) {
+            int oi = indices[j];
+            if (oi < 0 || orb_used[oi]) continue;
+            if (dists[j] <= best_d2) {
+                best_d2 = dists[j];
+                chosen = oi;
+            }
+        }
+        mappings.emplace_back(li, chosen);
+        if (chosen >= 0) {
+            orb_used[chosen] = true;
+        }
+    }
+    return mappings;
 }

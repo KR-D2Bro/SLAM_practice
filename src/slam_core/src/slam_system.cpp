@@ -5,16 +5,18 @@
 #include "slam_core/frontend.hpp"
 #include "slam_core/Map.hpp"
 #include "slam_core/LocalMapping.hpp"
+#include "slam_core/visual_odometry.hpp"
 #include<iostream>
 #include <chrono>
 
 #include "rclcpp/rclcpp.hpp"
-#include "sensor_msgs/msg/image.hpp"
-#include "slam_core/visual_odometry.hpp"
+#include "std_msgs/msg/bool.hpp"
 #include "geometry_msgs/msg/pose_stamped.hpp"
 #include "nav_msgs/msg/path.hpp"
+#include "sensor_msgs/msg/image.hpp"
 #include "sensor_msgs/msg/point_cloud2.hpp"
 #include "sensor_msgs/point_cloud2_iterator.hpp"
+#include "interface_pkg/srv/lo_ftr_match_srv.hpp"
 
 using namespace std;
 using namespace cv;
@@ -30,7 +32,7 @@ void publishGTPause(rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr path_pub);
 std::vector<GroundTruthPose> loadEuRoCGroundTruth(const std::string& filename);
 Sophus::SE3d groundTruthToSE3(const GroundTruthPose& pose);
 
-// ORB based SLAM system
+// LoFTR based SLAM system
 class SlamSystem : public rclcpp::Node
 {
     public:
@@ -50,6 +52,12 @@ class SlamSystem : public rclcpp::Node
             map_points_publisher_ =
                 this->create_publisher<sensor_msgs::msg::PointCloud2>("/map_points", 10);
             gt_traj_publisher_ = this->create_publisher<nav_msgs::msg::Path>("/gt_trajectory", 10);
+            kf_ping_publisher_ = this->create_publisher<std_msgs::msg::Bool>("/LoFTR/kf_ping", 10);
+            loftr_client_ = this->create_client<interface_pkg::srv::LoFTRMatchSrv>("/LoFTR/match");
+
+            if(!loftr_client_->wait_for_service(5s)){
+                RCLCPP_INFO(rclcpp::get_logger("rclcpp"),"No LoFTR Service available");
+            }
 
             publishGTPause(gt_traj_publisher_);
         }
@@ -68,15 +76,39 @@ class SlamSystem : public rclcpp::Node
 
             publish_pose(frontend_->cur_frame->get_pose());
 
-            if (res == 2) {
-                local_mapping_->insert_kf2queue(frontend_->cur_frame);
+            // LoFTR를 사용하여 키포인트 매칭을 얻어와서 이를 추가로 사용하여 삼각화.
+            auto request = std::make_shared<interface_pkg::srv::LoFTRMatchSrv::Request>();
+            auto new_msg = cv_bridge::CvImage(std_msgs::msg::Header(), "mono8", frontend_->cur_frame->img_).toImageMsg();
+            request->image = *new_msg;
+            request->mode = 0;
+
+            if( res == -1 || res == 3)  return;            
+            else if(res == 1 || res == 2){
+                loftr_client_->async_send_request(request, [this](rclcpp::Client<interface_pkg::srv::LoFTRMatchSrv>::SharedFuture f){
+                });
                 publish_path(keyframe_pose_publisher_);
                 publish_map_points();
+                return;
             }
-            
-        }
 
-        
+            shared_ptr<Frame> cur_frame = frontend_->cur_frame;
+
+            auto future = loftr_client_->async_send_request(request, [this, cur_frame](rclcpp::Client<interface_pkg::srv::LoFTRMatchSrv>::SharedFuture f) {
+                auto response = f.get();
+
+                vector<KeyPoint> loftr_kps_1, loftr_kps_2;
+                for(int i=0; i < response->loftr_matches.keypoints0_u.size(); i++){
+                    loftr_kps_1.push_back(KeyPoint(response->loftr_matches.keypoints0_u[i], response->loftr_matches.keypoints0_v[i], 8));
+                    loftr_kps_2.push_back(KeyPoint(response->loftr_matches.keypoints1_u[i], response->loftr_matches.keypoints1_v[i], 8));
+                }
+
+                frontend_->add_keyframe(cur_frame, loftr_kps_1, loftr_kps_2, response->loftr_matches.confidence);
+
+                local_mapping_->insert_kf2queue(cur_frame);
+                publish_path(keyframe_pose_publisher_);
+                publish_map_points();
+            }); 
+        }   
 
         void publish_path(rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr publisher) {
             nav_msgs::msg::Path path;
@@ -165,6 +197,7 @@ class SlamSystem : public rclcpp::Node
             map_points_publisher_->publish(cloud);
         }
 
+        bool in_process_ = false;
         std::shared_ptr<Map> map_;
         cv::Point3f position_;
         std::unique_ptr<nav_msgs::msg::Path> path_, keyframes_;
@@ -174,6 +207,8 @@ class SlamSystem : public rclcpp::Node
         rclcpp::Publisher<geometry_msgs::msg::PoseStamped>::SharedPtr pose_publisher_;
         rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr keyframe_pose_publisher_, gt_traj_publisher_;
         rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr map_points_publisher_;
+        rclcpp::Publisher<std_msgs::msg::Bool>::SharedPtr kf_ping_publisher_;
+        rclcpp::Client<interface_pkg::srv::LoFTRMatchSrv>::SharedPtr loftr_client_;
         rclcpp::TimerBase::SharedPtr path_timer_;
 };
 

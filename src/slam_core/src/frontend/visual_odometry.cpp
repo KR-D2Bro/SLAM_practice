@@ -169,9 +169,36 @@ bool VisualOdometry::triangulation(Frame &frame_1, Frame &frame_2,
         if(isFirst && pose_inlier_mask_[i] == 0)
             continue;
 
+        // 기존에 존재하는 맵 포인트인지 확인 절차.
+        const DMatch &match = matches[i];
+        if(frame_1.observed_map_points_[match.queryIdx] != nullptr){
+            frame_2.observed_map_points_[match.trainIdx] = frame_1.observed_map_points_[match.queryIdx];
+            try {
+                auto frame2_ptr = frame_2.shared_from_this();
+                frame_2.observed_map_points_[match.trainIdx]->add_observation(frame2_ptr, match.trainIdx);
+            } catch (const std::bad_weak_ptr &) {
+            }
+            continue; 
+        } else if(frame_2.observed_map_points_[match.trainIdx] != nullptr){
+            frame_1.observed_map_points_[match.queryIdx] = frame_2.observed_map_points_[match.trainIdx];
+            try {
+                auto frame1_ptr = frame_1.shared_from_this();
+                frame_1.observed_map_points_[match.queryIdx]->add_observation(frame1_ptr, match.queryIdx);
+            } catch (const std::bad_weak_ptr &) {
+            }
+            continue; 
+        }
+
         pts_1.push_back(frame_1.keypoints_[matches[i].queryIdx].pt);
         pts_2.push_back(frame_2.keypoints_[matches[i].trainIdx].pt);
         inlier_match_indices.push_back(static_cast<int>(i));
+    }
+
+    // RANSAC과 삼각측량에 최소한의 대응점이 필요함
+    const size_t kMinTriangulationMatches = 8;
+    if (pts_1.size() < kMinTriangulationMatches) {
+        cout << "Triangulation skipped: too few matches (" << pts_1.size() << ")" << endl;
+        return false;
     }
     
     // inlier 거르기
@@ -252,25 +279,6 @@ bool VisualOdometry::triangulation(Frame &frame_1, Frame &frame_2,
         const auto& match = matches[valid_match_indices[k]];
         Eigen::Vector3d p_eigen_local(p_local.x, p_local.y, p_local.z);
         Eigen::Vector3d p_world = frame_1.get_pose() * p_eigen_local;
-
-        // 기존에 존재하는 맵 포인트인지 확인 절차.
-        if(frame_1.observed_map_points_[match.queryIdx] != nullptr){
-            frame_2.observed_map_points_[match.trainIdx] = frame_1.observed_map_points_[match.queryIdx];
-            try {
-                auto frame2_ptr = frame_2.shared_from_this();
-                frame_2.observed_map_points_[match.trainIdx]->add_observation(frame2_ptr, match.trainIdx);
-            } catch (const std::bad_weak_ptr &) {
-            }
-            continue; 
-        } else if(frame_2.observed_map_points_[match.trainIdx] != nullptr){
-            frame_1.observed_map_points_[match.queryIdx] = frame_2.observed_map_points_[match.trainIdx];
-            try {
-                auto frame1_ptr = frame_1.shared_from_this();
-                frame_1.observed_map_points_[match.queryIdx]->add_observation(frame1_ptr, match.queryIdx);
-            } catch (const std::bad_weak_ptr &) {
-            }
-            continue; 
-        }
 
         shared_ptr<MapPoint> mp = MapPoint::CreateNewMappoint(start_id++, 
                     p_world,

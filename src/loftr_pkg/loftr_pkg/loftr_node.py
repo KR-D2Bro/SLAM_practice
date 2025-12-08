@@ -1,7 +1,9 @@
 import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import Image
+from std_msgs.msg import Bool
 from interface_pkg.msg import LoFTRMatches
+from interface_pkg.srv import LoFTRMatchSrv
 from cv_bridge import CvBridge
 import cv2
 import numpy as np
@@ -22,8 +24,8 @@ class LoFTRNode(Node):
     def __init__(self) -> None:
         super().__init__("loftr_node")
         self.declare_parameter("pretrained", "outdoor")
-        self.declare_parameter("image0_topic", "/cam0/image_raw")
-        self.declare_parameter("matches_topic","/loftr/matches")
+        self.declare_parameter("match_srv", "/LoFTR/match")
+        self.declare_parameter("kf_ping_topic","/LoFTR/kf_ping")
         self.declare_parameter("device", "cuda")
         self.declare_parameter("visualize", True)
 
@@ -46,31 +48,52 @@ class LoFTRNode(Node):
         self.visualize = (
             self.get_parameter("visualize").get_parameter_value().bool_value
         )
-        self.image0_topic = self.get_parameter("image0_topic").value
-        self.matches_topic = self.get_parameter("matches_topic").value
+        self.loftr_srv = self.get_parameter("match_srv").value
+        self.kf_ping_topic = self.get_parameter("kf_ping_topic").value
 
-        self.image0_sub = self.create_subscription(
-            Image, self.image0_topic, self.image0_callback, 10
+        self.loftr_match_srv = self.create_service(
+            LoFTRMatchSrv, self.loftr_srv, self.loftr_match_callback
         )
-        self.matches_pub = self.create_publisher(
-            LoFTRMatches, self.matches_topic, 10
+        self.kf_ping_sub = self.create_subscription(
+            Bool, self.kf_ping_topic, self.kf_ping_callback, 10
         )
 
+        self._last_keyFrame = None
         self._last_image0 = None
 
-    def image0_callback(self, msg: Image) -> None:
-        self.try_match(msg)
-        self._last_image0 = msg
+    def loftr_match_callback(self, request, response):
+        if self._last_keyFrame is None:
+            self._last_keyFrame = request.image
+            response.is_first = 1
+            self._last_image0 = request.image
+            return response
+        
+        response.is_first = 0
+        response.loftr_matches = self.try_match(self._last_keyFrame, request.image)
+        self._last_keyFrame = request.image
+        self._last_image0 = request.image
+        return response
 
-    def try_match(self, image0) -> None:
-        if self._last_image0 is None:
+    def kf_ping_callback(self, msg) -> None:
+        self._last_keyFrame = self._last_image0
+
+    def try_match(self, ref_image, cur_image) -> LoFTRMatches:
+        if ref_image is None or cur_image is None:
             return
 
         try:
-            last_cv = self.bridge.imgmsg_to_cv2(self._last_image0, desired_encoding="mono8")
-            curr_cv = self.bridge.imgmsg_to_cv2(image0, desired_encoding="mono8")
-            last_tensor = self._cv_to_tensor(last_cv)
-            curr_tensor = self._cv_to_tensor(curr_cv)
+            last_cv = self.bridge.imgmsg_to_cv2(ref_image, desired_encoding="mono8")
+            curr_cv = self.bridge.imgmsg_to_cv2(cur_image, desired_encoding="mono8")
+
+            orig_h, orig_w = last_cv.shape[:2]
+            target_w, target_h = 640, 480
+            last_small = cv2.resize(last_cv, (target_w, target_h), interpolation=cv2.INTER_AREA)
+            curr_small = cv2.resize(curr_cv, (target_w, target_h), interpolation=cv2.INTER_AREA)
+            sx = orig_w / target_w
+            sy = orig_h / target_h
+
+            last_tensor = self._cv_to_tensor(last_small)
+            curr_tensor = self._cv_to_tensor(curr_small)
         except Exception as exc:
             self.get_logger().warn(f"Image conversion failed: {exc}")
             return
@@ -84,7 +107,10 @@ class LoFTRNode(Node):
         self.get_logger().debug(
             f"Matched {mkpts0.shape[0]} points (device={self.device})."
         )
-        # publish matches to slamsystem node.
+
+        mkpts0[:, 0] *= sx; mkpts0[:, 1] *= sy
+        mkpts1[:, 0] *= sx; mkpts1[:, 1] *= sy
+        # response matches to slamsystem node.
         matches_msg = LoFTRMatches()
         matches_msg.header.stamp = self.get_clock().now().to_msg()
         matches_msg.header.frame_id = "cam0"
@@ -94,11 +120,11 @@ class LoFTRNode(Node):
         matches_msg.keypoints1_v = mkpts1[:, 1].astype(np.float32).tolist()
         matches_msg.confidence = mconf.astype(np.float32).tolist()
 
-        self.matches_pub.publish(matches_msg)
-
         # visualize result
         if self.visualize:
             self._show_matches(last_cv, curr_cv, mkpts0, mkpts1, mconf)
+
+        return matches_msg
 
     def _cv_to_tensor(self, img: np.ndarray) -> torch.Tensor:
         """Convert grayscale OpenCV image to normalized tensor (1,1,H,W)."""

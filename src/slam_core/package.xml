@@ -16,7 +16,9 @@
   <depend>sophus</depend>
   <depend>cv_bridge</depend>
   <depend>libopencv-dev</depend>
+  <depend>sensor_msgs</depend>
   <depend>nav_msgs</depend>
+  <depend>interface_pkg</depend>
   
 
   <export>
