@@ -42,6 +42,7 @@ bool VisualOdometry::pose_estimate_2d2d(const Frame &frame_1, const Frame &frame
     float score_H = calc_homography_score(points1, points2, homography_matrix_21); 
     // cout << "score_F : " << score_F << endl << "score_H : " << score_H << endl;
 
+    // 현재 매칭이 H로 설명되는 정도의 비율
     if(score_H / (score_H + score_F) > 0.45){
         return false;
     }
@@ -203,6 +204,8 @@ bool VisualOdometry::triangulation(Frame &frame_1, Frame &frame_2,
     std::vector<cv::Point3d> valid_points_local; // frame_1 좌표계 기준 유효 포인트
     std::vector<int> valid_match_indices;
 
+    cout << "Triangulated points: " << pts_4d.cols << endl;
+
     for (int i = 0; i < pts_4d.cols; i++) {
         cv::Mat x = pts_4d.col(i);
         x /= x.at<double>(3, 0); // 4D -> 3D
@@ -222,7 +225,7 @@ bool VisualOdometry::triangulation(Frame &frame_1, Frame &frame_2,
 
                 double err1 = cv::norm(cv::Point2f(proj1.x(), proj1.y()) - obs1);
                 double err2 = cv::norm(cv::Point2f(proj2.x(), proj2.y()) - obs2);
-                const double MAX_REPROJ_ERR = 3.0;
+                const double MAX_REPROJ_ERR = 5.0;
                 if(err1 > MAX_REPROJ_ERR || err2 > MAX_REPROJ_ERR){
                     continue;
                 }
@@ -337,6 +340,50 @@ bool VisualOdometry::PnPcompute_g2o(const VecVector3d &points_3d, const VecVecto
     
     Eigen::Matrix3d K_eigen;
     cv2eigen(K, K_eigen);
+
+    // --- 1) RANSAC PnP로 초기 포즈 및 인라이어 선별 ---
+    std::vector<cv::Point3f> obj_pts;
+    std::vector<cv::Point2f> img_pts;
+    obj_pts.reserve(points_3d.size());
+    img_pts.reserve(points_2d.size());
+    for (size_t i = 0; i < points_3d.size(); ++i) {
+        obj_pts.emplace_back(static_cast<float>(points_3d[i].x()),
+                             static_cast<float>(points_3d[i].y()),
+                             static_cast<float>(points_3d[i].z()));
+        img_pts.emplace_back(static_cast<float>(points_2d[i].x()),
+                             static_cast<float>(points_2d[i].y()));
+    }
+
+    cv::Mat rvec, tvec;
+    std::vector<int> ransac_inliers;
+    const int ransac_iters = 100;
+    const double reproj_thresh = 3.0; // px
+    const double confidence = 0.99;
+    const int pnp_method = points_3d.size() >= 4 ? cv::SOLVEPNP_AP3P : cv::SOLVEPNP_ITERATIVE;
+    bool ok = cv::solvePnPRansac(obj_pts, img_pts, K, cv::noArray(),
+                                 rvec, tvec, false, ransac_iters,
+                                 reproj_thresh, confidence, ransac_inliers, pnp_method);
+    if(!ok || ransac_inliers.size() < 10){
+        cout << "RANSAC PnP failed or too few inliers: " << ransac_inliers.size() << endl;
+        return false;
+    }
+
+    // RANSAC 인라이어 마스크 초기화
+    pose_inlier_mask_.assign(points_3d.size(), 0);
+    for (int idx : ransac_inliers) {
+        if (idx >= 0 && idx < pose_inlier_mask_.size()) {
+            pose_inlier_mask_[idx] = 1;
+        }
+    }
+
+    // RANSAC 결과를 g2o 초기값으로 사용
+    cv::Mat R_cv;
+    cv::Rodrigues(rvec, R_cv);
+    Eigen::Matrix3d R_init;
+    Eigen::Vector3d t_init;
+    cv::cv2eigen(R_cv, R_init);
+    cv::cv2eigen(tvec, t_init);
+
     auto solver = new g2o::OptimizationAlgorithmLevenberg(
         std::make_unique<BlockSolverType>(std::make_unique<LinearSolverType>())
     );
@@ -346,15 +393,15 @@ bool VisualOdometry::PnPcompute_g2o(const VecVector3d &points_3d, const VecVecto
 
     VertexPose *vertex_pose = new VertexPose();
     vertex_pose->setId(0);
-    vertex_pose->setEstimate(cur_frame.get_pose().inverse());
+    vertex_pose->setEstimate(Sophus::SE3d(R_init, t_init));
     optimizer.addVertex(vertex_pose);
 
-    int index = 0;
     for(size_t i = 0; i < points_2d.size();i++){
+        if(!pose_inlier_mask_[i]) continue; // RANSAC에서 제외된 매칭은 g2o에 넣지 않음
         auto p2d = points_2d[i];
         auto p3d = points_3d[i];
         EdgeProjection *edge = new EdgeProjection(p3d, K_eigen);
-        edge->setId(index);
+        edge->setId(static_cast<int>(i)); // 원본 인덱스를 그대로 ID로 사용
         edge->setVertex(0, vertex_pose);
         edge->setMeasurement(p2d);
         edge->setInformation(Eigen::Matrix2d::Identity());
@@ -364,18 +411,14 @@ bool VisualOdometry::PnPcompute_g2o(const VecVector3d &points_3d, const VecVecto
         edge->setRobustKernel(huber);
 
         optimizer.addEdge(edge);
-        index++;
     }
 
     optimizer.setVerbose(true);
     optimizer.initializeOptimization();
     optimizer.optimize(10);
 
-    // 최종 inlier 마스크 계산
-    // 3D 포인트와 2D 포인트의 재투영 오차 기반으로 outlier 라는 것은 오매칭일 가능성이 높다는 것을 의미
-    pose_inlier_mask_.clear();
-    pose_inlier_mask_.resize(points_3d.size(), 1);
-    const double chi2_threshold = 5.99; // (≈ 2.45px)^2 or 원하는 값
+    // 최종 inlier 마스크 계산 (RANSAC 인라이어 중에서도 재투영 오차가 큰 것 제거)
+    const double chi2_threshold = 11.3; // (≈ 3.4px)^2 or 원하는 값
 
     for (auto edge_ptr : optimizer.edges()) {
         auto *edge = dynamic_cast<EdgeProjection*>(edge_ptr);

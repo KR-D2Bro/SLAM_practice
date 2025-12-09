@@ -115,7 +115,7 @@ int8_t Frontend::run(cv::Mat &img){
 
                 // 기본 키프레임 생성 조건
                 // 1. 30프레임 이상 간격
-                const bool c1 = cur_frame->id_ >= last_keyframe->id_ + 15; 
+                const bool c1 = cur_frame->id_ >= last_keyframe->id_ + 30; 
 
                 // 2. 트래킹 포인트가 키프레임 관측 포인트의 70% 이하이면서 15개 이상
                 // PnPcompute_g2o에서 pose_inlier_mask_ 설정됨
@@ -137,7 +137,7 @@ int8_t Frontend::run(cv::Mat &img){
                 // 4. 시차 검사
                 per_frame_parallax = cal_parallax_opticalflow(*prev_frame, kp2, status);
                 total_parallax += per_frame_parallax;
-                bool c_parrallax = total_parallax > 5.0;
+                bool c_parrallax = total_parallax > 7.0;
 
                 // 5. 과도한 키프레임 추가 방지
                 const bool c3 = cur_frame->id_ <= last_keyframe->id_ + 5; 
@@ -148,11 +148,11 @@ int8_t Frontend::run(cv::Mat &img){
                 cout << "KeyFrame conditions: " << c1 << ", " << c2 << ", " << c_motion << ", " << c_parrallax << endl;
 
                 if(c1 || (c_motion && c_parrallax)){
-                    if(num_inliers < 20 || c3 ){
-                        cout << "Fail adding KeyFrame due to motion/parallax/inliers condition." << endl;
-                        return 1;
-                        // return add_keyframe(cur_frame, num_inliers);
-                    }                
+                    // if(num_inliers < 20 || c3 ){
+                    //     cout << "Fail adding KeyFrame due to motion/parallax/inliers condition." << endl;
+                    //     return 1;
+                    //     // return add_keyframe(cur_frame, num_inliers);
+                    // }                
                     //트래킹 포인트가 너무 적으면 키프레임 추가        
                     cout << "Adding new KeyFrame.!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
                     // triangulation 함수 호출                                      

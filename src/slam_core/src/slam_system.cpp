@@ -45,6 +45,8 @@ class SlamSystem : public rclcpp::Node
             keyframes_ = std::make_unique<nav_msgs::msg::Path>();
 
             pose_publisher_ = this->create_publisher<geometry_msgs::msg::PoseStamped>("/pose", 10);
+            path_publisher_ =
+                this->create_publisher<nav_msgs::msg::Path>("/trajectory", 10);
             keyframe_pose_publisher_ =
                 this->create_publisher<nav_msgs::msg::Path>("/keyframe_trajectory", 10);
             map_points_publisher_ =
@@ -66,21 +68,21 @@ class SlamSystem : public rclcpp::Node
 
             int8_t res = frontend_->run(img); 
 
+            frames_.push_back(frontend_->cur_frame);
             publish_pose(frontend_->cur_frame->get_pose());
-
+            publish_path(path_publisher_, frames_);
+            
             if (res == 2) {
                 local_mapping_->insert_kf2queue(frontend_->cur_frame);
-                publish_path(keyframe_pose_publisher_);
+                publish_path(keyframe_pose_publisher_, map_->keyframes());
                 publish_map_points();
             }
             
         }
 
-        
-
-        void publish_path(rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr publisher) {
+        void publish_path(rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr publisher, vector<shared_ptr<Frame>> frames) {
             nav_msgs::msg::Path path;
-            for(const auto &kf : map_->keyframes()){
+            for(const auto &kf : frames){
                 Sophus::SE3d pose = kf->get_pose();
                 Sophus::SE3d ros_pose = convert_cv_to_ros(pose);
             
@@ -165,6 +167,7 @@ class SlamSystem : public rclcpp::Node
             map_points_publisher_->publish(cloud);
         }
 
+        vector<shared_ptr<Frame>> frames_;
         std::shared_ptr<Map> map_;
         cv::Point3f position_;
         std::unique_ptr<nav_msgs::msg::Path> path_, keyframes_;
@@ -172,7 +175,7 @@ class SlamSystem : public rclcpp::Node
         std::unique_ptr<LocalMapping> local_mapping_;
         rclcpp::Subscription<sensor_msgs::msg::Image>::SharedPtr image_subscription_;
         rclcpp::Publisher<geometry_msgs::msg::PoseStamped>::SharedPtr pose_publisher_;
-        rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr keyframe_pose_publisher_, gt_traj_publisher_;
+        rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr keyframe_pose_publisher_, gt_traj_publisher_, path_publisher_;
         rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr map_points_publisher_;
         rclcpp::TimerBase::SharedPtr path_timer_;
 };
@@ -209,18 +212,20 @@ void publishGTPause(rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr path_pub) 
     nav_msgs::msg::Path path_msg;
     path_msg.header.frame_id = "map"; // 혹은 "world"
     path_msg.header.stamp = rclcpp::Clock().now();
+    const double gt_scale = 0.5;
 
     for (const auto& pose : gt_data) {
         const Sophus::SE3d T_wb = groundTruthToSE3(pose);
         const Sophus::SE3d T_wc = T_wb * T_bc;
         const Sophus::SE3d T_ros = convert_cv_to_ros(T_wc);
         const Sophus::SE3d T_rel = T_ros0_inv * T_ros; // 시작을 원점/단위회전에 정렬
+        const Eigen::Vector3d scaled_t = gt_scale * T_rel.translation();
 
         geometry_msgs::msg::PoseStamped ps;
         ps.header = path_msg.header; 
-        ps.pose.position.x = T_rel.translation().x();
-        ps.pose.position.y = T_rel.translation().y();
-        ps.pose.position.z = T_rel.translation().z();
+        ps.pose.position.x = scaled_t.x();
+        ps.pose.position.y = scaled_t.y();
+        ps.pose.position.z = scaled_t.z();
         ps.pose.orientation.w = T_rel.unit_quaternion().w();
         ps.pose.orientation.x = T_rel.unit_quaternion().x();
         ps.pose.orientation.y = T_rel.unit_quaternion().y();

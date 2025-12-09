@@ -294,10 +294,7 @@ void FeatureTracker::detectAndCompute(Frame &frame){
     cv::Mat output_image;
 
     detector_->detect(frame.img_, frame.keypoints_);
-    // std::vector<cv::KeyPoint> balanced;
-    // distributeKeypointsQuadtree(frame.keypoints_, frame.img_.size(), 800, balanced);
 
-    // frame.keypoints_ = balanced;
     descriptor_->compute(frame.img_, frame.keypoints_, frame.descriptors_);
     // FeatureTracker::ComputeORB(frame.img_, frame.keypoints_, frame.descriptors_);
     // 관측한 3D 포인트관리를 위해 초기화.
@@ -373,7 +370,7 @@ void FeatureTracker::ComputeORB(cv::Mat &img, vector<cv::KeyPoint> &key_points, 
 
 //ë¨ìí ë²ì 
 void FeatureTracker::BfMatch(const Mat &desc1, const Mat &desc2, vector<cv::DMatch> &matches, float ratio){
-    const int d_max = 50;
+    const int d_max = 70;
     const uint32_t* d1;
     const uint32_t* d2;
     matches.clear();
@@ -446,7 +443,7 @@ bool FeatureTracker::match_3d_2d(const vector<shared_ptr<MapPoint>> &map_points,
         if(p_img.x() < 0 || p_img.x() >= cur_frame.img_.cols || p_img.y() < 0 || p_img.y() >= cur_frame.img_.rows)   continue;
 
         // 이미지를 셀로 나눠서 키포인트 인덱스를 셀 단위로 리스트업
-        DMatch match = queryMatch(cur_frame, p_img, mp->descriptor_, cells, cols, rows);
+        DMatch match = queryMatch(cur_frame, p_img, mp->descriptor_, cells, cols, rows, 70.0f);
 
         //매칭이 없으면 
         if(match.queryIdx == -1)    continue;
