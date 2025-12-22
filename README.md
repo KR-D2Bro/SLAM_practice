@@ -73,7 +73,11 @@ T^* = \underset{T}{\mathrm{argmin}} \sum_{i \in \mathcal{M}} \rho \left( \| u_i 
 ## 📊 Results
 
 * **Dataset:** EuRoC MAV (Vicon Room 1 01 easy).
-* **Analysis:** 특징점이 많은 텍스처(체커보드 등) 환경에서 트래킹을 확인. 그러나 특정 구간 이후 Lost 발생.
+* **Analysis:** 특징점이 많은 텍스처(체커보드 등) 환경에서 트래킹을 확인. 그러나 특정 구간 이후 Lost 발생. 또한 LoFTR 추가로 더 풍부한 맵 포인트와 트래킹이 가능할거라 예상했지만 실제로는 추론 시간, LoFTR->ORB 키포인트로의 변환을 통해 ORB 키포인트 매칭을 통한 Triangulation보다 낮은 성능을 보여줌.
+
+
+https://github.com/user-attachments/assets/16737ab0-02d8-4e1b-9142-36b27861a4cc
+
 
 ---
 
