@@ -42,23 +42,38 @@ x'^T E x = 0, \quad E = R[t]_{\times}
 ```
 본 시스템은 $F, H$ 스코어를 비교하여 충분한 시차(Parallax)가 확보된 경우에만 지도를 초기화.
 
-### PnP
+### PnP Optimize
 맵 포인트의 3D 좌표는 고정돼있고, 해당 맵 포인트를 투영한 좌표와 매칭되는 2D 포인트의 좌표 오차합을 최소화하여 카메라의 Pose를 최적화.
-
+```math
+T^* = \underset{T}{\mathrm{argmin}} \sum_{i \in \mathcal{M}} \rho \left( \| u_i - \pi(K, T, X_i) \|_2^2 \right)
+```
+**Where:**
+* $T^*$: The optimized camera pose (Transformation matrix).  
+* $\mathcal{M}$: The set of matches between 3D map points and 2D features in the current frame.  
+* $X_i$: The 3D position of the map point (Fixed).  
+* $u_i$: The observed 2D feature point coordinates in the current image.  
+* $\pi$: The projection function (World frame $\rightarrow$ Image plane).  
+* $\rho$: Huber robust cost function to suppress outliers.
 
 ### Local Bundle Adjustment
 재투영 오차(Reprojection Error)를 최소화하는 카메라 자세($T_k$)와 맵 포인트($X_p$)를 찾는다.  
 ```math
-\min_{\{T_k\}, \{X_p\}} \sum_{k \in \mathcal{K}_L} \sum_{p \in \mathcal{P}_L} \rho \left( \| z_{kp} - \pi(K, T_k, X_p) \|^2_{\Sigma} \right)
+\min_{\{T_k\}, \{X_p\}} \sum_{k \in \mathcal{K}_L} \sum_{p \in \mathcal{P}_L} \rho \left( \| z_{kp} - \pi(K, T_k, X_p) \|^2_2 \right)
 ```
-
+**Where:**
+* $\{T_k\}, \{X_p\}$: The optimization variables. $T_k \in SE(3)$ represents the camera pose of the $k$-th keyframe, and $X_p \in \mathbb{R}^3$ is the position of the $p$-th map point.
+* $\mathcal{K}_L$: The set of local keyframes involved in the optimization (e.g., the last 5 keyframes).
+* $\mathcal{P}_L$: The set of map points observed by the keyframes in $\mathcal{K}_L$.
+* $z_{kp}$: The observed 2D feature coordinates of map point $p$ in keyframe $k$.
+* $\pi(\cdot)$: The projection function taking camera intrinsics $K$, pose $T_k$, and 3D point $X_p$ to the image plane.
+* $\rho(\cdot)$: The Huber robust kernel function used to reduce the influence of outliers.
 
 ---
 
 ## 📊 Results
 
 * **Dataset:** EuRoC MAV (Vicon Room 1 01 easy).
-* **Analysis:** 특징점이 많은 텍스처(체커보드 등) 환경에서 안정적인 트래킹을 확인했습니다.
+* **Analysis:** 특징점이 많은 텍스처(체커보드 등) 환경에서 트래킹을 확인. 그러나 특정 구간 이후 Lost 발생.
 
 ---
 
